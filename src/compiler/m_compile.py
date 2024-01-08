@@ -65,20 +65,39 @@ def get_text_c_function_applied(
 def get_text_c_statement(
     text_line_ll:str):
 
-    text_input, \
+    text_first_line, \
     _, \
     text_functions = text_line_ll \
         .partition("\n")
 
+    text_new_variable, \
+    _, \
+    text_input = text_first_line \
+        .rpartition(" = ")
+
     text_c_statement = text_input
 
-    for text_function in text_functions.split("\n"):
-        text_c_statement = get_text_c_function_applied(
-                text_input=text_c_statement,
-                text_function=text_function)
+    if text_functions != "":
 
-    return text_c_statement \
+        list_texts_functions = text_functions \
+            .split("\n")
+
+        for text_function in list_texts_functions:
+            text_c_statement = get_text_c_function_applied(
+                    text_input=text_c_statement,
+                    text_function=text_function)
+
+    text_function_result = text_c_statement \
         + ";"
+
+    if text_new_variable == "":
+        return text_function_result
+    else:
+        # TODO implement: other types
+        return "char " \
+            + text_new_variable \
+            + "[] = " \
+            + text_function_result
 
 
 def get_text_c(
