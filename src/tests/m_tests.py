@@ -10,7 +10,7 @@ def test_compiler():
     list_tests = [
         (
             """Nested Function call""",
-            """\n"Hello World 1"\n    > text_reverse\n    > print\n""",
+            """\n\n\n\n"Hello World 1"\n    > text_reverse\n    > print\n\n""",
             """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    printf(strrev("Hello World 1"));\n\n    return 0;\n}\n\n"""),
         (
             """Multiple statements""",
@@ -19,7 +19,11 @@ def test_compiler():
         (
             """Function argument""",
             """\n\n\n\n"You entered: %d"\n    > print [5]\n\n""",
-            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    printf("You entered: %d", 5);\n\n    return 0;\n}\n\n""")]
+            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    printf("You entered: %d", 5);\n\n    return 0;\n}\n\n"""),
+        (
+            """Variable assignment""",
+            """\n\n\n\ntext_hello_world = "Hello World"\n\ntext_hello_world\n    > text_reverse\n    > print\n\n""",
+            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    char text_hello_world[] = "Hello World";\n\n    printf(strrev(text_hello_world));\n\n    return 0;\n}\n\n""")]
 
     for text_name_test, text_ll, text_c_target in list_tests:
 
