@@ -155,7 +155,7 @@ def get_text_c(
                 get_text_c_statement,
                 list_texts_statements))
 
-    return "\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n" \
+    return "\n\n#include <stdio.h>\n#include <stdlib.h>\n\n\n\n\nint main(void) {\n\n" \
         + get_text_indented(text_c_lines) \
-        + "\n\n    return 0;\n}\n\n"
+        + "\n\n    return EXIT_SUCCESS;\n}\n\n"
 

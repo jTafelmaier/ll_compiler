@@ -1,6 +1,7 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
 
 
 
@@ -11,6 +12,6 @@ int main(void) {
 
     printf("test: %d", integer_test);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
