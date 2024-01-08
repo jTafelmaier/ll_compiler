@@ -26,29 +26,8 @@ def get_text_indented(
 
 
 def get_text_c_function_applied(
-    text_name_function_ll:str,
-    list_texts_arguments:typing.List[str]):
-
-    dict_names_functions = {
-        "print": "printf"}
-
-    text_arguments = ", " \
-        .join(list_texts_arguments)
-
-    return (dict_names_functions \
-            [text_name_function_ll]) \
-        + "(" \
-        + text_arguments \
-        + ");"
-
-
-def get_text_c_statement(
-    text_line_ll:str):
-
-    text_input, \
-    _, \
-    text_function = text_line_ll \
-        .partition("\n")
+    text_input:str,
+    text_function:str):
 
     text_name_function_ll, \
     _, \
@@ -72,9 +51,30 @@ def get_text_c_statement(
                 text_input] \
                 + list_texts_arguments
 
+    dict_names_functions = {
+        "print": "printf"}
+
+    text_arguments = ", " \
+        .join(get_list_texts_arguments())
+
+    return (dict_names_functions \
+            [text_name_function_ll]) \
+        + "(" \
+        + text_arguments \
+        + ");"
+
+
+def get_text_c_statement(
+    text_line_ll:str):
+
+    text_input, \
+    _, \
+    text_function = text_line_ll \
+        .partition("\n")
+
     return get_text_c_function_applied(
-            text_name_function_ll=text_name_function_ll,
-            list_texts_arguments=get_list_texts_arguments())
+            text_input=text_input,
+            text_function=text_function)
 
 
 def get_text_c(
