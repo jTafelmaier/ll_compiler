@@ -7,7 +7,7 @@
 
 int main(void) {
 
-    printf(strrev("Hello World 1"));
+    printf(strrev("Hello World"));
 
     return 0;
 }

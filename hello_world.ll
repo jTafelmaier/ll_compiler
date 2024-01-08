@@ -2,7 +2,7 @@
 
 
 
-"Hello World 1"
+"Hello World"
     > text_reverse
     > print
 
