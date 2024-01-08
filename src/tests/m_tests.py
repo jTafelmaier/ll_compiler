@@ -15,7 +15,11 @@ def test_compiler():
         (
             """Multiple statements""",
             """\n\n\n\n"Hello World 1"\n    > print\n\n"Hello World 2"\n    > print\n\n""",
-            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    printf("Hello World 1");\n\n    printf("Hello World 2");\n\n    return 0;\n}\n\n""")]
+            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    printf("Hello World 1");\n\n    printf("Hello World 2");\n\n    return 0;\n}\n\n"""),
+        (
+            """Function argument""",
+            """\n\n\n\n"You entered: %d"\n    > print [5]\n\n""",
+            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    printf("You entered: %d", 5);\n\n    return 0;\n}\n\n""")]
 
     for text_name_test, text_ll, text_c_target in list_tests:
 
