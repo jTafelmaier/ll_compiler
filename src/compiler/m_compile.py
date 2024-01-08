@@ -90,14 +90,18 @@ def get_text_c_statement(
     text_function_result = text_c_statement \
         + ";"
 
-    if text_new_variable == "":
-        return text_function_result
-    else:
+    def get_text_c_declaration_variable():
+
+        if text_new_variable == "":
+            return ""
+
         # TODO implement: other types
         return "char " \
             + text_new_variable \
-            + "[] = " \
-            + text_function_result
+            + "[] = "
+
+    return get_text_c_declaration_variable() \
+        + text_function_result
 
 
 def get_text_c(
