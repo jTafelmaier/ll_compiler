@@ -2,6 +2,26 @@
 
 
 
+def get_text_indented(
+    text:str):
+
+    def get_text_line_indented(
+        text_line:str):
+
+        if text_line == "":
+            return text_line
+
+        return "    " \
+            + text_line
+
+    return "\n" \
+        .join(
+            map(
+                get_text_line_indented,
+                text \
+                    .split("\n")))
+
+
 def get_text_c_statement(
     text_line_ll:str):
 
@@ -13,6 +33,7 @@ def get_text_c_statement(
     text_function = text_line_ll \
         .partition("\n")
 
+    # TODO use text_arguments
     name_function_ll, \
     _, \
     text_arguments = text_function \
@@ -28,17 +49,6 @@ def get_text_c_statement(
 
 def get_text_c(
     text_ll:str):
-
-    # TODO test
-    def get_text_indented(
-        text:str):
-
-        return "\n" \
-            .join(
-                map(
-                    lambda text: "    " + text,
-                    text \
-                        .split("\n")))
 
     def get_list_texts_statements(
         text_ll:str):
@@ -64,9 +74,9 @@ def compile_source():
         text_ll = file_ll \
             .read()
 
-    text_c = "\n\n#include <stdio.h>\n\n\n\n\nint main() {\n" \
+    text_c = "\n\n#include <stdio.h>\n\n\n\n\nint main() {\n\n" \
         + get_text_c(text_ll) \
-        + "\n    return 0;\n}\n\n"
+        + "\n\n    return 0;\n}\n\n"
 
     with open("hello_world.c", "w", encoding="utf-8") as file_c:
         file_c \
