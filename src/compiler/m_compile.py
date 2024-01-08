@@ -58,7 +58,6 @@ def get_text_c_statement(
     def get_list_texts_arguments():
 
         # TODO implement: keyword arguments
-        # TODO implement: perhaps option for no arguments, without "[]"
         list_texts_arguments = text_arguments \
             .lstrip("[") \
             .rstrip("]") \

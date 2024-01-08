@@ -3,8 +3,8 @@
 
 
 "Hello World 1"
-    > print []
+    > print
 
 "Hello World 2"
-    > print []
+    > print
 
