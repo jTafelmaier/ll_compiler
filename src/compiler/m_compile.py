@@ -49,7 +49,8 @@ def get_text_c_function_applied(
                 + list_texts_arguments
 
     dict_names_functions = {
-        "print": "printf"}
+        "print": "printf",
+        "text_reverse": "strrev"}
 
     text_arguments = ", " \
         .join(get_list_texts_arguments())
@@ -58,7 +59,7 @@ def get_text_c_function_applied(
             [text_name_function_ll]) \
         + "(" \
         + text_arguments \
-        + ");"
+        + ")"
 
 
 def get_text_c_statement(
@@ -66,12 +67,18 @@ def get_text_c_statement(
 
     text_input, \
     _, \
-    text_function = text_line_ll \
+    text_functions = text_line_ll \
         .partition("\n")
 
-    return get_text_c_function_applied(
-            text_input=text_input,
-            text_function=text_function)
+    text_c_statement = text_input
+
+    for text_function in text_functions.split("\n"):
+        text_c_statement = get_text_c_function_applied(
+                text_input=text_c_statement,
+                text_function=text_function)
+
+    return text_c_statement \
+        + ";"
 
 
 def get_text_c(
