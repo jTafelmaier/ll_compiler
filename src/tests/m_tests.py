@@ -23,7 +23,11 @@ def test_compiler():
         (
             """Variable assignment""",
             """\n\n\n\ntext_hello_world = "Hello World"\n\ntext_hello_world\n    > text_reverse\n    > print\n\n""",
-            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    char text_hello_world[] = "Hello World";\n\n    printf(strrev(text_hello_world));\n\n    return 0;\n}\n\n""")]
+            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    char text_hello_world[] = "Hello World";\n\n    printf(strrev(text_hello_world));\n\n    return 0;\n}\n\n"""),
+        (
+            """Integer assignment""",
+            """\n\n\ninteger_test = 15\n\n"test: %d"\n    > print [integer_test]\n\n""",
+            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    int integer_test = 15;\n\n    printf("test: %d", integer_test);\n\n    return 0;\n}\n\n""")]
 
     for text_name_test, text_ll, text_c_target in list_tests:
 

@@ -70,7 +70,7 @@ def get_text_c_statement(
     text_functions = text_line_ll \
         .partition("\n")
 
-    text_new_variable, \
+    text_declaration_variable, \
     _, \
     text_input = text_first_line \
         .rpartition(" = ")
@@ -90,15 +90,46 @@ def get_text_c_statement(
     text_function_result = text_c_statement \
         + ";"
 
+    def get_text_type_final():
+
+        if text_functions == "":
+            if text_c_statement.startswith("\"") and text_c_statement.endswith("\""):
+                return "Type_text"
+
+            elif text_c_statement.isalpha():
+                # TODO implement: retrieve type from variable definition
+                raise NotImplementedError()
+
+            elif text_c_statement.isdecimal():
+                return "Type_decimal"
+
+            # TODO implement: more literal types
+            else:
+                raise SyntaxError("Unknown literal type")
+
+        # TODO implement: compute types from function chain
+        raise NotImplementedError()
+
     def get_text_c_declaration_variable():
 
-        if text_new_variable == "":
+        # TODO implement: other types
+
+        if text_declaration_variable == "":
             return ""
 
-        # TODO implement: other types
-        return "char " \
-            + text_new_variable \
-            + "[] = "
+        text_type_final = get_text_type_final()
+
+        if text_type_final == "Type_text":
+            return "char " \
+                + text_declaration_variable \
+                + "[] = "
+
+        if text_type_final == "Type_decimal":
+            return "int " \
+                + text_declaration_variable \
+                + " = "
+
+        raise SyntaxError("Invalid type")
 
     return get_text_c_declaration_variable() \
         + text_function_result
@@ -106,6 +137,8 @@ def get_text_c_statement(
 
 def get_text_c(
     text_ll:str):
+
+    # TODO implement: enums
 
     def get_list_texts_statements(
         text_ll:str):

@@ -1,10 +1,8 @@
 
 
 
+integer_test = 15
 
-text_hello_world = "Hello World"
-
-text_hello_world
-    > text_reverse
-    > print
+"test: %d"
+    > print [integer_test]
 

@@ -7,9 +7,9 @@
 
 int main(void) {
 
-    char text_hello_world[] = "Hello World";
+    int integer_test = 15;
 
-    printf(strrev(text_hello_world));
+    printf("test: %d", integer_test);
 
     return 0;
 }
