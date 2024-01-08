@@ -11,11 +11,11 @@ def test_compiler():
         (
             """Nested Function call""",
             """\n"Hello World 1"\n    > text_reverse\n    > print\n""",
-            """\n\n#include <stdio.h>\n\n\n\n\nint main() {\n\n    printf(strrev("Hello World 1"));\n\n    return 0;\n}\n\n"""),
+            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    printf(strrev("Hello World 1"));\n\n    return 0;\n}\n\n"""),
         (
             """Multiple statements""",
             """\n\n\n\n"Hello World 1"\n    > print\n\n"Hello World 2"\n    > print\n\n""",
-            """\n\n#include <stdio.h>\n\n\n\n\nint main() {\n\n    printf("Hello World 1");\n\n    printf("Hello World 2");\n\n    return 0;\n}\n\n""")]
+            """\n\n#include <stdio.h>\n\n\n\n\nint main(void) {\n\n    printf("Hello World 1");\n\n    printf("Hello World 2");\n\n    return 0;\n}\n\n""")]
 
     for text_name_test, text_ll, text_c_target in list_tests:
 

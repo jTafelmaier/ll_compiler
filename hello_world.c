@@ -5,7 +5,7 @@
 
 
 
-int main() {
+int main(void) {
 
     printf(strrev("Hello World 1"));
 
