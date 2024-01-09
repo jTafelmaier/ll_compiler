@@ -3,6 +3,6 @@
 
 integer_test = 15
 
-"test: %d"
+"test"
     > print [integer_test]
 

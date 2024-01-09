@@ -22,7 +22,7 @@ def get_text_indented(
                     .split("\n")))
 
 
-def get_text_c_function_applied(
+def get_text_python_function_applied(
     text_input:str,
     text_function:str):
 
@@ -49,8 +49,8 @@ def get_text_c_function_applied(
                 + list_texts_arguments
 
     dict_names_functions = {
-        "print": "printf",
-        "text_reverse": "strrev"}
+        "print": "print",
+        "text_reverse": "reversed"}
 
     text_arguments = ", " \
         .join(get_list_texts_arguments())
@@ -62,7 +62,7 @@ def get_text_c_function_applied(
         + ")"
 
 
-def get_text_c_statement(
+def get_text_python_statement(
     text_line_ll:str):
 
     text_first_line, \
@@ -75,7 +75,7 @@ def get_text_c_statement(
     text_input = text_first_line \
         .rpartition(" = ")
 
-    text_c_statement = text_input
+    text_python_statement = text_input
 
     if text_functions != "":
 
@@ -83,59 +83,23 @@ def get_text_c_statement(
             .split("\n")
 
         for text_function in list_texts_functions:
-            text_c_statement = get_text_c_function_applied(
-                    text_input=text_c_statement,
+            text_python_statement = get_text_python_function_applied(
+                    text_input=text_python_statement,
                     text_function=text_function)
 
-    text_function_result = text_c_statement \
-        + ";"
-
-    def get_text_type_final():
-
-        if text_functions == "":
-            if text_c_statement.startswith("\"") and text_c_statement.endswith("\""):
-                return "Type_text"
-
-            elif text_c_statement.isalpha():
-                # TODO implement: retrieve type from variable definition
-                raise NotImplementedError()
-
-            elif text_c_statement.isdecimal():
-                return "Type_decimal"
-
-            # TODO implement: more literal types
-            else:
-                raise SyntaxError("Unknown literal type")
-
-        # TODO implement: compute types from function chain
-        raise NotImplementedError()
-
-    def get_text_c_declaration_variable():
-
-        # TODO implement: other types
+    def get_text_python_declaration_variable():
 
         if text_declaration_variable == "":
             return ""
-
-        text_type_final = get_text_type_final()
-
-        if text_type_final == "Type_text":
-            return "char " \
-                + text_declaration_variable \
-                + "[] = "
-
-        if text_type_final == "Type_decimal":
-            return "int " \
-                + text_declaration_variable \
+        else:
+            return text_declaration_variable \
                 + " = "
 
-        raise SyntaxError("Invalid type")
-
-    return get_text_c_declaration_variable() \
-        + text_function_result
+    return get_text_python_declaration_variable() \
+        + text_python_statement
 
 
-def get_text_c(
+def get_text_python(
     text_ll:str):
 
     # TODO implement: enums
@@ -149,13 +113,13 @@ def get_text_c(
     list_texts_statements = get_list_texts_statements(text_ll \
         .strip("\n"))
 
-    text_c_lines = "\n\n" \
+    text_python_lines = "\n\n" \
         .join(
             map(
-                get_text_c_statement,
+                get_text_python_statement,
                 list_texts_statements))
 
-    return "\n\n#include <stdio.h>\n#include <stdlib.h>\n\n\n\n\nint main(void) {\n\n" \
-        + get_text_indented(text_c_lines) \
-        + "\n\n    return EXIT_SUCCESS;\n}\n\n"
+    return "\n\n\n\ndef main():\n\n" \
+        + get_text_indented(text_python_lines) \
+        + "\n\n    return None\n\n\nif __name__ == \"__main__\":\n    main()\n\n"
 

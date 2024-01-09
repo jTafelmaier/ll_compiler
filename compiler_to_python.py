@@ -11,9 +11,9 @@ def main():
         text_ll = file_ll \
             .read()
 
-    with open("hello_world.c", "w", encoding="utf-8") as file_c:
-        file_c \
-            .write(m_compile.get_text_c(text_ll))
+    with open("hello_world.py", "w", encoding="utf-8") as file_python:
+        file_python \
+            .write(m_compile.get_text_python(text_ll))
 
     return None
 
