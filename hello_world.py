@@ -8,7 +8,7 @@ def main():
 
     text_1 = "test"
 
-    to_print(to_text_append(to_text_reversed(text_1), ", test 2"))
+    ll_print(ll_to_text_append(ll_to_text_reversed(text_1), ", test 2"))
 
     return None
 

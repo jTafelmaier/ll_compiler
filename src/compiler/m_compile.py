@@ -51,7 +51,8 @@ def get_text_python_function_applied(
     text_arguments = ", " \
         .join(get_list_texts_arguments())
 
-    return text_name_function_ll \
+    return "ll_" \
+        + text_name_function_ll \
         + "(" \
         + text_arguments \
         + ")"

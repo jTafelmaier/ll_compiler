@@ -2,7 +2,7 @@
 
 
 
-def to_text_append(
+def ll_to_text_append(
     text_input:str,
     text_to_append:str):
 
@@ -10,14 +10,14 @@ def to_text_append(
         + text_to_append
 
 
-def to_text_reversed(
+def ll_to_text_reversed(
     text_input:str):
 
     return text_input \
         [::-1]
 
 
-def to_print(
+def ll_print(
     text_input:str):
 
     print(text_input)
