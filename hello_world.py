@@ -13,7 +13,7 @@ def main():
 
     text_hello = "Hello"
 
-    ll_print(ll_to_text_rev(ll_to_text_append(text_hello, " World")))
+    ll_print(ll_to_text_reversed(ll_to_text_uppercase(ll_to_text_rev(ll_to_text_append(text_hello, " World")))))
 
     return None
 

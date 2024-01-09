@@ -17,6 +17,13 @@ def ll_to_text_reversed(
         [::-1]
 
 
+def ll_to_text_uppercase(
+    text_input:str):
+
+    return text_input \
+        .upper()
+
+
 def ll_print(
     text_input:str):
 
