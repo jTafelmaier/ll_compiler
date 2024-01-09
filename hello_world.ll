@@ -1,8 +1,10 @@
 
 
 
-integer_test = 15
+text_1 = "test"
 
-"test"
-    > print [integer_test]
+text_1
+    > to_text_reversed
+    > to_text_append ", test 2"
+    > to_print
 

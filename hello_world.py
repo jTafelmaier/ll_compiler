@@ -1,12 +1,14 @@
 
 
+from built_in_functions import *
+
 
 
 def main():
 
-    integer_test = 15
+    text_1 = "test"
 
-    print("test", integer_test)
+    to_print(to_text_append(to_text_reversed(text_1), ", test 2"))
 
     return None
 

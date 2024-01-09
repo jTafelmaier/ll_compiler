@@ -48,15 +48,10 @@ def get_text_python_function_applied(
                 text_input] \
                 + list_texts_arguments
 
-    dict_names_functions = {
-        "print": "print",
-        "text_reverse": "reversed"}
-
     text_arguments = ", " \
         .join(get_list_texts_arguments())
 
-    return (dict_names_functions \
-            [text_name_function_ll]) \
+    return text_name_function_ll \
         + "(" \
         + text_arguments \
         + ")"
@@ -119,7 +114,7 @@ def get_text_python(
                 get_text_python_statement,
                 list_texts_statements))
 
-    return "\n\n\n\ndef main():\n\n" \
+    return "\n\nfrom built_in_functions import *\n\n\n\ndef main():\n\n" \
         + get_text_indented(text_python_lines) \
         + "\n\n    return None\n\n\nif __name__ == \"__main__\":\n    main()\n\n"
 
