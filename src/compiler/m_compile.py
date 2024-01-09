@@ -78,6 +78,37 @@ def get_text_python_function_chain(
     return text_python_function_chain
 
 
+def get_text_python_def(
+    text_block:str):
+
+    # TODO error: all sorts of things
+    # TODO multiple blocks
+    # TODO return
+    # TODO arguments
+    # TODO type inference
+
+    text_type_input, \
+    _, \
+    text_remaining = text_block \
+        .partition(" ")
+
+    text_name_function, \
+    _, \
+    text_body_function = text_remaining \
+        .partition("\n\n")
+
+    text_body_python = get_text_python_do(text_body_function \
+        .lstrip() \
+        .replace(
+            "return ",
+            ""))
+
+    return "def ll_" \
+        + text_name_function \
+        + "(\n    this):\n\n    return " \
+        + text_body_python
+
+
 def get_text_python_set(
     text_block:str):
 
@@ -122,6 +153,7 @@ def get_text_python_block(
         .partition(" ")
 
     dict_functions = {
+        "def": get_text_python_def,
         "set": get_text_python_set, 
         "do": get_text_python_do}
 
@@ -135,13 +167,13 @@ def get_text_python(
 
     # TODO implement: enums
 
-    def get_list_texts_statements(
+    def get_list_texts_blocks(
         text_ll:str):
 
         return text_ll \
-            .split("\n\n")
+            .split("\n\n\n")
 
-    list_texts_statements = get_list_texts_statements(text_ll \
+    list_texts_statements = get_list_texts_blocks(text_ll \
         .strip("\n"))
 
     text_python_lines = "\n\n" \
