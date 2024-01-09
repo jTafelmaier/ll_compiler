@@ -16,5 +16,6 @@ do text_hello
     > to_text_rev
     > to_text_uppercase
     > to_text_reversed
+    > to_text_append "!"
     > print
 
