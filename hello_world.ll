@@ -1,9 +1,9 @@
 
 
 
-set text_1 = "Hello"
+set text_hello = "Hello"
 
-do text_1
+do text_hello
     > to_text_append " World"
     > print
 
