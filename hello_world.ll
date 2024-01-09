@@ -1,9 +1,9 @@
 
 
 
-text_1 = "test"
+set text_1 = "test"
 
-text_1
+do text_1
     > to_text_reversed
     > to_text_append ", test 2"
     > print

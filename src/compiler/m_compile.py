@@ -58,12 +58,32 @@ def get_text_python_function_applied(
         + ")"
 
 
-def get_text_python_statement(
-    text_line_ll:str):
+def get_text_python_function_chain(
+    text_input:str,
+    text_functions:str):
+
+    if text_functions == "":
+        return text_input
+
+    list_texts_functions = text_functions \
+        .split("\n")
+
+    text_python_function_chain = text_input
+
+    for text_function in list_texts_functions:
+        text_python_function_chain = get_text_python_function_applied(
+                text_input=text_python_function_chain,
+                text_function=text_function)
+
+    return text_python_function_chain
+
+
+def get_text_python_set(
+    text_block:str):
 
     text_first_line, \
     _, \
-    text_functions = text_line_ll \
+    text_functions = text_block \
         .partition("\n")
 
     text_declaration_variable, \
@@ -71,28 +91,43 @@ def get_text_python_statement(
     text_input = text_first_line \
         .rpartition(" = ")
 
-    text_python_statement = text_input
+    text_python_function_chain = get_text_python_function_chain(
+            text_input=text_input,
+            text_functions=text_functions)
 
-    if text_functions != "":
+    return text_declaration_variable \
+        + " = " \
+        + text_python_function_chain
 
-        list_texts_functions = text_functions \
-            .split("\n")
 
-        for text_function in list_texts_functions:
-            text_python_statement = get_text_python_function_applied(
-                    text_input=text_python_statement,
-                    text_function=text_function)
+def get_text_python_do(
+    text_block:str):
 
-    def get_text_python_declaration_variable():
+    text_input, \
+    _, \
+    text_functions = text_block \
+        .partition("\n")
 
-        if text_declaration_variable == "":
-            return ""
-        else:
-            return text_declaration_variable \
-                + " = "
+    return get_text_python_function_chain(
+            text_input=text_input,
+            text_functions=text_functions)
 
-    return get_text_python_declaration_variable() \
-        + text_python_statement
+
+def get_text_python_block(
+    text_line_ll:str):
+
+    text_type_block, \
+    _, \
+    text_block = text_line_ll \
+        .partition(" ")
+
+    dict_functions = {
+        "set": get_text_python_set, 
+        "do": get_text_python_do}
+
+    return dict_functions \
+        [text_type_block] \
+        (text_block)
 
 
 def get_text_python(
@@ -112,7 +147,7 @@ def get_text_python(
     text_python_lines = "\n\n" \
         .join(
             map(
-                get_text_python_statement,
+                get_text_python_block,
                 list_texts_statements))
 
     return "\n\nfrom built_in_functions import *\n\n\n\ndef main():\n\n" \
