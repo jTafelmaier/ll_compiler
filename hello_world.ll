@@ -2,26 +2,26 @@
 
 
 
-def to_text_custom text
+def toTextCustom text
 
     return this
-        > to_text_append " c1"
-        > to_text_append " c2"
+        > toTextAppend " c1"
+        > toTextAppend " c2"
 
 
-set text_hello = "Hello"
+set textHello = "Hello"
 
 
-set text_world = "World"
+set textWorld = "World"
 
 
-do text_hello
-    > to_text_uppercase
-    > to_text_append " "
-    > to_text_append text_world
-    > to_text_custom
-    > to_text_reversed
-    > to_text_reversed
-    > to_text_append "!"
+do textHello
+    > toTextUppercase
+    > toTextAppend " "
+    > toTextAppend textWorld
+    > toTextCustom
+    > toTextReversed
+    > toTextReversed
+    > toTextAppend "!"
     > print
 
