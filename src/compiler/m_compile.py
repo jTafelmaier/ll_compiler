@@ -87,12 +87,12 @@ def get_text_python_def(
     # TODO arguments
     # TODO type inference
 
-    text_type_input, \
+    text_name_function, \
     _, \
     text_remaining = text_block \
         .partition(" ")
 
-    text_name_function, \
+    text_type_input, \
     _, \
     text_body_function = text_remaining \
         .partition("\n\n")

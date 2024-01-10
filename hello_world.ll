@@ -2,7 +2,7 @@
 
 
 
-def text to_text_custom
+def to_text_custom text
 
     return this
         > to_text_append " c1"
