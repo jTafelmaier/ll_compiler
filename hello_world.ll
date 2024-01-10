@@ -2,7 +2,7 @@
 
 
 
-def toTextCustom text
+def toTextCustom Text
 
     return this
         > toTextAppend " c1"
