@@ -21,6 +21,7 @@ do text_hello
     > to_text_append text_world
     > to_text_custom
     > to_text_reversed
+    > to_text_reversed
     > to_text_append "!"
     > print
 

@@ -15,7 +15,7 @@ def main():
 
     text_world = "World"
 
-    ll_print(ll_to_text_append(ll_to_text_reversed(ll_to_text_custom(ll_to_text_append(ll_to_text_append(ll_to_text_uppercase(text_hello), " "), text_world))), "!"))
+    ll_print(ll_to_text_append(ll_to_text_reversed(ll_to_text_reversed(ll_to_text_custom(ll_to_text_append(ll_to_text_append(ll_to_text_uppercase(text_hello), " "), text_world)))), "!"))
 
     return None
 
