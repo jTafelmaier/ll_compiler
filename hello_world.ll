@@ -2,27 +2,27 @@
 
 
 
-def toTextCustom Text
-    arg textToAppend
+def Text appendTwice
+    Text text
 
     return input
-        > toTextAppend textToAppend
-        > toTextAppend textToAppend
+        > append text
+        > append text
 
 
-set textHello = "Hello"
+set hello = "Hello"
 
 
-set textWorld = "World"
+set world = "World"
 
 
-do textHello
-    > toTextUppercase
-    > toTextAppend " "
-    > toTextAppend textWorld
-    > toTextCustom " c"
-    > toTextReversed
-    > toTextReversed
-    > toTextAppend "!"
+do hello
+    > uppercase
+    > append " "
+    > append world
+    > appendTwice " c"
+    > reversed
+    > reversed
+    > append "!"
     > print
 

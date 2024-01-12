@@ -6,17 +6,17 @@ from built_in_functions import *
 
 def main():
 
-    def ll_toTextCustom(
+    def ll_appendTwice(
         input,
-        textToAppend):
+        text):
 
-        return ll_toTextAppend(ll_toTextAppend(input, textToAppend), textToAppend)
+        return ll_append(ll_append(input, text), text)
 
-    textHello = "Hello"
+    hello = "Hello"
 
-    textWorld = "World"
+    world = "World"
 
-    ll_print(ll_toTextAppend(ll_toTextReversed(ll_toTextReversed(ll_toTextCustom(ll_toTextAppend(ll_toTextAppend(ll_toTextUppercase(textHello), " "), textWorld), " c"))), "!"))
+    ll_print(ll_append(ll_reversed(ll_reversed(ll_appendTwice(ll_append(ll_append(ll_uppercase(hello), " "), world), " c"))), "!"))
 
     return None
 

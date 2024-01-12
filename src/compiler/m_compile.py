@@ -87,12 +87,12 @@ def get_text_python_def(
     # TODO multiple arguments
     # TODO type inference
 
-    text_name_function, \
+    text_type_input, \
     _, \
     text_remaining_1 = text_block \
         .partition(" ")
 
-    text_type_input, \
+    text_name_function, \
     _, \
     text_remaining_2 = text_remaining_1 \
         .partition("\n")
@@ -111,10 +111,8 @@ def get_text_python_def(
     text_arguments_python_initial = ",\n".join(
         map(
             lambda text_line_argument_ll: text_line_argument_ll
-                .lstrip()
-                .replace(
-                    "arg ",
-                    ""),
+                .rpartition(" ")
+                [-1],
             text_arguments_ll \
                 .split("\n")))
 
