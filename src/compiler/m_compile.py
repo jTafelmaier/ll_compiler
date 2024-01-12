@@ -87,19 +87,19 @@ def get_text_python_def(
     # TODO multiple arguments
     # TODO type inference
 
-    text_type_input, \
+    text_first_line, \
     _, \
-    text_remaining_1 = text_block \
-        .partition(" ")
-
-    text_name_function, \
-    _, \
-    text_remaining_2 = text_remaining_1 \
+    text_remaining_lines = text_block \
         .partition("\n")
+
+    _, \
+    text_type_input, \
+    text_name_function = text_first_line \
+        .split(" ")
 
     text_arguments_ll, \
     _, \
-    text_body_function = text_remaining_2 \
+    text_body_function = text_remaining_lines \
         .partition("\n\n")
 
     text_return_python = get_text_python_do(text_body_function \
@@ -165,21 +165,18 @@ def get_text_python_do(
 
 
 def get_text_python_block(
-    text_line_ll:str):
+    text_block_ll:str):
 
-    text_type_block, \
-    _, \
-    text_block = text_line_ll \
-        .partition(" ")
+    text_first_line = text_block_ll \
+        .partition("\n") \
+        [0]
 
-    dict_functions = {
-        "def": get_text_python_def,
-        "set": get_text_python_set, 
-        "do": get_text_python_do}
-
-    return dict_functions \
-        [text_type_block] \
-        (text_block)
+    if text_first_line.startswith("def"):
+        return get_text_python_def(text_block_ll)
+    elif " = " in text_first_line:
+        return get_text_python_set(text_block_ll)
+    else:
+        return get_text_python_do(text_block_ll)
 
 
 def get_text_python(

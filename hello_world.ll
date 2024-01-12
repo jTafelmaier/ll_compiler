@@ -10,13 +10,13 @@ def Text appendTwice
         > append text
 
 
-set hello = "Hello"
+hello = "Hello"
 
 
-set world = "World"
+world = "World"
 
 
-do hello
+hello
     > uppercase
     > append " "
     > append world
