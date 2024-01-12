@@ -4,7 +4,7 @@
 
 def toTextCustom Text
 
-    return this
+    return input
         > toTextAppend " c1"
         > toTextAppend " c2"
 

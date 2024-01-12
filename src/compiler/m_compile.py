@@ -105,7 +105,7 @@ def get_text_python_def(
 
     return "def ll_" \
         + text_name_function \
-        + "(\n    this):\n\n    return " \
+        + "(\n    input):\n\n    return " \
         + text_body_python
 
 

@@ -7,9 +7,9 @@ from built_in_functions import *
 def main():
 
     def ll_toTextCustom(
-        this):
+        input):
 
-        return ll_toTextAppend(ll_toTextAppend(this, " c1"), " c2")
+        return ll_toTextAppend(ll_toTextAppend(input, " c1"), " c2")
 
     textHello = "Hello"
 
