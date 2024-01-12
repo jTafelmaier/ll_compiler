@@ -3,10 +3,11 @@
 
 
 def toTextCustom Text
+    arg textToAppend
 
     return input
-        > toTextAppend " c1"
-        > toTextAppend " c2"
+        > toTextAppend textToAppend
+        > toTextAppend textToAppend
 
 
 set textHello = "Hello"
@@ -19,7 +20,7 @@ do textHello
     > toTextUppercase
     > toTextAppend " "
     > toTextAppend textWorld
-    > toTextCustom
+    > toTextCustom " c"
     > toTextReversed
     > toTextReversed
     > toTextAppend "!"

@@ -84,29 +84,51 @@ def get_text_python_def(
     # TODO error: all sorts of things
     # TODO multiple blocks
     # TODO return
-    # TODO arguments
+    # TODO multiple arguments
     # TODO type inference
 
     text_name_function, \
     _, \
-    text_remaining = text_block \
+    text_remaining_1 = text_block \
         .partition(" ")
 
     text_type_input, \
     _, \
-    text_body_function = text_remaining \
+    text_remaining_2 = text_remaining_1 \
+        .partition("\n")
+
+    text_arguments_ll, \
+    _, \
+    text_body_function = text_remaining_2 \
         .partition("\n\n")
 
-    text_body_python = get_text_python_do(text_body_function \
+    text_return_python = get_text_python_do(text_body_function \
         .lstrip() \
         .replace(
             "return ",
             ""))
 
+    text_arguments_python_initial = ",\n".join(
+        map(
+            lambda text_line_argument_ll: text_line_argument_ll
+                .lstrip()
+                .replace(
+                    "arg ",
+                    ""),
+            text_arguments_ll \
+                .split("\n")))
+
+    text_arguments_python_final = "" if text_arguments_ll == "" else ",\n" + text_arguments_python_initial
+
+    text_body_python = "input" \
+        + text_arguments_python_final \
+        + "):\n\nreturn " \
+        + text_return_python
+
     return "def ll_" \
         + text_name_function \
-        + "(\n    input):\n\n    return " \
-        + text_body_python
+        + "(\n" \
+        + get_text_indented(text_body_python)
 
 
 def get_text_python_set(
