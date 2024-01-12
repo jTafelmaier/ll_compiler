@@ -13,11 +13,9 @@ def main():
 
         return ll_append(ll_append(input, text), text)
 
-    hello = "Hello"
+    world = ll_uppercase(ll_append("World", "!"))
 
-    world = "World"
-
-    ll_print(ll_append(ll_reversed(ll_reversed(ll_appendTwice(ll_append(ll_append(ll_uppercase(hello), " "), world), " c"))), "!"))
+    ll_print(ll_appendTwice(ll_append(ll_uppercase(ll_append("Hello", " ")), world), " c"))
 
     return None
 

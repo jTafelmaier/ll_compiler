@@ -10,19 +10,15 @@ def Text appendTwice
         > append text
 
 
-hello = "Hello"
-
-
 world = "World"
-
-
-hello
+    > append "!"
     > uppercase
+
+
+"Hello"
     > append " "
+    > uppercase
     > append world
     > appendTwice " c"
-    > reversed
-    > reversed
-    > append "!"
     > print
 
