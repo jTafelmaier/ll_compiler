@@ -12,11 +12,9 @@ def TEXT appendTwoTexts
         > append Text1
         > append Text3
 
-
 World = "World"
     > append "!"
     > uppercase
-
 
 "Hello"
     > append " "

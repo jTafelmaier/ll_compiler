@@ -42,9 +42,27 @@ def get_text_unindented_one_level(
                     .split("\n")))
 
 
-def get_list_texts_blocks(
-    text_ll:str):
+def get_iterator_reversed_texts_grouped_by_indentation(
+    text:str):
 
-    return text_ll \
-        .split("\n\n\n")
+    list_texts_lines = text \
+        .split("\n")
+
+    text_block = ""
+
+    for text_line in reversed(list_texts_lines):
+        if text_block != "":
+            text_block = "\n" \
+                + text_block
+
+        if text_line == "":
+            continue
+
+        text_block = text_line \
+            + text_block
+
+        if not text_line.startswith("    "):
+            yield text_block
+
+            text_block = ""
 

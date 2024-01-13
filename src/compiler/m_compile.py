@@ -185,14 +185,15 @@ def get_text_python_block(
 def get_text_python(
     text_ll:str):
 
-    list_texts_statements = m_common_functions.get_list_texts_blocks(text_ll \
-        .strip("\n"))
+    iterator_texts_blocks_ll = reversed(
+        list(
+            m_common_functions.get_iterator_reversed_texts_grouped_by_indentation(text_ll)))
 
     return "\n\n" \
         .join(
             map(
                 get_text_python_block,
-                list_texts_statements))
+                iterator_texts_blocks_ll))
 
 
 def get_text_python_main(
