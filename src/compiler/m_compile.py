@@ -182,27 +182,28 @@ def get_text_python_block(
         return get_text_python_do(text_block_ll)
 
 
-def get_text_python_main(
+def get_text_python(
     text_ll:str):
 
-    # TODO implement: enums
+    list_texts_statements = text_ll \
+        .strip("\n") \
+        .split("\n\n\n")
 
-    def get_list_texts_blocks(
-        text_ll:str):
-
-        return text_ll \
-            .split("\n\n\n")
-
-    list_texts_statements = get_list_texts_blocks(text_ll \
-        .strip("\n"))
-
-    text_python_lines = "\n\n" \
+    return "\n\n" \
         .join(
             map(
                 get_text_python_block,
                 list_texts_statements))
 
+
+def get_text_python_main(
+    text_ll:str):
+
+    # TODO implement: enums
+
+    text_python = get_text_python(text_ll)
+
     return "\n\nfrom built_in_functions import *\n\n\n\n\ndef main():\n\n" \
-        + m_common_functions.get_text_indented_one_level(text_python_lines) \
+        + m_common_functions.get_text_indented_one_level(text_python) \
         + "\n\n    return None\n\n\nif __name__ == \"__main__\":\n    main()\n\n"
 
