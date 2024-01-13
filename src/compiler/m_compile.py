@@ -118,11 +118,15 @@ def get_text_python_def(
 
     text_arguments_python_final = "" if text_arguments_ll == "" else ",\n" + text_arguments_python_initial
 
+    text_python_before_return_raw = get_text_python(text_body_ll_before_return)
+
+    text_python_before_return_final = text_python_before_return_raw if text_python_before_return_raw == "" else text_python_before_return_raw + "\n\n"
+
     text_body_python = "Input" \
         + text_arguments_python_final \
         + "):\n\n" \
-        + get_text_python(text_body_ll_before_return) \
-        + "\n\nreturn " \
+        + text_python_before_return_final \
+        + "return " \
         + text_return_python
 
     return "def ll_" \

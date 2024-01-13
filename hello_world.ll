@@ -2,6 +2,14 @@
 
 
 
+def TEXT reverseTwice
+    NOTHING _
+
+    return Input
+        > reversed
+        > reversed
+
+
 def TEXT appendTwoTexts
     TEXT Text1
     TEXT Text2
@@ -16,9 +24,11 @@ def TEXT appendTwoTexts
         > append Text1Copy
         > append Text2Copy
 
+
 World = "World"
     > append "!"
     > uppercase
+
 
 "Hello"
     > append " "
@@ -27,5 +37,6 @@ World = "World"
     > appendTwoTexts
         " c1"
         " c2"
+    > reverseTwice None
     > print
 
