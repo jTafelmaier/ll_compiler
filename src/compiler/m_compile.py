@@ -2,7 +2,7 @@
 
 
 
-def get_text_indented(
+def get_text_indented_one_level(
     text:str):
 
     def get_text_line_indented(
@@ -22,23 +22,47 @@ def get_text_indented(
                     .split("\n")))
 
 
-def get_text_python_function_applied(
+def get_text_unindented_one_level(
+    text:str):
+
+    def get_text_line_unindented(
+        text_line:str):
+
+        if text_line == "":
+            return text_line
+
+        return text_line \
+            [4:]
+
+    return "\n" \
+        .join(
+            map(
+                get_text_line_unindented,
+                text \
+                    .split("\n")))
+
+
+def get_text_python_function_call(
     text_input:str,
     text_function:str):
 
     text_name_function_ll, \
     _, \
-    text_arguments = text_function \
-        .lstrip("    > ") \
+    text_arguments_ll = text_function \
         .partition(" ") \
 
-    def get_list_texts_arguments():
+    def get_list_texts_arguments_python():
 
         # TODO implement: keyword arguments
-        list_texts_arguments = text_arguments \
-            .lstrip("[") \
-            .rstrip("]") \
-            .split(", ")
+        list_texts_arguments = list(
+            filter(
+                lambda text_argument_ll: text_argument_ll != "",
+                map(
+                    lambda text_argument_ll: text_argument_ll.lstrip(" "),
+                    text_arguments_ll \
+                        .lstrip("[") \
+                        .rstrip("]") \
+                        .split("\n"))))
 
         if list_texts_arguments == [""]:
             return [
@@ -48,13 +72,13 @@ def get_text_python_function_applied(
                 text_input] \
                 + list_texts_arguments
 
-    text_arguments = ", " \
-        .join(get_list_texts_arguments())
+    text_arguments_python = ", " \
+        .join(get_list_texts_arguments_python())
 
     return "ll_" \
         + text_name_function_ll \
         + "(" \
-        + text_arguments \
+        + text_arguments_python \
         + ")"
 
 
@@ -65,13 +89,16 @@ def get_text_python_function_chain(
     if text_functions == "":
         return text_input
 
-    list_texts_functions = text_functions \
-        .split("\n")
+    # TODO refactor
+    list_texts_functions = ("\n" 
+        + text_functions) \
+        .split("\n    > ") \
+        [1:]
 
     text_python_function_chain = text_input
 
     for text_function in list_texts_functions:
-        text_python_function_chain = get_text_python_function_applied(
+        text_python_function_chain = get_text_python_function_call(
                 text_input=text_python_function_chain,
                 text_function=text_function)
 
@@ -84,13 +111,14 @@ def get_text_python_def(
     # TODO error: all sorts of things
     # TODO multiple blocks
     # TODO return
-    # TODO multiple arguments
     # TODO type inference
 
     text_first_line, \
     _, \
-    text_remaining_lines = text_block \
+    text_remaining_lines_indented = text_block \
         .partition("\n")
+
+    text_remaining_lines = get_text_unindented_one_level(text_remaining_lines_indented)
 
     _, \
     text_type_input, \
@@ -99,22 +127,23 @@ def get_text_python_def(
 
     text_arguments_ll, \
     _, \
-    text_body_function = text_remaining_lines \
+    text_body_ll = text_remaining_lines \
         .partition("\n\n")
 
-    text_return_python = get_text_python_do(text_body_function \
-        .lstrip() \
+    text_return_python = get_text_python_do(text_body_ll \
+        .lstrip(" ") \
         .replace(
             "return ",
             ""))
 
-    text_arguments_python_initial = ",\n".join(
-        map(
-            lambda text_line_argument_ll: text_line_argument_ll
-                .rpartition(" ")
-                [-1],
-            text_arguments_ll \
-                .split("\n")))
+    text_arguments_python_initial = ",\n" \
+        .join(
+            map(
+                lambda text_line_argument_ll: text_line_argument_ll
+                    .rpartition(" ")
+                    [-1],
+                text_arguments_ll \
+                    .split("\n")))
 
     text_arguments_python_final = "" if text_arguments_ll == "" else ",\n" + text_arguments_python_initial
 
@@ -126,7 +155,7 @@ def get_text_python_def(
     return "def ll_" \
         + text_name_function \
         + "(\n" \
-        + get_text_indented(text_body_python)
+        + get_text_indented_one_level(text_body_python)
 
 
 def get_text_python_set(
@@ -200,6 +229,6 @@ def get_text_python(
                 list_texts_statements))
 
     return "\n\nfrom built_in_functions import *\n\n\n\n\ndef main():\n\n" \
-        + get_text_indented(text_python_lines) \
+        + get_text_indented_one_level(text_python_lines) \
         + "\n\n    return None\n\n\nif __name__ == \"__main__\":\n    main()\n\n"
 
