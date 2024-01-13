@@ -6,11 +6,11 @@ def TEXT appendTwoTexts
     TEXT Text1
     TEXT Text2
 
-    Text3 = Text2
+    Text2Copy = Text2
 
     return Input
         > append Text1
-        > append Text3
+        > append Text2Copy
 
 World = "World"
     > append "!"
