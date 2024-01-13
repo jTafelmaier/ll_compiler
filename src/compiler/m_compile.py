@@ -49,11 +49,14 @@ def get_text_python_function_call(
     text_name_function_ll, \
     _, \
     text_arguments_ll = text_function \
+        .replace(
+            "\n",
+            " ",
+            1) \
         .partition(" ") \
 
     def get_list_texts_arguments_python():
 
-        # TODO implement: keyword arguments
         list_texts_arguments = list(
             filter(
                 lambda text_argument_ll: text_argument_ll != "",
@@ -130,8 +133,12 @@ def get_text_python_def(
     text_body_ll = text_remaining_lines \
         .partition("\n\n")
 
-    text_return_python = get_text_python_do(text_body_ll \
-        .lstrip(" ") \
+    text_body_ll_before_return, \
+    _, \
+    text_body_ll_return = text_body_ll \
+        .rpartition("\n\n")
+
+    text_return_python = get_text_python_do(text_body_ll_return \
         .replace(
             "return ",
             ""))
@@ -147,9 +154,12 @@ def get_text_python_def(
 
     text_arguments_python_final = "" if text_arguments_ll == "" else ",\n" + text_arguments_python_initial
 
+    # TODO multiple blocks in text_body_ll_before_return
     text_body_python = "Input" \
         + text_arguments_python_final \
-        + "):\n\nreturn " \
+        + "):\n\n" \
+        + get_text_python_block(text_body_ll_before_return) \
+        + "\n\nreturn " \
         + text_return_python
 
     return "def ll_" \
@@ -208,7 +218,7 @@ def get_text_python_block(
         return get_text_python_do(text_block_ll)
 
 
-def get_text_python(
+def get_text_python_main(
     text_ll:str):
 
     # TODO implement: enums

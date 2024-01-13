@@ -6,9 +6,11 @@ def TEXT appendTwoTexts
     TEXT Text1
     TEXT Text2
 
+    Text3 = Text2
+
     return Input
         > append Text1
-        > append Text2
+        > append Text3
 
 
 World = "World"
@@ -20,8 +22,8 @@ World = "World"
     > append " "
     > uppercase
     > append World
-    > appendTwoTexts [
+    > appendTwoTexts
         " c1"
-        " c2"]
+        " c2"
     > print
 

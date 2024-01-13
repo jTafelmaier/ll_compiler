@@ -15,7 +15,7 @@ def test_compiler():
 
     for text_name_test, text_ll, text_python_target in list_tests:
 
-        text_python_compiled = m_compile.get_text_python(text_ll)
+        text_python_compiled = m_compile.get_text_python_main(text_ll)
 
         if text_python_compiled == text_python_target:
 

@@ -13,7 +13,7 @@ def main():
 
     with open("hello_world.py", "w", encoding="utf-8") as file_python:
         file_python \
-            .write(m_compile.get_text_python(text_ll))
+            .write(m_compile.get_text_python_main(text_ll))
 
     return None
 
