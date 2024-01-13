@@ -1,45 +1,9 @@
 
 
 
-
-def get_text_indented_one_level(
-    text:str):
-
-    def get_text_line_indented(
-        text_line:str):
-
-        if text_line == "":
-            return text_line
-
-        return "    " \
-            + text_line
-
-    return "\n" \
-        .join(
-            map(
-                get_text_line_indented,
-                text \
-                    .split("\n")))
+from src.auxiliary import m_common_functions
 
 
-def get_text_unindented_one_level(
-    text:str):
-
-    def get_text_line_unindented(
-        text_line:str):
-
-        if text_line == "":
-            return text_line
-
-        return text_line \
-            [4:]
-
-    return "\n" \
-        .join(
-            map(
-                get_text_line_unindented,
-                text \
-                    .split("\n")))
 
 
 def get_text_python_function_call(
@@ -121,7 +85,7 @@ def get_text_python_def(
     text_remaining_lines_indented = text_block \
         .partition("\n")
 
-    text_remaining_lines = get_text_unindented_one_level(text_remaining_lines_indented)
+    text_remaining_lines = m_common_functions.get_text_unindented_one_level(text_remaining_lines_indented)
 
     _, \
     text_type_input, \
@@ -165,7 +129,7 @@ def get_text_python_def(
     return "def ll_" \
         + text_name_function \
         + "(\n" \
-        + get_text_indented_one_level(text_body_python)
+        + m_common_functions.get_text_indented_one_level(text_body_python)
 
 
 def get_text_python_set(
@@ -239,6 +203,6 @@ def get_text_python_main(
                 list_texts_statements))
 
     return "\n\nfrom built_in_functions import *\n\n\n\n\ndef main():\n\n" \
-        + get_text_indented_one_level(text_python_lines) \
+        + m_common_functions.get_text_indented_one_level(text_python_lines) \
         + "\n\n    return None\n\n\nif __name__ == \"__main__\":\n    main()\n\n"
 
