@@ -7,8 +7,10 @@ def TEXT appendTwoTexts
     TEXT Text2
 
     Text1Copy = Text1
+        > append ""
 
     Text2Copy = Text2
+        > append ""
 
     return Input
         > append Text1Copy

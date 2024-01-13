@@ -12,9 +12,9 @@ def main():
         Text1,
         Text2):
 
-        Text1Copy = Text1
+        Text1Copy = ll_append(Text1, "")
 
-        Text2Copy = Text2
+        Text2Copy = ll_append(Text2, "")
 
         return ll_append(ll_append(Input, Text1Copy), Text2Copy)
 
