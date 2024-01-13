@@ -20,11 +20,11 @@ def main():
 
         Text1Copy = ll_append(Text1, "")
 
-        Text2Copy = ll_append(Text2, "")
+        Text2Copy = Text2
 
-        return ll_append(ll_append(Input, Text1Copy), Text2Copy)
+        return ll_reverseTwice(ll_append(ll_append(Input, Text1Copy), Text2Copy), None)
 
-    ll_print(ll_reverseTwice(ll_appendTwoTexts(ll_uppercase("Hello World!"), " c1", " c2"), None))
+    ll_print(ll_appendTwoTexts(ll_uppercase("Hello World!"), " c1", " c2"))
 
     return None
 

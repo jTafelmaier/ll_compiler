@@ -18,11 +18,11 @@ def TEXT appendTwoTexts
         > append ""
 
     Text2Copy = Text2
-        > append ""
 
     return Input
         > append Text1Copy
         > append Text2Copy
+        > reverseTwice None
 
 
 "Hello World!"
@@ -30,6 +30,5 @@ def TEXT appendTwoTexts
     > appendTwoTexts
         " c1"
         " c2"
-    > reverseTwice None
     > print
 
