@@ -118,11 +118,10 @@ def get_text_python_def(
 
     text_arguments_python_final = "" if text_arguments_ll == "" else ",\n" + text_arguments_python_initial
 
-    # TODO multiple blocks in text_body_ll_before_return
     text_body_python = "Input" \
         + text_arguments_python_final \
         + "):\n\n" \
-        + get_text_python_block(text_body_ll_before_return) \
+        + get_text_python(text_body_ll_before_return) \
         + "\n\nreturn " \
         + text_return_python
 

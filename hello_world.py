@@ -12,9 +12,11 @@ def main():
         Text1,
         Text2):
 
+        Text1Copy = Text1
+
         Text2Copy = Text2
 
-        return ll_append(ll_append(Input, Text1), Text2Copy)
+        return ll_append(ll_append(Input, Text1Copy), Text2Copy)
 
     World = ll_uppercase(ll_append("World", "!"))
 
