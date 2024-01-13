@@ -147,7 +147,7 @@ def get_text_python_def(
 
     text_arguments_python_final = "" if text_arguments_ll == "" else ",\n" + text_arguments_python_initial
 
-    text_body_python = "input" \
+    text_body_python = "Input" \
         + text_arguments_python_final \
         + "):\n\nreturn " \
         + text_return_python

@@ -3,15 +3,15 @@
 
 
 def TEXT appendTwoTexts
-    TEXT text1
-    TEXT text2
+    TEXT Text1
+    TEXT Text2
 
-    return input
-        > append text1
-        > append text2
+    return Input
+        > append Text1
+        > append Text2
 
 
-world = "World"
+World = "World"
     > append "!"
     > uppercase
 
@@ -19,7 +19,7 @@ world = "World"
 "Hello"
     > append " "
     > uppercase
-    > append world
+    > append World
     > appendTwoTexts [
         " c1"
         " c2"]
