@@ -185,9 +185,8 @@ def get_text_python_block(
 def get_text_python(
     text_ll:str):
 
-    list_texts_statements = text_ll \
-        .strip("\n") \
-        .split("\n\n\n")
+    list_texts_statements = m_common_functions.get_list_texts_blocks(text_ll \
+        .strip("\n"))
 
     return "\n\n" \
         .join(
