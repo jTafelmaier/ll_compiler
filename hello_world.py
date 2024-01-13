@@ -10,14 +10,13 @@ def main():
     def ll_appendTwoTexts(
         input,
         text1,
-        text2,
-        text3):
+        text2):
 
-        return ll_append(ll_append(ll_append(input, text1), text2), text3)
+        return ll_append(ll_append(input, text1), text2)
 
     world = ll_uppercase(ll_append("World", "!"))
 
-    ll_print(ll_appendTwoTexts(ll_append(ll_uppercase(ll_append("Hello", " ")), world), " c1", " c2", " c3"))
+    ll_print(ll_appendTwoTexts(ll_append(ll_uppercase(ll_append("Hello", " ")), world), " c1", " c2"))
 
     return None
 

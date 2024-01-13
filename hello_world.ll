@@ -2,9 +2,9 @@
 
 
 
-def Text appendTwoTexts
-    Text text1
-    Text text2
+def TEXT appendTwoTexts
+    TEXT text1
+    TEXT text2
 
     return input
         > append text1
