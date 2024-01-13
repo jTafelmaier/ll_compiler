@@ -25,15 +25,8 @@ def TEXT appendTwoTexts
         > append Text2Copy
 
 
-World = "World"
-    > append "!"
+"Hello World!"
     > uppercase
-
-
-"Hello"
-    > append " "
-    > uppercase
-    > append World
     > appendTwoTexts
         " c1"
         " c2"

@@ -24,9 +24,7 @@ def main():
 
         return ll_append(ll_append(Input, Text1Copy), Text2Copy)
 
-    World = ll_uppercase(ll_append("World", "!"))
-
-    ll_print(ll_reverseTwice(ll_appendTwoTexts(ll_append(ll_uppercase(ll_append("Hello", " ")), World), " c1", " c2"), None))
+    ll_print(ll_reverseTwice(ll_appendTwoTexts(ll_uppercase("Hello World!"), " c1", " c2"), None))
 
     return None
 
