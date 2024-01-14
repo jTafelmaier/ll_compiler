@@ -2,18 +2,17 @@
 
 
 
-def TEXT applyFunction
-    FN[TEXT > TEXT] Function
-
-    return Input
-        > Function
-
-
 def TEXT applyTwoFunctionsReversed
     FN[TEXT > TEXT] Function2
     FN[TEXT > TEXT] Function1
 
+    def TEXT doNothing
+        NOTHING _
+
+        return Input
+
     return Input
+        > doNothing "Nothing"
         > Function1
         > Function2
 
@@ -29,9 +28,7 @@ def TEXT prepend
     > applyTwoFunctionsReversed [
         append "!"
         append " World"]
-    > applyFunction prepend "I say: "
-    > applyFunction reversed
-    > applyFunction reversed
+    > prepend "I say: "
     > applyTwoFunctionsReversed [
         reversed
         reversed]
