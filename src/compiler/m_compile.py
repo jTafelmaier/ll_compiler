@@ -43,11 +43,10 @@ def get_text_python_function_call(
                 text_input="Input",
                 text_function=text_argument_ll_stripped)
 
-    def get_list_texts_arguments_python():
+    def get_text_arguments_python():
 
         if text_arguments_ll == "":
-            return [
-                text_input]
+            return text_input
 
         list_texts_arguments_python = list(
             map(
@@ -59,17 +58,16 @@ def get_text_python_function_call(
                         .rstrip("]") \
                         .split("\n"))))
 
-        return [
-            text_input] \
-            + list_texts_arguments_python
-
-    text_arguments_python = ",\n" \
-        .join(get_list_texts_arguments_python())
+        return ",\n" \
+            .join(
+                [
+                    text_input] \
+                + list_texts_arguments_python)
 
     return "ll_" \
         + text_name_function_ll \
         + "(\n" \
-        + m_common_functions.get_text_indented_one_level(text_arguments_python) \
+        + m_common_functions.get_text_indented_one_level(get_text_arguments_python()) \
         + ")"
 
 
