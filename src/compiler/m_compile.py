@@ -29,13 +29,13 @@ def get_text_python_function_call(
         if text_argument_ll_stripped.startswith("\""):
             return text_argument_ll_stripped
 
+        if text_argument_ll_stripped[0].isupper():
+            return text_argument_ll_stripped
+
         text_argument_ll_first, \
         _, \
         text_argument_to_function = text_argument_ll_stripped \
             .partition(" ")
-
-        if text_argument_ll_first[0].isupper():
-            return text_argument_ll_first
 
         if text_argument_to_function == "":
             return "ll_" \
