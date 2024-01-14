@@ -13,6 +13,7 @@ def get_text_python_function_call(
     text_name_function_ll, \
     _, \
     text_arguments_ll = text_function \
+        .rstrip("\n") \
         .replace(
             "\n",
             " ",
@@ -80,10 +81,8 @@ def get_text_python_function_chain(
     text_input:str,
     text_functions:str):
 
-    # TODO refactor
-    list_texts_functions = ("\n" 
-        + text_functions) \
-        .split("\n    > ") \
+    list_texts_functions = m_common_functions.get_text_unindented_one_level(text_functions) \
+        .split("> ") \
         [1:]
 
     text_python_function_chain = text_input
