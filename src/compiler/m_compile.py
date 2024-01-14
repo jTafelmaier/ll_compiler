@@ -30,7 +30,7 @@ def get_text_python_function_call(
     text_arguments_ll = text_function_call_ll \
         .partition(" ")
 
-    def isFunctionName(
+    def is_function_name(
         text_ll):
 
         return text_ll.isalpha() and text_ll[0].islower()
@@ -42,7 +42,7 @@ def get_text_python_function_call(
             .partition(" ") \
             [0]
 
-        if not isFunctionName(text_argument_ll_first):
+        if not is_function_name(text_argument_ll_first):
             return text_argument_ll
 
         return "lambda Input: " \
