@@ -26,10 +26,7 @@ def get_text_python_function_call(
         text_argument_ll_stripped = text_argument_ll \
             .lstrip(" ")
 
-        if text_argument_ll_stripped.startswith("\""):
-            return text_argument_ll_stripped
-
-        if text_argument_ll_stripped[0].isupper():
+        if text_argument_ll_stripped.startswith("\"") or text_argument_ll_stripped[0].isupper():
             return text_argument_ll_stripped
 
         text_argument_ll_first, \
