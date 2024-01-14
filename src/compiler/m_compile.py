@@ -99,10 +99,9 @@ def get_text_python_function_chain(
 def get_text_python_def(
     text_block:str):
 
-    # TODO error: all sorts of things
-    # TODO multiple blocks
-    # TODO return
-    # TODO type inference
+    # TODO implement: nested function definitions
+    # TODO implement: pre-return
+    # TODO implement: type inference
 
     text_first_line, \
     _, \
