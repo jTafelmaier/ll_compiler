@@ -67,14 +67,14 @@ def get_text_python_function_call(
                 text_input] \
                 + list_texts_arguments_python
 
-    text_arguments_python = ", " \
+    text_arguments_python = ",\n" \
         .join(get_list_texts_arguments_python())
 
     return "ll_" \
         + text_name_function_ll \
-        + "(" \
-        + text_arguments_python \
-        + ")"
+        + "(\n" \
+        + m_common_functions.get_text_indented_one_level(text_arguments_python \
+            + ")")
 
 
 def get_text_python_function_chain(
