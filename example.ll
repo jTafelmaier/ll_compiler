@@ -12,13 +12,12 @@ def TEXT applyTwoFunctions
 
 
 "Hello"
-    > append " World!"
+    > applyTwoFunctions [
+        append " World"
+        append "!"]
     > uppercase
     > applyTwoFunctions [
         reversed
         reversed]
-    > applyTwoFunctions [
-        append " c1"
-        append " c2"]
     > print
 

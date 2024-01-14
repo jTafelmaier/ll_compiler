@@ -18,21 +18,19 @@ def main():
 
     ll_print(
         ll_applyTwoFunctions(
-            ll_applyTwoFunctions(
-                ll_uppercase(
-                    ll_append(
-                        "Hello",
-                        " World!")),
-                lambda Input: ll_reversed(
-                    Input),
-                lambda Input: ll_reversed(
-                    Input)),
-            lambda Input: ll_append(
-                Input,
-                " c1"),
-            lambda Input: ll_append(
-                Input,
-                " c2")))
+            ll_uppercase(
+                ll_applyTwoFunctions(
+                    "Hello",
+                    lambda Input: ll_append(
+                        Input,
+                        " World"),
+                    lambda Input: ll_append(
+                        Input,
+                        "!"))),
+            lambda Input: ll_reversed(
+                Input),
+            lambda Input: ll_reversed(
+                Input)))
 
     return None
 
