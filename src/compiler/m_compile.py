@@ -33,15 +33,12 @@ def get_text_python_function_call(
     def get_text_argument_python(
         text_argument_ll:str):
 
-        text_argument_ll_stripped = text_argument_ll \
-            .lstrip(" ")
-
-        if text_argument_ll_stripped.startswith("\"") or text_argument_ll_stripped[0].isupper():
-            return text_argument_ll_stripped
+        if text_argument_ll.startswith("\"") or text_argument_ll[0].isupper():
+            return text_argument_ll
 
         text_argument_ll_first, \
         _, \
-        text_argument_to_function = text_argument_ll_stripped \
+        text_argument_to_function = text_argument_ll \
             .partition(" ")
 
         if text_argument_to_function == "":
@@ -51,17 +48,20 @@ def get_text_python_function_call(
         return "lambda Input: " \
             + get_text_python_function_call(
                 text_input="Input",
-                text_function_call_ll=text_argument_ll_stripped)
+                text_function_call_ll=text_argument_ll)
 
+    # TODO refactor
     text_arguments_additional = ",\n" \
         .join(
             map(
                 get_text_argument_python,
-                text_arguments_ll \
-                    .rstrip("]") \
-                    .lstrip("[") \
-                    .lstrip("\n") \
-                    .split("\n")))
+                map(
+                    lambda text_argument_ll: text_argument_ll.lstrip(" "),
+                    text_arguments_ll \
+                        .rstrip("]") \
+                        .lstrip("[") \
+                        .lstrip("\n") \
+                        .split("\n"))))
 
     text_arguments_python = text_input \
         + ",\n" \
