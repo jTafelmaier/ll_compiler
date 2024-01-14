@@ -9,9 +9,9 @@ def TEXT applyFunction
         > Function
 
 
-def TEXT applyTwoFunctions
-    FN[TEXT > TEXT] Function1
+def TEXT applyTwoFunctionsReversed
     FN[TEXT > TEXT] Function2
+    FN[TEXT > TEXT] Function1
 
     return Input
         > Function1
@@ -19,11 +19,11 @@ def TEXT applyTwoFunctions
 
 
 "Hello"
-    > applyTwoFunctions [
-        append " World"
-        append "!"]
+    > applyTwoFunctionsReversed [
+        append "!"
+        append " World"]
     > applyFunction append " c1"
-    > applyTwoFunctions [
+    > applyTwoFunctionsReversed [
         reversed
         reversed]
     > print

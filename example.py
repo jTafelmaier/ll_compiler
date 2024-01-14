@@ -14,26 +14,26 @@ def main():
         return ll_Function(
             Input)
 
-    def ll_applyTwoFunctions(
+    def ll_applyTwoFunctionsReversed(
         Input,
-        ll_Function1,
-        ll_Function2):
+        ll_Function2,
+        ll_Function1):
 
         return ll_Function2(
             ll_Function1(
                 Input))
 
     ll_print(
-        ll_applyTwoFunctions(
+        ll_applyTwoFunctionsReversed(
             ll_applyFunction(
-                ll_applyTwoFunctions(
+                ll_applyTwoFunctionsReversed(
                     "Hello",
                     lambda Input: ll_append(
                         Input,
-                        " World"),
+                        "!"),
                     lambda Input: ll_append(
                         Input,
-                        "!")),
+                        " World")),
                 lambda Input: ll_append(
                     Input,
                     " c1")),
