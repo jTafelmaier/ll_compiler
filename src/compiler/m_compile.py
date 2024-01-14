@@ -20,13 +20,14 @@ def get_text_python_function_call(
             + m_common_functions.get_text_indented_one_level(text_arguments_python) \
             + ")"
 
+    if " " not in text_function_ll:
+        return get_text_python_syntax_function_call(
+                text_name_function=text_function_ll,
+                text_arguments_python=text_input)
+
     text_name_function_ll, \
     _, \
     text_arguments_ll = text_function_ll \
-        .replace(
-            "\n",
-            " ",
-            1) \
         .partition(" ")
 
     def get_text_argument_python(
@@ -53,9 +54,6 @@ def get_text_python_function_call(
                 text_function_ll=text_argument_ll_stripped)
 
     def get_text_arguments_python():
-
-        if text_arguments_ll == "":
-            return text_input
 
         list_texts_arguments_additional = list(
             map(
