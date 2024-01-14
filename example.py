@@ -23,8 +23,12 @@ def main():
                     "Hello World!"),
                 ll_reversed,
                 ll_reversed),
-            lambda Input: ll_append(Input, " c1"),
-            lambda Input: ll_append(Input, " c2")))
+            lambda Input: ll_append(
+                Input,
+                " c1"),
+            lambda Input: ll_append(
+                Input,
+                " c2")))
 
     return None
 

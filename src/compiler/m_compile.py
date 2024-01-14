@@ -41,11 +41,10 @@ def get_text_python_function_call(
             return "ll_" \
                 + text_argument_ll_first
 
-        return "lambda Input: ll_" \
-            + text_argument_ll_first \
-            + "(Input, " \
-            + text_argument_to_function \
-            + ")"
+        return "lambda Input: " \
+            + get_text_python_function_call(
+                text_input="Input",
+                text_function=text_argument_ll_stripped)
 
     def get_list_texts_arguments_python():
 
