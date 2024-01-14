@@ -8,7 +8,7 @@ from src.auxiliary import m_common_functions
 
 def get_text_python_function_call(
     text_input:str,
-    text_function_ll:str):
+    text_function_call_ll:str):
 
     def get_text_python_syntax_function_call(
         text_name_function:str,
@@ -20,14 +20,14 @@ def get_text_python_function_call(
             + m_common_functions.get_text_indented_one_level(text_arguments_python) \
             + ")"
 
-    if " " not in text_function_ll:
+    if " " not in text_function_call_ll:
         return get_text_python_syntax_function_call(
-                text_name_function=text_function_ll,
+                text_name_function=text_function_call_ll,
                 text_arguments_python=text_input)
 
     text_name_function_ll, \
     _, \
-    text_arguments_ll = text_function_ll \
+    text_arguments_ll = text_function_call_ll \
         .partition(" ")
 
     def get_text_argument_python(
@@ -51,7 +51,7 @@ def get_text_python_function_call(
         return "lambda Input: " \
             + get_text_python_function_call(
                 text_input="Input",
-                text_function_ll=text_argument_ll_stripped)
+                text_function_call_ll=text_argument_ll_stripped)
 
     def get_text_arguments_python():
 
@@ -90,7 +90,7 @@ def get_text_python_function_chain(
         # TODO refactor: use of .rstrip("\n")
         text_python_function_chain = get_text_python_function_call(
                 text_input=text_python_function_chain,
-                text_function_ll=text_function_ll \
+                text_function_call_ll=text_function_ll \
                     .rstrip("\n"))
 
     return text_python_function_chain
