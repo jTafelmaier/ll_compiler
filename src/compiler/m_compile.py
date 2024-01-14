@@ -48,11 +48,11 @@ def get_text_python_function_call(
         if text_arguments_ll == "":
             return text_input
 
-        list_texts_arguments_python = list(
+        list_texts_arguments_additional = list(
             map(
                 get_text_argument_python,
                 filter(
-                    lambda text_argument_python: text_argument_python != "",
+                    lambda text_argument_ll: text_argument_ll != "",
                     text_arguments_ll \
                         .lstrip("[") \
                         .rstrip("]") \
@@ -62,7 +62,7 @@ def get_text_python_function_call(
             .join(
                 [
                     text_input] \
-                + list_texts_arguments_python)
+                + list_texts_arguments_additional)
 
     return "ll_" \
         + text_name_function_ll \
