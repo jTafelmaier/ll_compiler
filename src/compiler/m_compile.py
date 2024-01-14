@@ -38,17 +38,12 @@ def get_text_python_function_call(
     def get_text_argument_python(
         text_argument_ll:str):
 
-        text_argument_ll_first, \
-        _, \
-        text_argument_to_function = text_argument_ll \
-            .partition(" ")
+        text_argument_ll_first = text_argument_ll \
+            .partition(" ") \
+            [0]
 
         if not isFunctionName(text_argument_ll_first):
             return text_argument_ll
-
-        if text_argument_to_function == "":
-            return "ll_" \
-                + text_argument_ll_first
 
         return "lambda Input: " \
             + get_text_python_function_call(
