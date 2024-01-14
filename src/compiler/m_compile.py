@@ -209,9 +209,7 @@ def get_text_python_block(
 def get_text_python(
     text_ll:str):
 
-    iterator_texts_blocks_ll = reversed(
-        list(
-            m_common_functions.get_iterator_reversed_texts_grouped_by_indentation(text_ll)))
+    iterator_texts_blocks_ll = m_common_functions.get_iterator_texts_grouped_by_indentation(text_ll)
 
     return "\n\n" \
         .join(
