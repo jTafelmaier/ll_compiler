@@ -18,7 +18,7 @@ def get_text_python_function_call(
             "\n",
             " ",
             1) \
-        .partition(" ") \
+        .partition(" ")
 
     def get_text_argument_python(
         text_argument_ll:str):

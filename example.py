@@ -20,7 +20,9 @@ def main():
         ll_applyTwoFunctions(
             ll_applyTwoFunctions(
                 ll_uppercase(
-                    "Hello World!"),
+                    ll_append(
+                        "Hello",
+                        " World!")),
                 ll_reversed,
                 ll_reversed),
             lambda Input: ll_append(

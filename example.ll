@@ -11,7 +11,8 @@ def TEXT applyTwoFunctions
         > Function2
 
 
-"Hello World!"
+"Hello"
+    > append " World!"
     > uppercase
     > applyTwoFunctions [
         reversed
