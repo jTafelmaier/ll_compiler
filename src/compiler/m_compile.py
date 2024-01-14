@@ -82,7 +82,6 @@ def get_text_python_function_chain(
     text_python_function_chain = text_input
 
     for text_function_call_ll in iterator_texts_function_calls_ll:
-        # TODO refactor
         text_python_function_chain = get_text_python_function_call(
                 text_input=text_python_function_chain,
                 text_function_call_ll=text_function_call_ll \
