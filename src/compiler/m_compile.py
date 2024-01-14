@@ -58,12 +58,11 @@ def get_text_python_function_call(
         list_texts_arguments_additional = list(
             map(
                 get_text_argument_python,
-                filter(
-                    lambda text_argument_ll: text_argument_ll != "",
-                    text_arguments_ll \
-                        .lstrip("[") \
-                        .rstrip("]") \
-                        .split("\n"))))
+                text_arguments_ll \
+                    .rstrip("]") \
+                    .lstrip("[") \
+                    .lstrip("\n") \
+                    .split("\n")))
 
         return ",\n" \
             .join(
