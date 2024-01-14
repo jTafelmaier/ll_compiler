@@ -53,26 +53,24 @@ def get_text_python_function_call(
                 text_input="Input",
                 text_function_call_ll=text_argument_ll_stripped)
 
-    def get_text_arguments_python():
+    list_texts_arguments_additional = list(
+        map(
+            get_text_argument_python,
+            text_arguments_ll \
+                .rstrip("]") \
+                .lstrip("[") \
+                .lstrip("\n") \
+                .split("\n")))
 
-        list_texts_arguments_additional = list(
-            map(
-                get_text_argument_python,
-                text_arguments_ll \
-                    .rstrip("]") \
-                    .lstrip("[") \
-                    .lstrip("\n") \
-                    .split("\n")))
-
-        return ",\n" \
-            .join(
-                [
-                    text_input] \
-                + list_texts_arguments_additional)
+    text_arguments_python = ",\n" \
+        .join(
+            [
+                text_input] \
+            + list_texts_arguments_additional)
 
     return get_text_python_syntax_function_call(
             text_name_function=text_name_function_ll,
-            text_arguments_python=get_text_arguments_python())
+            text_arguments_python=text_arguments_python)
 
 
 def get_text_python_function_chain(
