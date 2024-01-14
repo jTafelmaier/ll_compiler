@@ -52,8 +52,8 @@ def get_text_python_function_call(
 
         return "lambda Input: " \
             + get_text_python_function_call(
-                text_input="Input",
-                text_function_call_ll=text_argument_ll)
+                    text_input="Input",
+                    text_function_call_ll=text_argument_ll)
 
     # TODO refactor
     text_arguments_additional = ",\n" \
