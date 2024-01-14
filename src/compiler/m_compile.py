@@ -6,6 +6,12 @@ from src.auxiliary import m_common_functions
 
 
 
+def is_function_name(
+    text_ll:str):
+
+    return text_ll.isalpha() and text_ll[0].islower()
+
+
 def get_text_python_function_call(
     text_input:str,
     text_function_call_ll:str):
@@ -29,11 +35,6 @@ def get_text_python_function_call(
     _, \
     text_arguments_ll = text_function_call_ll \
         .partition(" ")
-
-    def is_function_name(
-        text_ll):
-
-        return text_ll.isalpha() and text_ll[0].islower()
 
     def get_text_argument_python(
         text_argument_ll:str):
