@@ -45,6 +45,10 @@ def get_text_python_function_call(
 
     def get_list_texts_arguments_python():
 
+        if text_arguments_ll == "":
+            return [
+                text_input]
+
         list_texts_arguments_python = list(
             map(
                 get_text_argument_python,
@@ -55,13 +59,9 @@ def get_text_python_function_call(
                         .rstrip("]") \
                         .split("\n"))))
 
-        if list_texts_arguments_python == [""]:
-            return [
-                text_input]
-        else:
-            return [
-                text_input] \
-                + list_texts_arguments_python
+        return [
+            text_input] \
+            + list_texts_arguments_python
 
     text_arguments_python = ",\n" \
         .join(get_list_texts_arguments_python())
