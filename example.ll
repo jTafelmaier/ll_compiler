@@ -2,6 +2,13 @@
 
 
 
+def TEXT applyFunction
+    FN[TEXT > TEXT] Function
+
+    return Input
+        > Function
+
+
 def TEXT applyTwoFunctions
     FN[TEXT > TEXT] Function1
     FN[TEXT > TEXT] Function2
@@ -12,9 +19,10 @@ def TEXT applyTwoFunctions
 
 
 "Hello"
+    > applyFunction append " World!"
     > applyTwoFunctions [
-        append " World"
-        append "!"]
+        append " c1"
+        append " c2"]
     > uppercase
     > applyTwoFunctions [
         reversed

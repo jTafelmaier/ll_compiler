@@ -7,6 +7,13 @@ from built_in_functions import *
 
 def main():
 
+    def ll_applyFunction(
+        Input,
+        ll_Function):
+
+        return ll_Function(
+            Input)
+
     def ll_applyTwoFunctions(
         Input,
         ll_Function1,
@@ -20,13 +27,17 @@ def main():
         ll_applyTwoFunctions(
             ll_uppercase(
                 ll_applyTwoFunctions(
-                    "Hello",
+                    ll_applyFunction(
+                        "Hello",
+                        lambda Input: ll_append(
+                            Input,
+                            " World!")),
                     lambda Input: ll_append(
                         Input,
-                        " World"),
+                        " c1"),
                     lambda Input: ll_append(
                         Input,
-                        "!"))),
+                        " c2"))),
             lambda Input: ll_reversed(
                 Input),
             lambda Input: ll_reversed(
