@@ -13,7 +13,6 @@ def get_text_python_function_call(
     text_name_function_ll, \
     _, \
     text_arguments_ll = text_function \
-        .rstrip("\n") \
         .replace(
             "\n",
             " ",
@@ -82,9 +81,11 @@ def get_text_python_function_chain(
     text_python_function_chain = text_input
 
     for text_function in list_texts_functions:
+        # TODO refactor: use of .rstrip("\n")
         text_python_function_chain = get_text_python_function_call(
                 text_input=text_python_function_chain,
-                text_function=text_function)
+                text_function=text_function \
+                    .rstrip("\n"))
 
     return text_python_function_chain
 
