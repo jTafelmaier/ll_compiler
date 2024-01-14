@@ -80,17 +80,17 @@ def get_text_python_function_chain(
     text_input:str,
     text_functions:str):
 
-    list_texts_functions_ll = m_common_functions.get_text_unindented_one_level(text_functions) \
+    list_texts_function_calls_ll = m_common_functions.get_text_unindented_one_level(text_functions) \
         .split("> ") \
         [1:]
 
     text_python_function_chain = text_input
 
-    for text_function_ll in list_texts_functions_ll:
+    for text_function_call_ll in list_texts_function_calls_ll:
         # TODO refactor: use of .rstrip("\n")
         text_python_function_chain = get_text_python_function_call(
                 text_input=text_python_function_chain,
-                text_function_call_ll=text_function_ll \
+                text_function_call_ll=text_function_call_ll \
                     .rstrip("\n"))
 
     return text_python_function_chain
