@@ -18,11 +18,20 @@ def TEXT applyTwoFunctionsReversed
         > Function2
 
 
+def TEXT prepend
+    TEXT Text
+
+    return Text
+        > append Input
+
+
 "Hello"
     > applyTwoFunctionsReversed [
         append "!"
         append " World"]
-    > applyFunction append " c1"
+    > applyFunction prepend "I say: "
+    > applyFunction reversed
+    > applyFunction reversed
     > applyTwoFunctionsReversed [
         reversed
         reversed]

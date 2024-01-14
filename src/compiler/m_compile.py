@@ -6,10 +6,14 @@ from src.auxiliary import m_common_functions
 
 
 
-def is_function_name(
+def get_text_element_ll_reformat(
     text_ll:str):
 
-    return text_ll.isalpha() and text_ll[0].islower()
+    if text_ll.isalpha():
+        return "ll_" \
+            + text_ll
+    else:
+        return text_ll
 
 
 def get_text_python_function_call(
@@ -39,18 +43,18 @@ def get_text_python_function_call(
     def get_text_argument_python(
         text_argument_ll:str):
 
-        # TODO potential error: whitespace in strings like "Hello World" is captured by .partition(" ")
-        text_argument_ll_first = text_argument_ll \
-            .partition(" ") \
-            [0]
+        text_argument_first, \
+        _, \
+        text_argument_second = text_argument_ll \
+            .partition(" ")
 
-        if not is_function_name(text_argument_ll_first):
-            return text_argument_ll
+        if text_argument_first.isalpha() and text_argument_second != "":
+            return "lambda ll_Input: " \
+                + get_text_python_function_call(
+                        text_input="ll_Input",
+                        text_function_call_ll=text_argument_ll)
 
-        return "lambda Input: " \
-            + get_text_python_function_call(
-                    text_input="Input",
-                    text_function_call_ll=text_argument_ll)
+        return get_text_element_ll_reformat(text_argument_ll)
 
     # TODO refactor
     list_texts_arguments_additional = list(
@@ -81,7 +85,7 @@ def get_text_python_function_chain(
     iterator_texts_function_calls_ll = m_common_functions.get_iterator_texts_grouped_by_indentation(
             m_common_functions.get_text_unindented_one_level(text_functions))
 
-    text_python_function_chain = text_input
+    text_python_function_chain = get_text_element_ll_reformat(text_input)
 
     for text_function_call_ll in iterator_texts_function_calls_ll:
         text_python_function_chain = get_text_python_function_call(
@@ -143,7 +147,7 @@ def get_text_python_def(
 
     text_python_before_return_final = text_python_before_return_raw if text_python_before_return_raw == "" else text_python_before_return_raw + "\n\n"
 
-    text_body_python = "Input" \
+    text_body_python = "ll_Input" \
         + text_arguments_python_final \
         + "):\n\n" \
         + text_python_before_return_final \
