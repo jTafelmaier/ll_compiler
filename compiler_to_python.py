@@ -11,9 +11,11 @@ def main():
         text_ll = file_ll \
             .read()
 
+    text_python_main = m_compile.get_text_python_main(text_ll)
+
     with open("example.py", "w", encoding="utf-8") as file_python:
         file_python \
-            .write(m_compile.get_text_python_main(text_ll))
+            .write(text_python_main)
 
     return None
 
