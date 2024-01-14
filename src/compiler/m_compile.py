@@ -8,7 +8,7 @@ from src.auxiliary import m_common_functions
 
 def get_text_python_function_call(
     text_input:str,
-    text_function:str):
+    text_function_ll:str):
 
     def get_text_python_syntax_function_call(
         text_name_function:str,
@@ -22,7 +22,7 @@ def get_text_python_function_call(
 
     text_name_function_ll, \
     _, \
-    text_arguments_ll = text_function \
+    text_arguments_ll = text_function_ll \
         .replace(
             "\n",
             " ",
@@ -50,7 +50,7 @@ def get_text_python_function_call(
         return "lambda Input: " \
             + get_text_python_function_call(
                 text_input="Input",
-                text_function=text_argument_ll_stripped)
+                text_function_ll=text_argument_ll_stripped)
 
     def get_text_arguments_python():
 
@@ -82,17 +82,17 @@ def get_text_python_function_chain(
     text_input:str,
     text_functions:str):
 
-    list_texts_functions = m_common_functions.get_text_unindented_one_level(text_functions) \
+    list_texts_functions_ll = m_common_functions.get_text_unindented_one_level(text_functions) \
         .split("> ") \
         [1:]
 
     text_python_function_chain = text_input
 
-    for text_function in list_texts_functions:
+    for text_function_ll in list_texts_functions_ll:
         # TODO refactor: use of .rstrip("\n")
         text_python_function_chain = get_text_python_function_call(
                 text_input=text_python_function_chain,
-                text_function=text_function \
+                text_function_ll=text_function_ll \
                     .rstrip("\n"))
 
     return text_python_function_chain
