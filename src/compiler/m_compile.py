@@ -80,9 +80,6 @@ def get_text_python_function_chain(
     text_input:str,
     text_functions:str):
 
-    if text_functions == "":
-        return text_input
-
     # TODO refactor
     list_texts_functions = ("\n" 
         + text_functions) \
