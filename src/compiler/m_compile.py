@@ -10,6 +10,16 @@ def get_text_python_function_call(
     text_input:str,
     text_function:str):
 
+    def get_text_python_syntax_function_call(
+        text_name_function:str,
+        text_arguments_python:str):
+
+        return "ll_" \
+            + text_name_function \
+            + "(\n" \
+            + m_common_functions.get_text_indented_one_level(text_arguments_python) \
+            + ")"
+
     text_name_function_ll, \
     _, \
     text_arguments_ll = text_function \
@@ -63,11 +73,9 @@ def get_text_python_function_call(
                     text_input] \
                 + list_texts_arguments_additional)
 
-    return "ll_" \
-        + text_name_function_ll \
-        + "(\n" \
-        + m_common_functions.get_text_indented_one_level(get_text_arguments_python()) \
-        + ")"
+    return get_text_python_syntax_function_call(
+            text_name_function=text_name_function_ll,
+            text_arguments_python=get_text_arguments_python())
 
 
 def get_text_python_function_chain(
