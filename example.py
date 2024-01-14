@@ -7,24 +7,14 @@ from built_in_functions import *
 
 def main():
 
-    def ll_reverseTwice(
+    def ll_applyTwoFunctions(
         Input,
-        _):
+        ll_Function1,
+        ll_Function2):
 
-        return ll_reversed(ll_reversed(Input))
+        return ll_Function2(ll_Function1(Input))
 
-    def ll_appendTwoTexts(
-        Input,
-        Text1,
-        Text2):
-
-        Text1Copy = ll_append(Text1, "")
-
-        Text2Copy = Text2
-
-        return ll_reverseTwice(ll_append(ll_append(Input, Text1Copy), Text2Copy), None)
-
-    ll_print(ll_appendTwoTexts(ll_uppercase("Hello World!"), " c1", " c2"))
+    ll_print(ll_applyTwoFunctions(ll_applyTwoFunctions(ll_uppercase("Hello World!"), ll_reversed, ll_reversed), lambda Input: ll_append(Input, " c1"), lambda Input: ll_append(Input, " c2")))
 
     return None
 

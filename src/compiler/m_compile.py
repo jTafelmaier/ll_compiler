@@ -19,25 +19,52 @@ def get_text_python_function_call(
             1) \
         .partition(" ") \
 
+    def get_text_argument_python(
+        text_argument_ll:str):
+
+        text_argument_ll_stripped = text_argument_ll \
+            .lstrip(" ")
+
+        if text_argument_ll_stripped.startswith("\""):
+            return text_argument_ll_stripped
+
+        text_argument_ll_first, \
+        _, \
+        text_argument_to_function = text_argument_ll_stripped \
+            .partition(" ")
+
+        if text_argument_ll_first[0].isupper():
+            return text_argument_ll_first
+
+        if text_argument_to_function == "":
+            return "ll_" \
+                + text_argument_ll_first
+
+        return "lambda Input: ll_" \
+            + text_argument_ll_first \
+            + "(Input, " \
+            + text_argument_to_function \
+            + ")"
+
     def get_list_texts_arguments_python():
 
-        list_texts_arguments = list(
-            filter(
-                lambda text_argument_ll: text_argument_ll != "",
-                map(
-                    lambda text_argument_ll: text_argument_ll.lstrip(" "),
+        list_texts_arguments_python = list(
+            map(
+                get_text_argument_python,
+                filter(
+                    lambda text_argument_python: text_argument_python != "",
                     text_arguments_ll \
                         .lstrip("[") \
                         .rstrip("]") \
                         .split("\n"))))
 
-        if list_texts_arguments == [""]:
+        if list_texts_arguments_python == [""]:
             return [
                 text_input]
         else:
             return [
                 text_input] \
-                + list_texts_arguments
+                + list_texts_arguments_python
 
     text_arguments_python = ", " \
         .join(get_list_texts_arguments_python())
@@ -110,9 +137,10 @@ def get_text_python_def(
     text_arguments_python_initial = ",\n" \
         .join(
             map(
-                lambda text_line_argument_ll: text_line_argument_ll
-                    .rpartition(" ")
-                    [-1],
+                lambda text_line_argument_ll: "ll_" \
+                    + text_line_argument_ll
+                        .rpartition(" ")
+                        [-1],
                 text_arguments_ll \
                     .split("\n")))
 
