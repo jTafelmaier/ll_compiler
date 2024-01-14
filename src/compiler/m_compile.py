@@ -38,6 +38,7 @@ def get_text_python_function_call(
     def get_text_argument_python(
         text_argument_ll:str):
 
+        # TODO potential error: whitespace in strings like "Hello World" is captured by .partition(" ")
         text_argument_ll_first = text_argument_ll \
             .partition(" ") \
             [0]
@@ -51,8 +52,7 @@ def get_text_python_function_call(
                     text_function_call_ll=text_argument_ll)
 
     # TODO refactor
-    text_arguments_additional = ",\n" \
-        .join(
+    list_texts_arguments_additional = list(
             map(
                 get_text_argument_python,
                 map(
@@ -63,9 +63,10 @@ def get_text_python_function_call(
                         .lstrip("\n") \
                         .split("\n"))))
 
-    text_arguments_python = text_input \
-        + ",\n" \
-        + text_arguments_additional
+    text_arguments_python = ",\n" \
+        .join([
+                text_input] \
+            + list_texts_arguments_additional)
 
     return get_text_python_syntax_function_call(
             text_name_function=text_name_function_ll,
