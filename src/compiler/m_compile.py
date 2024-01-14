@@ -99,8 +99,8 @@ def get_text_python_function_chain(
 def get_text_python_def(
     text_block:str):
 
-    # TODO implement: nested function definitions
     # TODO implement: pre-return
+    # TODO implement: functions without arguments
     # TODO implement: type inference
 
     text_first_line, \
@@ -225,6 +225,7 @@ def get_text_python_main(
     text_ll:str):
 
     # TODO implement: enums
+    # TODO error: None -> ll_None
 
     text_python = get_text_python(text_ll)
 
