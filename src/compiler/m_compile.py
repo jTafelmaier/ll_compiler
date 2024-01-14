@@ -30,16 +30,21 @@ def get_text_python_function_call(
     text_arguments_ll = text_function_call_ll \
         .partition(" ")
 
+    def isFunctionName(
+        text_ll):
+
+        return text_ll.isalpha() and text_ll[0].islower()
+
     def get_text_argument_python(
         text_argument_ll:str):
-
-        if text_argument_ll.startswith("\"") or text_argument_ll[0].isupper():
-            return text_argument_ll
 
         text_argument_ll_first, \
         _, \
         text_argument_to_function = text_argument_ll \
             .partition(" ")
+
+        if not isFunctionName(text_argument_ll_first):
+            return text_argument_ll
 
         if text_argument_to_function == "":
             return "ll_" \
