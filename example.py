@@ -44,8 +44,10 @@ def main():
                         ll_Input,
                         " World")),
                 "I say: "),
-            ll_reversed,
-            ll_reversed))
+            lambda ll_Input: ll_reversed(
+                ll_Input),
+            lambda ll_Input: ll_reversed(
+                ll_Input)))
 
     return None
 

@@ -7,7 +7,7 @@ from src.auxiliary import m_common_functions
 
 
 
-def get_list_items_ll_parsed(
+def get_dict_data_parsed_ll(
     text_ll:str):
 
     def get_dict_parsed_def(
@@ -34,7 +34,7 @@ def get_list_items_ll_parsed(
                 .rpartition(" ")
 
             return {
-                "name": text_name_argument,
+                "name_argument_def": text_name_argument,
                 "type": text_type_argument}
 
         list_dicts_arguments = list(
@@ -61,22 +61,14 @@ def get_list_items_ll_parsed(
 
         return {
             "category": "def",
-            "name": text_name_function,
+            "name_function_def": text_name_function,
             "type_input": text_type_input,
-            "arguments": list_dicts_arguments,
+            "arguments_def": list_dicts_arguments,
             "body": list_dicts_body,
             "return": dict_return}
 
-    def get_dict_parsed_function_call(
-        text_function_call:str):
-
-        assert text_function_call.startswith("> ")
-
-        name_function, \
-        _, \
-        text_arguments = text_function_call \
-            [2:] \
-            .partition(" ")
+    def get_list_dicts_arguments_function_call(
+        text_arguments:str):
 
         def get_dict_argument(
             text_argument:str):
@@ -100,30 +92,45 @@ def get_list_items_ll_parsed(
             else:
                 return text_arguments
 
-        list_dicts_arguments = list(
+        return list(
                 map(
                     get_dict_argument,
                     m_common_functions.get_iterator_texts_grouped_by_indentation(get_text_arguments_final())))
+
+    def get_dict_parsed_function_call(
+        text_function_call:str):
+
+        assert text_function_call.startswith("> ")
+
+        name_function, \
+        _, \
+        text_arguments = text_function_call \
+            [2:] \
+            .partition(" ")
+
+        list_dicts_arguments = get_list_dicts_arguments_function_call(text_arguments)
 
         return {
             "name_function": name_function,
             "arguments": list_dicts_arguments}
 
-    def get_dict_parsed_variable(
+    def get_dict_parsed_memory_read(
         text:str):
 
         return {
-            "category": "variable",
-            "name": text}
+            "category": "memory_read",
+            "key_memory_read": text}
 
     def get_dict_parsed_function(
         text_name:str,
         text_arguments:str):
 
+        list_dicts_arguments = get_list_dicts_arguments_function_call(text_arguments)
+
         return {
             "category": "function",
-            "name": text_name,
-            "arguments": text_arguments}
+            "name_function": text_name,
+            "arguments": list_dicts_arguments}
 
     def get_dict_parsed_literal(
         text:str):
@@ -141,7 +148,7 @@ def get_list_items_ll_parsed(
             .partition(" ")
 
         if text_first[0].isupper():
-            return get_dict_parsed_variable(text)
+            return get_dict_parsed_memory_read(text)
 
         if text_first.isalnum():
             return get_dict_parsed_function(
@@ -151,12 +158,12 @@ def get_list_items_ll_parsed(
         return get_dict_parsed_literal(text)
 
     def get_dict_memory_allocation(
-        text_id_memory:str,
+        text_key_memory:str,
         dict_restricted:typing.Dict):
 
         return {
             "category": "memory_allocation",
-            "id_memory": text_id_memory,
+            "key_memory_allocation": text_key_memory,
             "restricted": dict_restricted}
 
     def get_dict_parsed_restricted(
@@ -172,7 +179,7 @@ def get_list_items_ll_parsed(
 
         return {
             "category": "restricted",
-            "item": dict_first_line,
+            "initial": dict_first_line,
             "function_calls": list_dicts_function_calls}
 
     def get_dict_parsed_free(
@@ -203,7 +210,7 @@ def get_list_items_ll_parsed(
                     text_remaining=text_remaining_unindented)
 
             return get_dict_memory_allocation(
-                    text_id_memory=text_first,
+                    text_key_memory=text_first,
                     dict_restricted=dict_restricted)
 
         return get_dict_parsed_restricted(
@@ -220,5 +227,6 @@ def get_list_items_ll_parsed(
                     get_dict_parsed_free,
                     iterator_texts_grouped))
 
-    return get_list_dicts_free_multiple(text_ll)
+    return {
+        "data": get_list_dicts_free_multiple(text_ll)}
 
