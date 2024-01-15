@@ -139,24 +139,6 @@ def get_dict_data_parsed_ll(
             "category": "literal",
             "value": text}
 
-    def get_dict_parsed_item(
-        text:str):
-
-        text_first, \
-        _, \
-        text_second = text \
-            .partition(" ")
-
-        if text_first[0].isupper():
-            return get_dict_parsed_memory_read(text)
-
-        if text_first.isalnum():
-            return get_dict_parsed_function(
-                    text_name=text_first,
-                    text_arguments=text_second)
-
-        return get_dict_parsed_literal(text)
-
     def get_dict_memory_allocation(
         text_key_memory:str,
         dict_restricted:typing.Dict):
@@ -169,6 +151,24 @@ def get_dict_data_parsed_ll(
     def get_dict_parsed_restricted(
         text_first_line:str,
         text_remaining:str):
+
+        def get_dict_parsed_item(
+            text:str):
+
+            text_first, \
+            _, \
+            text_second = text \
+                .partition(" ")
+
+            if text_first[0].isupper():
+                return get_dict_parsed_memory_read(text)
+
+            if text_first.isalnum():
+                return get_dict_parsed_function(
+                        text_name=text_first,
+                        text_arguments=text_second)
+
+            return get_dict_parsed_literal(text)
 
         dict_first_line = get_dict_parsed_item(text_first_line)
 
