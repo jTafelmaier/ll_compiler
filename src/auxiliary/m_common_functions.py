@@ -45,8 +45,7 @@ def get_text_unindented_one_level(
 def get_iterator_texts_grouped_by_indentation(
     text:str):
 
-    def get_iterator_reversed_texts_grouped_by_indentation(
-        text:str):
+    def get_iterator_reversed_texts_grouped_by_indentation():
 
         list_texts_lines = text \
             .split("\n")
@@ -71,5 +70,5 @@ def get_iterator_texts_grouped_by_indentation(
 
     return reversed(
         list(
-            get_iterator_reversed_texts_grouped_by_indentation(text)))
+            get_iterator_reversed_texts_grouped_by_indentation()))
 
