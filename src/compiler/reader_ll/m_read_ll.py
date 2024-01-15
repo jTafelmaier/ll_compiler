@@ -152,7 +152,7 @@ def get_dict_data_parsed_ll(
         text_first_line:str,
         text_remaining:str):
 
-        def get_dict_parsed_item(
+        def get_dict_parsed_initial(
             text:str):
 
             text_first, \
@@ -170,7 +170,7 @@ def get_dict_data_parsed_ll(
 
             return get_dict_parsed_literal(text)
 
-        dict_first_line = get_dict_parsed_item(text_first_line)
+        dict_initial = get_dict_parsed_initial(text_first_line)
 
         list_dicts_function_calls = list(
                 map(
@@ -179,7 +179,7 @@ def get_dict_data_parsed_ll(
 
         return {
             "category": "restricted",
-            "initial": dict_first_line,
+            "initial": dict_initial,
             "function_calls": list_dicts_function_calls}
 
     def get_dict_parsed_free(
