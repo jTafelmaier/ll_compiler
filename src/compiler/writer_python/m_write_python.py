@@ -19,7 +19,7 @@ def get_text_python_function_call(
 
     list_texts_arguments_additional = list(
             map(
-                get_text_python_restricted,
+                get_text_python_item,
                 list_dicts_arguments))
 
     text_arguments_python = ",\n" \
@@ -54,7 +54,7 @@ def get_text_python_def(
         ["body"]
 
     dict_return = dict_def \
-        ["restricted_return"]
+        ["item_return"]
 
     def get_text_argument(
         dict_argument:typing.Dict):
@@ -75,7 +75,7 @@ def get_text_python_def(
 
     text_python_before_return_final = text_python_before_return_raw if text_python_before_return_raw == "" else text_python_before_return_raw + "\n\n"
 
-    text_return_python = get_text_python_restricted(dict_return)
+    text_return_python = get_text_python_item(dict_return)
 
     text_body_python = "ll_Input" \
         + text_arguments_python_final \
@@ -96,17 +96,17 @@ def get_text_python_memory_allocation(
     text_key_memory = dict_memory_allocation \
         ["key_memory_allocation"]
 
-    dict_restricted = dict_memory_allocation \
-        ["restricted"]
+    dict_item = dict_memory_allocation \
+        ["item"]
 
     return "ll_" \
         + text_key_memory \
         + " = " \
-        + get_text_python_restricted(dict_restricted)
+        + get_text_python_item(dict_item)
 
 
-def get_text_python_restricted(
-    dict_restricted:typing.Dict):
+def get_text_python_item(
+    dict_item:typing.Dict):
 
     def get_text_python_function_chain(
         dict_initial:typing.Dict,
@@ -144,10 +144,10 @@ def get_text_python_restricted(
 
         return text_python_current
 
-    dict_initial = dict_restricted \
+    dict_initial = dict_item \
         ["initial"]
 
-    list_dicts_function_calls = dict_restricted \
+    list_dicts_function_calls = dict_item \
         ["function_calls"]
 
     return get_text_python_function_chain(
@@ -164,7 +164,7 @@ def get_text_python_block(
     dict_function = {
         "def": get_text_python_def,
         "memory_allocation": get_text_python_memory_allocation,
-        "restricted": get_text_python_restricted}
+        "item": get_text_python_item}
 
     return dict_function \
         [text_category_block] \

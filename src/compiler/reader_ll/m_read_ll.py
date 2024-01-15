@@ -55,7 +55,7 @@ def get_dict_data_parsed_ll(
         text_return_remaining_indented = text_return \
             .partition("\n")
 
-        dict_return = get_dict_parsed_restricted(
+        dict_return = get_dict_parsed_item(
                 text_first_line=text_return_first_line,
                 text_remaining=m_common_functions.get_text_unindented_one_level(text_return_remaining_indented))
 
@@ -65,7 +65,7 @@ def get_dict_data_parsed_ll(
             "type_input": text_type_input,
             "arguments_def": list_dicts_arguments,
             "body": list_dicts_body,
-            "restricted_return": dict_return}
+            "item_return": dict_return}
 
     def get_list_dicts_arguments_function_call(
         text_arguments:str):
@@ -78,7 +78,7 @@ def get_dict_data_parsed_ll(
             text_remaining_indented = text_argument \
                 .partition("\n")
 
-            return get_dict_parsed_restricted(
+            return get_dict_parsed_item(
                     text_first_line=text_first_line,
                     text_remaining=m_common_functions.get_text_unindented_one_level(text_remaining_indented))
 
@@ -141,14 +141,14 @@ def get_dict_data_parsed_ll(
 
     def get_dict_memory_allocation(
         text_key_memory:str,
-        dict_restricted:typing.Dict):
+        dict_item:typing.Dict):
 
         return {
             "category": "memory_allocation",
             "key_memory_allocation": text_key_memory,
-            "restricted": dict_restricted}
+            "item": dict_item}
 
-    def get_dict_parsed_restricted(
+    def get_dict_parsed_item(
         text_first_line:str,
         text_remaining:str):
 
@@ -178,7 +178,7 @@ def get_dict_data_parsed_ll(
                     m_common_functions.get_iterator_texts_grouped_by_indentation(text_remaining)))
 
         return {
-            "category": "restricted",
+            "category": "item",
             "initial": dict_initial,
             "function_calls": list_dicts_function_calls}
 
@@ -205,15 +205,15 @@ def get_dict_data_parsed_ll(
             .partition(" = ")
 
         if text_first.isalnum() and text_first[0].isupper() and text_second != "":
-            dict_restricted = get_dict_parsed_restricted(
+            dict_item = get_dict_parsed_item(
                     text_first_line=text_second,
                     text_remaining=text_remaining_unindented)
 
             return get_dict_memory_allocation(
                     text_key_memory=text_first,
-                    dict_restricted=dict_restricted)
+                    dict_item=dict_item)
 
-        return get_dict_parsed_restricted(
+        return get_dict_parsed_item(
                 text_first_line=text_first_line,
                 text_remaining=text_remaining_unindented)
 
