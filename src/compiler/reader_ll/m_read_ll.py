@@ -65,7 +65,7 @@ def get_dict_data_parsed_ll(
             "type_input": text_type_input,
             "arguments_def": list_dicts_arguments,
             "body": list_dicts_body,
-            "return": dict_return}
+            "restricted_return": dict_return}
 
     def get_list_dicts_arguments_function_call(
         text_arguments:str):

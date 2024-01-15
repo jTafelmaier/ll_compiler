@@ -44,8 +44,8 @@ def get_text_python_def(
     text_name_function = dict_def \
         ["name_function_def"]
 
-    text_type_input = dict_def \
-        ["type_input"]
+    # text_type_input = dict_def \
+    #     ["type_input"]
 
     list_dicts_arguments = dict_def \
         ["arguments_def"]
@@ -54,7 +54,7 @@ def get_text_python_def(
         ["body"]
 
     dict_return = dict_def \
-        ["return"]
+        ["restricted_return"]
 
     def get_text_argument(
         dict_argument:typing.Dict):
