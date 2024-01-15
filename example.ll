@@ -24,10 +24,18 @@ def TEXT prepend
         > append Input
 
 
-"Hello"
+Text1 = "Hello"
+    > prepend ""
+    > append ""
+
+
+Text2 = " World"
+
+
+Text1
     > applyTwoFunctionsReversed [
         append "!"
-        append " World"]
+        append Text2]
     > prepend "I say: "
     > applyTwoFunctionsReversed [
         reversed
