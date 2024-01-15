@@ -9,7 +9,7 @@ from src.auxiliary import m_common_functions
 def get_text_element_ll_reformat(
     text_ll:str):
 
-    if text_ll.isalpha():
+    if text_ll.isalnum():
         return "ll_" \
             + text_ll
     else:
@@ -48,7 +48,7 @@ def get_text_python_function_call(
         text_argument_second = text_argument_ll \
             .partition(" ")
 
-        if text_argument_first.isalpha() and text_argument_second != "":
+        if text_argument_first.isalnum() and text_argument_second != "":
             return "lambda ll_Input: " \
                 + get_text_python_function_call(
                         text_input="ll_Input",
