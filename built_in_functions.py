@@ -33,6 +33,16 @@ def ll_print(
     print(text_input)
 
 
+def ll_map(
+    list_items:typing.List,
+    function:typing.Callable[[typing.Any], typing.Any]):
+
+    return list(
+            map(
+                function,
+                list_items))
+
+
 def ll_joined(
     list_texts_input:typing.List[str],
     text_join:str):

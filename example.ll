@@ -30,6 +30,7 @@ ListTexts = [
 
 
 ListTexts
+    > map uppercase
     > joined " "
     > prepend "I say: "
     > applyTwoFunctionsReversed [

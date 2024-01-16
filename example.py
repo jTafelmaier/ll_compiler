@@ -40,7 +40,10 @@ def main():
         ll_applyTwoFunctionsReversed(
             ll_prepend(
                 ll_joined(
-                    ll_ListTexts,
+                    ll_map(
+                        ll_ListTexts,
+                        lambda ll_Input: ll_uppercase(
+                            ll_Input)),
                     " "),
                 "I say: "),
             lambda ll_Input: ll_reversed(
