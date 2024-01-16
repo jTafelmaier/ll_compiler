@@ -24,14 +24,6 @@ def main():
                     ll_Input,
                     None)))
 
-    def ll_prepend(
-        ll_Input,
-        ll_Text):
-
-        return ll_append(
-            ll_Text,
-            ll_Input)
-
     ll_ListTexts = [
         "Hello",
         "World"]

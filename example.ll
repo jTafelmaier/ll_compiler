@@ -17,13 +17,6 @@ def TEXT applyTwoFunctionsReversed
         > Function2
 
 
-def TEXT prepend
-    TEXT Text
-
-    return Text
-        > append Input
-
-
 ListTexts = [
         "Hello",
         "World"]

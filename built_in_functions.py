@@ -5,6 +5,14 @@ import typing
 
 
 
+def ll_prepend(
+    text_input:str,
+    text_to_prepend:str):
+
+    return text_to_prepend \
+        + text_input
+
+
 def ll_append(
     text_input:str,
     text_to_append:str):
