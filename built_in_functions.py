@@ -28,11 +28,25 @@ def ll_reversed(
         [::-1]
 
 
+def ll_lowercase(
+    text_input:str):
+
+    return text_input \
+        .lower()
+
+
 def ll_uppercase(
     text_input:str):
 
     return text_input \
         .upper()
+
+
+def ll_titlecase(
+    text_input:str):
+
+    return text_input \
+        .title()
 
 
 def ll_print(
