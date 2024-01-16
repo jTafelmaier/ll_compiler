@@ -24,20 +24,13 @@ def TEXT prepend
         > append Input
 
 
-Text1 = "Hello"
-    > prepend ""
-    > append ""
+ListTexts = [
+        "Hello",
+        "World"]
 
 
-Text2 = [
-        "Test1",
-        "Test2"]
-
-
-Text1
-    > applyTwoFunctionsReversed [
-        append "!"
-        append " World"]
+ListTexts
+    > joined " "
     > prepend "I say: "
     > applyTwoFunctionsReversed [
         reversed

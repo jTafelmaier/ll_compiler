@@ -32,27 +32,16 @@ def main():
             ll_Text,
             ll_Input)
 
-    ll_Text1 = ll_append(
-        ll_prepend(
-            "Hello",
-            ""),
-        "")
-
-    ll_Text2 = [
-        "Test1",
-        "Test2"]
+    ll_ListTexts = [
+        "Hello",
+        "World"]
 
     ll_print(
         ll_applyTwoFunctionsReversed(
             ll_prepend(
-                ll_applyTwoFunctionsReversed(
-                    ll_Text1,
-                    lambda ll_Input: ll_append(
-                        ll_Input,
-                        "!"),
-                    lambda ll_Input: ll_append(
-                        ll_Input,
-                        " World")),
+                ll_joined(
+                    ll_ListTexts,
+                    " "),
                 "I say: "),
             lambda ll_Input: ll_reversed(
                 ll_Input),

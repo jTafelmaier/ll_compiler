@@ -1,5 +1,8 @@
 
 
+import typing
+
+
 
 
 def ll_append(
@@ -28,4 +31,12 @@ def ll_print(
     text_input:str):
 
     print(text_input)
+
+
+def ll_joined(
+    list_texts_input:typing.List[str],
+    text_join:str):
+
+    return text_join \
+        .join(list_texts_input)
 
