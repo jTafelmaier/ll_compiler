@@ -152,6 +152,11 @@ def get_dict_data_parsed_ll(
         text_first_line:str,
         text_remaining:str):
 
+        set_texts_special_literals = {
+            "None",
+            "True",
+            "False"}
+
         def get_dict_parsed_initial(
             text:str):
 
@@ -159,11 +164,6 @@ def get_dict_data_parsed_ll(
             _, \
             text_second = text \
                 .partition(" ")
-
-            set_texts_special_literals = {
-                "None",
-                "True",
-                "False"}
 
             if text_first in set_texts_special_literals:
                 return get_dict_parsed_literal(text_first)
@@ -178,12 +178,23 @@ def get_dict_data_parsed_ll(
 
             return get_dict_parsed_literal(text)
 
-        dict_initial = get_dict_parsed_initial(text_first_line)
+        text_full = text_first_line \
+            + "\n" \
+            + text_remaining
+
+        list_texts_grouped = list(
+                m_common_functions.get_iterator_texts_grouped_by_indentation(text_full))
+
+        # TODO test further: always at least one item in list?
+        dict_initial = get_dict_parsed_initial(
+            list_texts_grouped \
+                [0])
 
         list_dicts_function_calls = list(
                 map(
                     get_dict_parsed_function_call,
-                    m_common_functions.get_iterator_texts_grouped_by_indentation(text_remaining)))
+                    list_texts_grouped \
+                        [1:]))
 
         return {
             "category": "item",
