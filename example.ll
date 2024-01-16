@@ -12,7 +12,7 @@ def TEXT applyTwoFunctionsReversed
         return Input
 
     return Input
-        > doNothing "Nothing"
+        > doNothing None
         > Function1
         > Function2
 

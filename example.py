@@ -22,7 +22,7 @@ def main():
             ll_Function1(
                 ll_doNothing(
                     ll_Input,
-                    "Nothing")))
+                    None)))
 
     def ll_prepend(
         ll_Input,

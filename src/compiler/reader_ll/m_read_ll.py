@@ -160,6 +160,14 @@ def get_dict_data_parsed_ll(
             text_second = text \
                 .partition(" ")
 
+            set_texts_special_literals = {
+                "None",
+                "True",
+                "False"}
+
+            if text_first in set_texts_special_literals:
+                return get_dict_parsed_literal(text_first)
+
             if text_first[0].isupper():
                 return get_dict_parsed_memory_read(text)
 
