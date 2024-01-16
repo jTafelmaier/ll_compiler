@@ -38,7 +38,9 @@ def main():
             ""),
         "")
 
-    ll_Text2 = " World"
+    ll_Text2 = [
+        "Test1",
+        "Test2"]
 
     ll_print(
         ll_applyTwoFunctionsReversed(
@@ -50,7 +52,7 @@ def main():
                         "!"),
                     lambda ll_Input: ll_append(
                         ll_Input,
-                        ll_Text2)),
+                        " World")),
                 "I say: "),
             lambda ll_Input: ll_reversed(
                 ll_Input),

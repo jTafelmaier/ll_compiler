@@ -29,13 +29,15 @@ Text1 = "Hello"
     > append ""
 
 
-Text2 = " World"
+Text2 = [
+        "Test1",
+        "Test2"]
 
 
 Text1
     > applyTwoFunctionsReversed [
         append "!"
-        append Text2]
+        append " World"]
     > prepend "I say: "
     > applyTwoFunctionsReversed [
         reversed

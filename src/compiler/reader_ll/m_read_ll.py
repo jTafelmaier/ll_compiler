@@ -165,6 +165,11 @@ def get_dict_data_parsed_ll(
             text_second = text \
                 .partition(" ")
 
+            if text.startswith("[") and text.endswith("]"):
+                # TODO separate list category
+                # TODO allow memory read (variables) in lists
+                return get_dict_parsed_literal(text)
+
             if text_first in set_texts_special_literals:
                 return get_dict_parsed_literal(text_first)
 
