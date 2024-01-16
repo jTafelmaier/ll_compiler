@@ -185,6 +185,7 @@ def get_text_python_main(
     dict:typing):
 
     # TODO implement: enums
+    # TODO implement: lists, sets etc.
 
     text_python = get_text_python(dict["data"])
 
