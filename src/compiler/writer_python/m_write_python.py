@@ -185,7 +185,6 @@ def get_text_python_main(
     dict:typing):
 
     # TODO implement: enums
-    # TODO error: None -> ll_None
 
     text_python = get_text_python(dict["data"])
 
