@@ -89,8 +89,8 @@ def get_dict_data_parsed_ll(
                         text_arguments \
                             [1:-1] \
                             .lstrip("\n"))
-            else:
-                return text_arguments
+
+            return text_arguments
 
         return list(
                 map(
