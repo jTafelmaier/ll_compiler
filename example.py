@@ -8,15 +8,15 @@ from built_in_functions import *
 def main():
 
     ll_ListTexts = [
-        "Hello",
-        "World"]
+        "hello",
+        "world"]
 
     ll_print(
         ll_append(
             ll_joined(
                 ll_map(
                     ll_ListTexts,
-                    lambda ll_Input: ll_uppercase(
+                    lambda ll_Input: ll_titlecase(
                         ll_Input)),
                 ", "),
             "!"))

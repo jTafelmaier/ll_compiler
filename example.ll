@@ -3,12 +3,12 @@
 
 
 ListTexts = [
-        "Hello",
-        "World"]
+        "hello",
+        "world"]
 
 
 ListTexts
-    > map uppercase
+    > map titlecase
     > joined ", "
     > append "!"
     > print
