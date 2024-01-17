@@ -7,7 +7,7 @@ from built_in_functions import *
 
 def main():
 
-    ll_TextRaw = "_ Hello ;; 12 World !"
+    ll_TextRaw = "_ hello ;; 12 world hello2 !"
 
     ll_print(
         ll_append(
