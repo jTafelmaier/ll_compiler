@@ -1,7 +1,7 @@
 
 
 
-def BOOL true
+def ANYTHING true
     NOTHING _
 
     return True
