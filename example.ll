@@ -2,7 +2,6 @@
 
 
 def ANYTHING true
-    NOTHING _
 
     return True
 
@@ -13,7 +12,7 @@ ListTexts = [
 
 
 ListTexts
-    > filter true None
+    > filter true
     > map titlecase
     > joined ", "
     > append "!"

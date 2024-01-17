@@ -8,8 +8,7 @@ from built_in_functions import *
 def main():
 
     def ll_true(
-        ll_Input,
-        ll__):
+        ll_Input):
 
         return True
 
@@ -24,8 +23,7 @@ def main():
                     ll_filter(
                         ll_ListTexts,
                         lambda ll_Input: ll_true(
-                            ll_Input,
-                            None)),
+                            ll_Input)),
                     lambda ll_Input: ll_titlecase(
                         ll_Input)),
                 ", "),

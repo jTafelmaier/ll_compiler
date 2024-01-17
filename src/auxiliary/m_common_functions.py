@@ -42,6 +42,21 @@ def get_text_unindented_one_level(
                     .split("\n")))
 
 
+def get_text_unindent_lines_except_first(
+    text:str):
+
+    text_first_line, \
+    _, \
+    text_remaining_indented = text \
+        .partition("\n")
+
+    text_remaining_unindented = get_text_unindented_one_level(text_remaining_indented)
+
+    return text_first_line \
+        + "\n" \
+        + text_remaining_unindented
+
+
 def get_iterator_texts_grouped_by_indentation(
     text:str):
 
