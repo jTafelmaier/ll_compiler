@@ -7,14 +7,12 @@ from built_in_functions import *
 
 def main():
 
-    def ll_true(
-        ll_Input):
-
-        return True
-
     ll_ListTexts = [
         "hello",
-        "world"]
+        "_",
+        ";;",
+        "world",
+        "1Error"]
 
     ll_print(
         ll_append(
@@ -22,7 +20,7 @@ def main():
                 ll_map(
                     ll_retainIf(
                         ll_ListTexts,
-                        lambda ll_Input: ll_true(
+                        lambda ll_Input: ll_isAlphabetic(
                             ll_Input)),
                     lambda ll_Input: ll_titlecase(
                         ll_Input)),

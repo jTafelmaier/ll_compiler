@@ -1,18 +1,17 @@
 
 
 
-def ANYTHING true
-
-    return True
-
 
 ListTexts = [
         "hello",
-        "world"]
+        "_",
+        ";;",
+        "world",
+        "1Error"]
 
 
 ListTexts
-    > retainIf true
+    > retainIf isAlphabetic
     > map titlecase
     > joined ", "
     > append "!"

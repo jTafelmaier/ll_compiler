@@ -4,6 +4,12 @@ import typing
 
 
 
+def ll_isAlphabetic(
+    text_input:str):
+
+    return text_input \
+        .isalpha()
+
 
 def ll_prepend(
     text_input:str,
