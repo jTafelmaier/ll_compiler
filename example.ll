@@ -12,7 +12,7 @@ ListTexts = [
 
 
 ListTexts
-    > filter true
+    > retainIf true
     > map titlecase
     > joined ", "
     > append "!"

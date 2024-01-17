@@ -20,7 +20,7 @@ def main():
         ll_append(
             ll_joined(
                 ll_map(
-                    ll_filter(
+                    ll_retainIf(
                         ll_ListTexts,
                         lambda ll_Input: ll_true(
                             ll_Input)),

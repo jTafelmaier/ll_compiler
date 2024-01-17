@@ -65,7 +65,7 @@ def ll_map(
                 list_items))
 
 
-def ll_filter(
+def ll_retainIf(
     list_items:typing.List,
     function:typing.Callable[[typing.Any], bool]):
 
