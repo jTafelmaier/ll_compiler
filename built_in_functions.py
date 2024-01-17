@@ -55,6 +55,14 @@ def ll_titlecase(
         .title()
 
 
+def ll_splitOn(
+    text_input:str,
+    text_separator:str):
+
+    return text_input \
+        .split(text_separator)
+
+
 def ll_print(
     text_input:str):
 

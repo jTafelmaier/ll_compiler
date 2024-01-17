@@ -7,19 +7,16 @@ from built_in_functions import *
 
 def main():
 
-    ll_ListTexts = [
-        "hello",
-        "_",
-        ";;",
-        "world",
-        "1Error"]
+    ll_TextRaw = "_ Hello ;; 12 World !"
 
     ll_print(
         ll_append(
             ll_joined(
                 ll_map(
                     ll_retainIf(
-                        ll_ListTexts,
+                        ll_splitOn(
+                            ll_TextRaw,
+                            " "),
                         lambda ll_Input: ll_isAlphabetic(
                             ll_Input)),
                     lambda ll_Input: ll_titlecase(

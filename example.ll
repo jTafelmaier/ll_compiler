@@ -2,15 +2,11 @@
 
 
 
-ListTexts = [
-        "hello",
-        "_",
-        ";;",
-        "world",
-        "1Error"]
+TextRaw = "_ Hello ;; 12 World !"
 
 
-ListTexts
+TextRaw
+    > splitOn " "
     > retainIf isAlphabetic
     > map titlecase
     > joined ", "
