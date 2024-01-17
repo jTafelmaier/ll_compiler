@@ -2,7 +2,7 @@
 
 
 
-TextRaw = "_ hello ;; 12 world hello2 !"
+TextRaw = "_ HelLO ;; 12 woRlD hEllo2 !"
 
 
 TextRaw
