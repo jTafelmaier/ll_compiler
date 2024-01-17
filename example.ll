@@ -1,6 +1,11 @@
 
 
 
+def BOOL true
+    NOTHING _
+
+    return True
+
 
 ListTexts = [
         "hello",
@@ -8,6 +13,7 @@ ListTexts = [
 
 
 ListTexts
+    > filter true None
     > map titlecase
     > joined ", "
     > append "!"
