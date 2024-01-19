@@ -184,6 +184,11 @@ def get_text_python(
 def get_text_python_main(
     dict:typing):
 
+    # TODO implement: namespaces
+    # TODO implement: data classes
+    # TODO implement: module imports
+    # TODO implement: pure - modifying splits
+    # TODO implement: type inference
     # TODO implement: enums
     # TODO implement: lists, sets etc.
 
