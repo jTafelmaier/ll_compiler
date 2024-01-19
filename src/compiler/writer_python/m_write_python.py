@@ -40,9 +40,6 @@ def get_text_python_function_call(
 def get_text_python_def(
     dict_def:typing.Dict):
 
-    # TODO implement: pre-return
-    # TODO implement: type inference
-
     text_name_function = dict_def \
         [m_shared.Def.KEY_TEXT_NAME_FUNCTION]
 
@@ -192,14 +189,6 @@ def get_text_python(
 
 def get_text_python_main(
     dict:typing):
-
-    # TODO implement: function groups / namespaces
-    # TODO implement: data classes
-    # TODO implement: module imports
-    # TODO implement: pure - modifying function differentiation
-    # TODO implement: type inference
-    # TODO implement: enums
-    # TODO implement: integers, sets etc.
 
     text_python = get_text_python(dict["data"])
 

@@ -1,0 +1,20 @@
+
+
+
+
+Implement, in order:
+- integers, sets etc.
+- data classes
+- pre-return in function defs
+- function groups / namespaces
+- builtin ll file
+- module imports
+- pure - modifying function differentiation
+- type inference
+- function suggestions
+- enums
+
+
+Refactor, in order:
+- json structure
+
