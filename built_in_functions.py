@@ -4,14 +4,14 @@ import typing
 
 
 
-def ll_isAlphabetic(
+def nonpython_isAlphabetic(
     text_input:str):
 
     return text_input \
         .isalpha()
 
 
-def ll_prepend(
+def nonpython_prepend(
     text_input:str,
     text_to_prepend:str):
 
@@ -19,7 +19,7 @@ def ll_prepend(
         + text_input
 
 
-def ll_append(
+def nonpython_append(
     text_input:str,
     text_to_append:str):
 
@@ -27,35 +27,35 @@ def ll_append(
         + text_to_append
 
 
-def ll_reversed(
+def nonpython_reversed(
     text_input:str):
 
     return text_input \
         [::-1]
 
 
-def ll_lowercase(
+def nonpython_lowercase(
     text_input:str):
 
     return text_input \
         .lower()
 
 
-def ll_uppercase(
+def nonpython_uppercase(
     text_input:str):
 
     return text_input \
         .upper()
 
 
-def ll_titlecase(
+def nonpython_titlecase(
     text_input:str):
 
     return text_input \
         .title()
 
 
-def ll_splitOn(
+def nonpython_splitOn(
     text_input:str,
     text_separator:str):
 
@@ -63,13 +63,13 @@ def ll_splitOn(
         .split(text_separator)
 
 
-def ll_print(
+def nonpython_print(
     text_input:str):
 
     print(text_input)
 
 
-def ll_map(
+def nonpython_map(
     list_items:typing.List,
     function:typing.Callable[[typing.Any], typing.Any]):
 
@@ -79,7 +79,7 @@ def ll_map(
                 list_items))
 
 
-def ll_retainIf(
+def nonpython_retainIf(
     list_items:typing.List,
     function:typing.Callable[[typing.Any], bool]):
 
@@ -89,7 +89,7 @@ def ll_retainIf(
                 list_items))
 
 
-def ll_joined(
+def nonpython_joined(
     list_texts_input:typing.List[str],
     text_join:str):
 

@@ -7,20 +7,20 @@ from built_in_functions import *
 
 def main():
 
-    ll_TextRaw = "_ HelLO ;; 12 woRlD hEllo2 !"
+    nonpython_TextRaw = "_ HelLO ;; 12 woRlD hEllo2 !"
 
-    ll_print(
-        ll_append(
-            ll_joined(
-                ll_map(
-                    ll_retainIf(
-                        ll_splitOn(
-                            ll_TextRaw,
+    nonpython_print(
+        nonpython_append(
+            nonpython_joined(
+                nonpython_map(
+                    nonpython_retainIf(
+                        nonpython_splitOn(
+                            nonpython_TextRaw,
                             " "),
-                        lambda ll_Input: ll_isAlphabetic(
-                            ll_Input)),
-                    lambda ll_Input: ll_titlecase(
-                        ll_Input)),
+                        lambda nonpython_Input: nonpython_isAlphabetic(
+                            nonpython_Input)),
+                    lambda nonpython_Input: nonpython_titlecase(
+                        nonpython_Input)),
                 ", "),
             "!"))
 

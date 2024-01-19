@@ -8,7 +8,7 @@ from src.compiler import m_shared
 
 
 
-TEXT_PREFIX_TO_AVOID_NAME_CLASHES = "ll_"
+TEXT_PREFIX_TO_AVOID_NAME_CLASHES = "nonpython_"
 
 def get_text_python_function_call(
     text_input:str,
@@ -79,7 +79,8 @@ def get_text_python_def(
 
     text_return_python = get_text_python_item(dict_return)
 
-    text_body_python = "ll_Input" \
+    text_body_python = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+        + "Input" \
         + text_arguments_python_final \
         + "):\n\n" \
         + text_python_before_return_final \
@@ -131,9 +132,12 @@ def get_text_python_item(
                     [m_shared.Literal.KEY_TEXT_VALUE]
 
             if text_category == "function":
-                return "lambda ll_Input: " \
+                # TODO refactor
+                return "lambda " \
+                    + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                    + "Input: " \
                     + get_text_python_function_call(
-                            text_input="ll_Input",
+                            text_input=TEXT_PREFIX_TO_AVOID_NAME_CLASHES + "Input",
                             dict_function_call=dict_initial)
 
             raise Exception("dict_initial: Invalid \"category\".")
