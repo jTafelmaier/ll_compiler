@@ -8,6 +8,8 @@ from src.compiler import m_shared
 
 
 
+TEXT_PREFIX_TO_AVOID_NAME_CLASHES = "ll_"
+
 def get_text_python_function_call(
     text_input:str,
     dict_function_call:typing.Dict):
@@ -28,7 +30,7 @@ def get_text_python_function_call(
                 text_input] \
             + list_texts_arguments_additional)
 
-    return "ll_" \
+    return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
         + text_name_function \
         + "(\n" \
         + m_common_functions.get_text_indented_one_level(text_arguments_python) \
@@ -59,7 +61,7 @@ def get_text_python_def(
     def get_text_argument(
         dict_argument:typing.Dict):
 
-        return "ll_" \
+        return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
             + dict_argument \
                 [m_shared.Def.Argument.KEY_TEXT_NAME]
 
@@ -84,7 +86,8 @@ def get_text_python_def(
         + "return " \
         + text_return_python
 
-    return "def ll_" \
+    return "def " \
+        + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
         + text_name_function \
         + "(\n" \
         + m_common_functions.get_text_indented_one_level(text_body_python)
@@ -99,7 +102,7 @@ def get_text_python_memory_allocation(
     dict_item = dict_memory_allocation \
         [m_shared.Memory_allocation.KEY_OBJECT_CONTENT]
 
-    return "ll_" \
+    return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
         + text_key_memory \
         + " = " \
         + get_text_python_item(dict_item)
@@ -119,7 +122,7 @@ def get_text_python_item(
                 ["category"]
 
             if text_category == "memory_read":
-                return "ll_" \
+                return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
                     + dict_initial \
                         [m_shared.Memory_read.KEY_TEXT_KEY_MEMORY]
 
