@@ -132,12 +132,14 @@ def get_text_python_item(
                     [m_shared.Literal.KEY_TEXT_VALUE]
 
             if text_category == "function":
-                # TODO refactor
+                text_input = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                    + "Input"
+
                 return "lambda " \
                     + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
                     + "Input: " \
                     + get_text_python_function_call(
-                            text_input=TEXT_PREFIX_TO_AVOID_NAME_CLASHES + "Input",
+                            text_input=text_input,
                             dict_function_call=dict_initial)
 
             raise Exception("dict_initial: Invalid \"category\".")
