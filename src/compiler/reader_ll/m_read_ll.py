@@ -189,8 +189,8 @@ def get_dict_data_parsed_ll(
 
         # TODO test further: always at least one item in list?
         dict_initial = get_dict_parsed_initial(
-            list_texts_grouped \
-                [0])
+                list_texts_grouped \
+                    [0])
 
         list_dicts_function_calls = list(
                 map(
