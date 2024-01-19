@@ -3,16 +3,18 @@
 
 
 Implement, in order:
+- interpreter script
 - integers, sets etc.
+- type inference
 - data classes
+- function suggestions
+- enums
 - pre-return in function defs
 - function groups / namespaces
 - builtin ll file
 - module imports
 - pure - modifying function differentiation
-- type inference
-- function suggestions
-- enums
+- (automatic parallelization)
 
 
 Refactor, in order:
