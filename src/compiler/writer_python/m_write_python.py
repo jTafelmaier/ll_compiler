@@ -3,6 +3,7 @@
 import typing
 
 from src.auxiliary import m_common_functions
+from src.compiler import m_shared
 
 
 
@@ -12,10 +13,10 @@ def get_text_python_function_call(
     dict_function_call:typing.Dict):
 
     text_name_function = dict_function_call \
-        ["name_function"]
+        [m_shared.Function_call.KEY_NAME_FUNCTION]
 
     list_dicts_arguments = dict_function_call \
-        ["arguments"]
+        [m_shared.Function_call.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
     list_texts_arguments_additional = list(
             map(
@@ -38,30 +39,29 @@ def get_text_python_def(
     dict_def:typing.Dict):
 
     # TODO implement: pre-return
-    # TODO implement: functions without arguments
     # TODO implement: type inference
 
     text_name_function = dict_def \
-        ["name_function_def"]
+        [m_shared.Def.KEY_TEXT_NAME_FUNCTION]
 
     # text_type_input = dict_def \
-    #     ["type_input"]
+    #     [m_shared.Def.KEY_TEXT_TYPE_INPUT]
 
     list_dicts_arguments = dict_def \
-        ["arguments_def"]
+        [m_shared.Def.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
     list_dicts_body_before_return = dict_def \
-        ["body"]
+        [m_shared.Def.KEY_ARRAY_OBJECTS_BODY]
 
     dict_return = dict_def \
-        ["item_return"]
+        [m_shared.Def.KEY_OBJECT_RETURN]
 
     def get_text_argument(
         dict_argument:typing.Dict):
 
         return "ll_" \
             + dict_argument \
-                ["name_argument_def"]
+                [m_shared.Def.Argument.KEY_TEXT_NAME]
 
     text_arguments_python_initial = ",\n" \
         .join(
@@ -94,10 +94,10 @@ def get_text_python_memory_allocation(
     dict_memory_allocation:typing.Dict):
 
     text_key_memory = dict_memory_allocation \
-        ["key_memory_allocation"]
+        [m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY]
 
     dict_item = dict_memory_allocation \
-        ["item"]
+        [m_shared.Memory_allocation.KEY_OBJECT_CONTENT]
 
     return "ll_" \
         + text_key_memory \
@@ -121,11 +121,11 @@ def get_text_python_item(
             if text_category == "memory_read":
                 return "ll_" \
                     + dict_initial \
-                        ["key_memory_read"]
+                        [m_shared.Memory_read.KEY_TEXT_KEY_MEMORY]
 
             if text_category == "literal":
                 return dict_initial \
-                    ["value"]
+                    [m_shared.Literal.KEY_TEXT_VALUE]
 
             if text_category == "function":
                 return "lambda ll_Input: " \
@@ -145,10 +145,10 @@ def get_text_python_item(
         return text_python_current
 
     dict_initial = dict_item \
-        ["initial"]
+        [m_shared.Item.KEY_TEXT_INITIAL_VALUE]
 
     list_dicts_function_calls = dict_item \
-        ["function_calls"]
+        [m_shared.Item.KEY_ARRAY_OBJECTS_FUNCTION_CALLS]
 
     return get_text_python_function_chain(
             dict_initial=dict_initial,
@@ -184,13 +184,13 @@ def get_text_python(
 def get_text_python_main(
     dict:typing):
 
-    # TODO implement: namespaces
+    # TODO implement: function groups / namespaces
     # TODO implement: data classes
     # TODO implement: module imports
-    # TODO implement: pure - modifying splits
+    # TODO implement: pure - modifying function differentiation
     # TODO implement: type inference
     # TODO implement: enums
-    # TODO implement: lists, sets etc.
+    # TODO implement: integers, sets etc.
 
     text_python = get_text_python(dict["data"])
 
