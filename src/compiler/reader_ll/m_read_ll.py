@@ -3,6 +3,7 @@
 import typing
 
 from src.auxiliary import m_common_functions
+from src.compiler import m_shared
 
 
 
@@ -39,10 +40,9 @@ def get_dict_data_parsed_ll(
                 text_name_argument = text_line_argument \
                     .rpartition(" ")
 
-                # TODO use constants as keys
                 return {
-                    "name_argument_def": text_name_argument,
-                    "type": text_type_argument}
+                    m_shared.Def.Argument.KEY_TEXT_NAME: text_name_argument,
+                    m_shared.Def.Argument.KEY_TEXT_TYPE: text_type_argument}
 
             if text_arguments == "":
                 return []
@@ -67,12 +67,12 @@ def get_dict_data_parsed_ll(
         dict_return = get_dict_parsed_item(text_return_full_edited)
 
         return {
-            "category": "def",
-            "name_function_def": text_name_function,
-            "type_input": text_type_input,
-            "arguments_def": list_dicts_arguments,
-            "body": list_dicts_body,
-            "item_return": dict_return}
+            m_shared.Def.KEY_TEXT_CATEGORY: "def",
+            m_shared.Def.KEY_TEXT_NAME_FUNCTION: text_name_function,
+            m_shared.Def.KEY_TEXT_TYPE_INPUT: text_type_input,
+            m_shared.Def.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments,
+            m_shared.Def.KEY_ARRAY_OBJECTS_BODY: list_dicts_body,
+            m_shared.Def.KEY_OBJECT_RETURN: dict_return}
 
     def get_list_dicts_arguments_function_call(
         text_arguments:str):
@@ -113,15 +113,15 @@ def get_dict_data_parsed_ll(
         list_dicts_arguments = get_list_dicts_arguments_function_call(text_arguments)
 
         return {
-            "name_function": name_function,
-            "arguments": list_dicts_arguments}
+            m_shared.Function_call.KEY_NAME_FUNCTION: name_function,
+            m_shared.Function_call.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
     def get_dict_parsed_memory_read(
         text:str):
 
         return {
-            "category": "memory_read",
-            "key_memory_read": text}
+            m_shared.Memory_read.KEY_TEXT_CATEGORY: "memory_read",
+            m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text}
 
     def get_dict_parsed_function(
         text_name:str,
@@ -130,25 +130,26 @@ def get_dict_data_parsed_ll(
         list_dicts_arguments = get_list_dicts_arguments_function_call(text_arguments)
 
         return {
-            "category": "function",
-            "name_function": text_name,
-            "arguments": list_dicts_arguments}
+            m_shared.Function_Item.KEY_TEXT_CATEGORY: "function",
+            m_shared.Function_Item.KEY_NAME_FUNCTION: text_name,
+            m_shared.Function_Item.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
     def get_dict_parsed_literal(
         text:str):
 
         return {
-            "category": "literal",
-            "value": text}
+            m_shared.Literal.KEY_TEXT_CATEGORY: "literal",
+            m_shared.Literal.KEY_TEXT_VALUE: text}
 
+    # TODO refactor: move above
     def get_dict_memory_allocation(
         text_key_memory:str,
         dict_item:typing.Dict):
 
         return {
-            "category": "memory_allocation",
-            "key_memory_allocation": text_key_memory,
-            "item": dict_item}
+            m_shared.Memory_allocation.KEY_TEXT_CATEGORY: "memory_allocation",
+            m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY: text_key_memory,
+            m_shared.Memory_allocation.KEY_OBJECT_CONTENT: dict_item}
 
     def get_dict_parsed_item(
         text_full:str):
@@ -199,9 +200,9 @@ def get_dict_data_parsed_ll(
                         [1:]))
 
         return {
-            "category": "item",
-            "initial": dict_initial,
-            "function_calls": list_dicts_function_calls}
+            m_shared.Item.KEY_TEXT_CATEGORY: "item",
+            m_shared.Item.KEY_TEXT_INITIAL_VALUE: dict_initial,
+            m_shared.Item.KEY_ARRAY_OBJECTS_FUNCTION_CALLS: list_dicts_function_calls}
 
     def get_dict_parsed_free(
         text_ll:str):
