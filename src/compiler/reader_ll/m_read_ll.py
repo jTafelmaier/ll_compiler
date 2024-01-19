@@ -99,6 +99,17 @@ def get_dict_data_parsed_ll(
                     get_dict_argument,
                     m_common_functions.get_iterator_texts_grouped_by_indentation(get_text_arguments_final())))
 
+    def get_dict_parsed_function(
+        text_name:str,
+        text_arguments:str):
+
+        list_dicts_arguments = get_list_dicts_arguments_function_call(text_arguments)
+
+        return {
+            m_shared.Function_Item.KEY_TEXT_CATEGORY: "function",
+            m_shared.Function_Item.KEY_NAME_FUNCTION: text_name,
+            m_shared.Function_Item.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
+
     def get_dict_parsed_function_call(
         text_function_call:str):
 
@@ -116,32 +127,6 @@ def get_dict_data_parsed_ll(
             m_shared.Function_call.KEY_NAME_FUNCTION: name_function,
             m_shared.Function_call.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
-    def get_dict_parsed_memory_read(
-        text:str):
-
-        return {
-            m_shared.Memory_read.KEY_TEXT_CATEGORY: "memory_read",
-            m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text}
-
-    def get_dict_parsed_function(
-        text_name:str,
-        text_arguments:str):
-
-        list_dicts_arguments = get_list_dicts_arguments_function_call(text_arguments)
-
-        return {
-            m_shared.Function_Item.KEY_TEXT_CATEGORY: "function",
-            m_shared.Function_Item.KEY_NAME_FUNCTION: text_name,
-            m_shared.Function_Item.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
-
-    def get_dict_parsed_literal(
-        text:str):
-
-        return {
-            m_shared.Literal.KEY_TEXT_CATEGORY: "literal",
-            m_shared.Literal.KEY_TEXT_VALUE: text}
-
-    # TODO refactor: move above
     def get_dict_memory_allocation(
         text_key_memory:str,
         dict_item:typing.Dict):
@@ -150,6 +135,20 @@ def get_dict_data_parsed_ll(
             m_shared.Memory_allocation.KEY_TEXT_CATEGORY: "memory_allocation",
             m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY: text_key_memory,
             m_shared.Memory_allocation.KEY_OBJECT_CONTENT: dict_item}
+
+    def get_dict_parsed_memory_read(
+        text:str):
+
+        return {
+            m_shared.Memory_read.KEY_TEXT_CATEGORY: "memory_read",
+            m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text}
+
+    def get_dict_parsed_literal(
+        text:str):
+
+        return {
+            m_shared.Literal.KEY_TEXT_CATEGORY: "literal",
+            m_shared.Literal.KEY_TEXT_VALUE: text}
 
     def get_dict_parsed_item(
         text_full:str):
