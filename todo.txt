@@ -3,12 +3,12 @@
 
 
 Implement, in order:
-- interpreter script
 - integers, sets etc.
 - type inference
 - data classes
-- function suggestions
 - enums
+- function suggestions
+- linting
 - pre-return in function defs
 - function groups / namespaces
 - builtin ll file
