@@ -7,9 +7,7 @@ Implement, in order:
 - type inference
 - data classes
 - enums
-- VScode: function suggestions
-- VScode: item information when hovering
-- VScode: linting
+- VScode: implement language server for ll
 - pre-return in function defs
 - function groups / namespaces
 - builtin ll file
