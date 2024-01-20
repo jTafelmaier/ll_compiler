@@ -94,6 +94,8 @@ def nonpython_print(
 
     print(text_input)
 
+    return text_input
+
 
 def nonpython_map(
     list_items:typing.List,
