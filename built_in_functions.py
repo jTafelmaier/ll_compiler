@@ -5,6 +5,25 @@ import typing
 
 
 
+def nonpython_toOtherItem(
+    item_input:typing.Any,
+    item_other:typing.Any):
+
+    return item_other
+
+
+def nonpython_if(
+    item_input:typing.Any,
+    function_condition:typing.Callable[[typing.Any], bool],
+    function_then:typing.Callable[[typing.Any], typing.Any],
+    function_else:typing.Callable[[typing.Any], typing.Any]):
+
+    if function_condition(item_input):
+        return function_then(item_input)
+    else:
+        return function_else(item_input)
+
+
 def nonpython_toText(
     int_input:int):
 
