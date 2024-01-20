@@ -7,8 +7,6 @@ from built_in_functions import *
 
 def main():
 
-    nonpython_TextRaw = "_ HelLO ;; 12 woRlD hEllo2 !"
-
     nonpython_TextTwoHundred = nonpython_toText(
         200)
 
@@ -19,7 +17,7 @@ def main():
                     nonpython_retainIf(
                         nonpython_splitOn(
                             nonpython_append(
-                                nonpython_TextRaw,
+                                "_ HelLO ;; 12 woRlD hEllo2 !",
                                 nonpython_TextTwoHundred),
                             " "),
                         lambda nonpython_Input: nonpython_isAlphabetic(

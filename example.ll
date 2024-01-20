@@ -2,14 +2,11 @@
 
 
 
-TextRaw = "_ HelLO ;; 12 woRlD hEllo2 !"
-
-
 TextTwoHundred = 200
     > toText
 
 
-TextRaw
+"_ HelLO ;; 12 woRlD hEllo2 !"
     > append TextTwoHundred
     > splitOn " "
     > retainIf isAlphabetic
