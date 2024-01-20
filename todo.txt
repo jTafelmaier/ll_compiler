@@ -3,7 +3,7 @@
 
 
 Implement, in order:
-- floats, sets etc.
+- floats, tuples, sets etc.
 - type inference
 - data classes
 - enums
