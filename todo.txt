@@ -3,8 +3,8 @@
 
 
 Implement, in order:
-- floats, tuples, sets etc.
 - type inference
+- floats, tuples, sets etc.
 - data classes
 - enums
 - some way to specify that multiple arguments must have the same type
