@@ -9,6 +9,7 @@ Implement, in order:
 - enums
 - some way to specify that multiple arguments must have the same type
 - VScode: implement language server for ll
+- VScode: show argument names when multiple arguments passed
 - pre-return in function defs
 - function groups / namespaces
 - builtin ll file
