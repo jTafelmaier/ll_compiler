@@ -4,6 +4,13 @@ import typing
 
 
 
+
+def nonpython_toText(
+    int_input:int):
+
+    return str(int_input)
+
+
 def nonpython_isAlphabetic(
     text_input:str):
 

@@ -9,13 +9,18 @@ def main():
 
     nonpython_TextRaw = "_ HelLO ;; 12 woRlD hEllo2 !"
 
+    nonpython_TextTwoHundred = nonpython_toText(
+        200)
+
     nonpython_print(
         nonpython_append(
             nonpython_joined(
                 nonpython_map(
                     nonpython_retainIf(
                         nonpython_splitOn(
-                            nonpython_TextRaw,
+                            nonpython_append(
+                                nonpython_TextRaw,
+                                nonpython_TextTwoHundred),
                             " "),
                         lambda nonpython_Input: nonpython_isAlphabetic(
                             nonpython_Input)),

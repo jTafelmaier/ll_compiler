@@ -177,6 +177,9 @@ def get_dict_data_parsed_ll(
             if text_first[0].isupper():
                 return get_dict_parsed_memory_read(text)
 
+            if text_first.isnumeric():
+                return get_dict_parsed_literal(text_first)
+
             if text_first.isalnum():
                 return get_dict_parsed_function(
                         text_name=text_first,
