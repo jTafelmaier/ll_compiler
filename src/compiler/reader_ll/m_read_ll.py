@@ -79,27 +79,19 @@ def get_dict_data_parsed_ll(
         text_name:str,
         text_arguments:str):
 
-        def get_dict_argument(
-            text_argument:str):
-
-            text_argument_edited = m_common_functions.get_text_unindent_lines_except_first(text_argument)
-
-            return get_dict_parsed_item(text_argument_edited)
-
         def get_text_arguments_final():
 
             if text_arguments.startswith("[") and text_arguments.endswith("]"):
-                return m_common_functions.get_text_unindented_one_level(
-                        text_arguments \
-                            [1:-1] \
-                            .lstrip("\n"))
+                return text_arguments \
+                        [1:-1] \
+                        .lstrip("\n")
 
             return text_arguments
 
         list_dicts_arguments = list(
                 map(
-                    get_dict_argument,
-                    m_common_functions.get_iterator_texts_grouped_by_indentation(get_text_arguments_final())))
+                    get_dict_parsed_item,
+                    m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(get_text_arguments_final())))
 
         return {
             m_shared.Function_reference.KEY_TEXT_CATEGORY: "function",
@@ -182,7 +174,7 @@ def get_dict_data_parsed_ll(
                     text_arguments=text_arguments)
 
         list_texts_grouped = list(
-                m_common_functions.get_iterator_texts_grouped_by_indentation(text_full))
+                m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text_full))
 
         # TODO test further: always at least one item in list?
         dict_initial = get_dict_parsed_initial(
@@ -206,20 +198,18 @@ def get_dict_data_parsed_ll(
         def get_dict_parsed_free(
             text_ll:str):
 
-            text_full_edited = m_common_functions.get_text_unindent_lines_except_first(text_ll)
-
             # TODO perhaps implement: string
 
             # TODO implement: do not allow outside function body
-            if text_full_edited.startswith("return "):
-                return get_dict_parsed_return(text_full_edited)
+            if text_ll.startswith("return "):
+                return get_dict_parsed_return(text_ll)
 
-            if text_full_edited.startswith("def "):
-                return get_dict_parsed_def(text_full_edited)
+            if text_ll.startswith("def "):
+                return get_dict_parsed_def(text_ll)
 
             text_first, \
             _, \
-            text_remaining = text_full_edited \
+            text_remaining = text_ll \
                 .partition(" = ")
 
             # TODO test
@@ -230,9 +220,9 @@ def get_dict_data_parsed_ll(
                         text_key_memory=text_first,
                         dict_item=dict_item)
 
-            return get_dict_parsed_item(text_full_edited)
+            return get_dict_parsed_item(text_ll)
 
-        iterator_texts_grouped = m_common_functions.get_iterator_texts_grouped_by_indentation(text)
+        iterator_texts_grouped = m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text)
 
         return list(
                 map(
