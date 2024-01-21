@@ -198,8 +198,6 @@ def get_dict_data_parsed_ll(
         def get_dict_parsed_free(
             text_ll:str):
 
-            # TODO perhaps implement: string
-
             # TODO implement: do not allow outside function body
             if text_ll.startswith("return "):
                 return get_dict_parsed_return(text_ll)
@@ -212,8 +210,10 @@ def get_dict_data_parsed_ll(
             text_remaining = text_ll \
                 .partition(" = ")
 
-            # TODO test
-            if text_first.isalnum() and text_first[0].isupper() and text_remaining != "":
+            if text_first.isalnum() and text_remaining != "":
+
+                assert text_first[0].isupper()
+
                 dict_item = get_dict_parsed_item(text_remaining)
 
                 return get_dict_memory_allocation(
