@@ -44,28 +44,25 @@ def get_text_unindented_one_level(
                     .split("\n")))
 
 
-# TODO perhaps integrate
-def get_text_unindent_lines_except_first(
+def get_iterator_texts_grouped_by_and_remove_indentation(
     text:str):
 
-    text_first_line, \
-    text_newline_partition, \
-    text_remaining_indented = text \
-        .partition("\n")
+    def get_text_unindent_lines_except_first(
+        text:str):
 
-    if text_newline_partition == "":
-        return text
+        text_first_line, \
+        text_newline_partition, \
+        text_remaining_indented = text \
+            .partition("\n")
 
-    text_remaining_unindented = get_text_unindented_one_level(text_remaining_indented)
+        if text_newline_partition == "":
+            return text
 
-    return text_first_line \
-        + "\n" \
-        + text_remaining_unindented
+        text_remaining_unindented = get_text_unindented_one_level(text_remaining_indented)
 
-
-# TODO perhaps integrate
-def get_iterator_texts_grouped_by_indentation(
-    text:str):
+        return text_first_line \
+            + "\n" \
+            + text_remaining_unindented
 
     def get_iterator_reversed_texts_grouped_by_indentation():
 
@@ -90,15 +87,9 @@ def get_iterator_texts_grouped_by_indentation(
 
                 text_block = ""
 
-    return reversed(
-        list(
-            get_iterator_reversed_texts_grouped_by_indentation()))
-
-
-def get_iterator_texts_grouped_by_and_remove_indentation(
-    text:str):
-
     return map(
             get_text_unindent_lines_except_first,
-            get_iterator_texts_grouped_by_indentation(text))
+            reversed(
+                list(
+                    get_iterator_reversed_texts_grouped_by_indentation())))
 
