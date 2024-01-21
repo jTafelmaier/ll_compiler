@@ -10,6 +10,9 @@ from src.compiler import m_shared
 
 TEXT_PREFIX_TO_AVOID_NAME_CLASHES = "nonpython_"
 
+TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+    + "Input"
+
 def get_text_python_function_call(
     text_input:str,
     dict_function_call:typing.Dict):
@@ -64,9 +67,7 @@ def get_text_python_def(
 
         return ",\n" \
             .join(
-                [
-                    TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                        + "Input"] \
+                [TEXT_INPUT] \
                     + list(
                         map(
                             get_text_argument,
@@ -126,15 +127,11 @@ def get_text_python_expression(
     def get_text_function(
         dict_function:typing.Dict):
 
-        # TODO refactor
-        text_input = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-            + "Input"
-
         return "lambda " \
-            + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-            + "Input: " \
+            + TEXT_INPUT \
+            + ": " \
             + get_text_python_function_call(
-                    text_input=text_input,
+                    text_input=TEXT_INPUT,
                     dict_function_call=dict_function)
 
     def get_text_initial(
