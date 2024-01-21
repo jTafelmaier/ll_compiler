@@ -41,8 +41,8 @@ def get_dict_data_parsed_ll(
                     .rpartition(" ")
 
                 return {
-                    m_shared.Def.Argument.KEY_TEXT_NAME: text_name_argument,
-                    m_shared.Def.Argument.KEY_TEXT_TYPE: text_type_argument}
+                    m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
+                    m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
 
             if text_arguments == "":
                 return []
@@ -67,12 +67,12 @@ def get_dict_data_parsed_ll(
         dict_return = get_dict_parsed_item(text_return_full_edited)
 
         return {
-            m_shared.Def.KEY_TEXT_CATEGORY: "def",
-            m_shared.Def.KEY_TEXT_NAME_FUNCTION: text_name_function,
-            m_shared.Def.KEY_TEXT_TYPE_INPUT: text_type_input,
-            m_shared.Def.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments,
-            m_shared.Def.KEY_ARRAY_OBJECTS_BODY: list_dicts_body,
-            m_shared.Def.KEY_OBJECT_RETURN: dict_return}
+            m_shared.Function_definition.KEY_TEXT_CATEGORY: "def",
+            m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
+            m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
+            m_shared.Function_definition.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments,
+            m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY: list_dicts_body,
+            m_shared.Function_definition.KEY_OBJECT_RETURN: dict_return}
 
     def get_dict_parsed_function(
         text_name:str,

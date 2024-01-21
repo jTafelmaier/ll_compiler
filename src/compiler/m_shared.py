@@ -2,7 +2,7 @@
 
 
 
-class Def:
+class Function_definition:
 
     KEY_TEXT_CATEGORY = "category"
     KEY_TEXT_NAME_FUNCTION = "name_function_def"

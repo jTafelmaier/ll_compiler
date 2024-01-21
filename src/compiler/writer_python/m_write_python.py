@@ -41,26 +41,26 @@ def get_text_python_def(
     dict_def:typing.Dict):
 
     text_name_function = dict_def \
-        [m_shared.Def.KEY_TEXT_NAME_FUNCTION]
+        [m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION]
 
     # text_type_input = dict_def \
-    #     [m_shared.Def.KEY_TEXT_TYPE_INPUT]
+    #     [m_shared.Function_definition.KEY_TEXT_TYPE_INPUT]
 
     list_dicts_arguments = dict_def \
-        [m_shared.Def.KEY_ARRAY_OBJECTS_ARGUMENTS]
+        [m_shared.Function_definition.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
     list_dicts_body_before_return = dict_def \
-        [m_shared.Def.KEY_ARRAY_OBJECTS_BODY]
+        [m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY]
 
     dict_return = dict_def \
-        [m_shared.Def.KEY_OBJECT_RETURN]
+        [m_shared.Function_definition.KEY_OBJECT_RETURN]
 
     def get_text_argument(
         dict_argument:typing.Dict):
 
         return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
             + dict_argument \
-                [m_shared.Def.Argument.KEY_TEXT_NAME]
+                [m_shared.Function_definition.Argument.KEY_TEXT_NAME]
 
     text_arguments_python_initial = ",\n" \
         .join(
