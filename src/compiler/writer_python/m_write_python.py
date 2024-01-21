@@ -53,6 +53,7 @@ def get_text_python_def(
     list_dicts_body = dict_def \
         [m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY]
 
+    # TODO integrate
     def get_text_argument(
         dict_argument:typing.Dict):
 
@@ -62,21 +63,17 @@ def get_text_python_def(
 
     def get_text_arguments_python_final():
 
-        text_arguments_python_initial = ",\n" \
+        return ",\n" \
             .join(
-                map(
-                    get_text_argument,
-                    list_dicts_arguments))
+                [
+                    TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                        + "Input"] \
+                    + list(
+                        map(
+                            get_text_argument,
+                            list_dicts_arguments)))
 
-        if len(list_dicts_arguments) == 0:
-            return ""
-        else:
-            return ",\n" \
-                + text_arguments_python_initial
-
-    text_body = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-        + "Input" \
-        + get_text_arguments_python_final() \
+    text_body = get_text_arguments_python_final() \
         + "):\n\n" \
         + get_text_python(list_dicts_body)
 
