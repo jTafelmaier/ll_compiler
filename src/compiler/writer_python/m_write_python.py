@@ -114,7 +114,7 @@ def get_text_python_expression(
         dict_initial:typing.Dict):
 
         text_category = dict_initial \
-            ["category"]
+            [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
         if text_category == "memory_read":
             return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
@@ -136,7 +136,10 @@ def get_text_python_expression(
                         text_input=text_input,
                         dict_function_call=dict_initial)
 
-        raise Exception("dict_initial: Invalid \"category\".")
+        raise Exception(
+                "dict_initial: Invalid \"" \
+                    + m_shared.Object_variable.KEY_TEXT_CATEGORY \
+                    + "\".")
 
     dict_initial = dict_expression \
         [m_shared.Expression.KEY_OBJECT_INITIAL]
@@ -158,7 +161,7 @@ def get_text_python_block(
     dict_block:typing.Dict):
 
     text_category_block = dict_block \
-        ["category"]
+        [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
     dict_function = {
         "def": get_text_python_def,

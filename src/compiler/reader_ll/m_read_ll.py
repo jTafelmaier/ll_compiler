@@ -17,7 +17,7 @@ def get_dict_data_parsed_ll(
         dict_expression = get_dict_parsed_expression(text)
 
         return {
-            m_shared.Expression_return.KEY_TEXT_CATEGORY: "return",
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "return",
             m_shared.Expression_return.KEY_OBJECT: dict_expression}
 
     def get_dict_parsed_def(
@@ -66,7 +66,7 @@ def get_dict_data_parsed_ll(
         list_dicts_body = get_list_dicts_free_multiple(text_body)
 
         return {
-            m_shared.Function_definition.KEY_TEXT_CATEGORY: "def",
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "def",
             m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
             m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
             m_shared.Function_definition.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments,
@@ -91,7 +91,7 @@ def get_dict_data_parsed_ll(
                     m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(get_text_arguments_final())))
 
         return {
-            m_shared.Function_reference.KEY_TEXT_CATEGORY: "function",
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "function",
             m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
             m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
@@ -100,7 +100,7 @@ def get_dict_data_parsed_ll(
         dict_expression:typing.Dict):
 
         return {
-            m_shared.Memory_allocation.KEY_TEXT_CATEGORY: "memory_allocation",
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_allocation",
             m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY: text_key_memory,
             m_shared.Memory_allocation.KEY_OBJECT_CONTENT: dict_expression}
 
@@ -108,14 +108,14 @@ def get_dict_data_parsed_ll(
         text:str):
 
         return {
-            m_shared.Memory_read.KEY_TEXT_CATEGORY: "memory_read",
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_read",
             m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text}
 
     def get_dict_parsed_literal(
         text:str):
 
         return {
-            m_shared.Literal.KEY_TEXT_CATEGORY: "literal",
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "literal",
             m_shared.Literal.KEY_TEXT_VALUE: text}
 
     def get_dict_parsed_expression(
@@ -184,7 +184,7 @@ def get_dict_data_parsed_ll(
                         [1:]))
 
         return {
-            m_shared.Expression.KEY_TEXT_CATEGORY: "expression",
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "expression",
             m_shared.Expression.KEY_OBJECT_INITIAL: dict_initial,
             m_shared.Expression.KEY_ARRAY_OBJECTS_FUNCTION_CALLS: list_dicts_function_calls}
 
