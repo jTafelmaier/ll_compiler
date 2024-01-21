@@ -200,37 +200,37 @@ def get_dict_data_parsed_ll(
             m_shared.Item.KEY_TEXT_INITIAL_VALUE: dict_initial,
             m_shared.Item.KEY_ARRAY_OBJECTS_FUNCTION_CALLS: list_dicts_function_calls}
 
-    def get_dict_parsed_free(
-        text_ll:str):
-
-        text_full_edited = m_common_functions.get_text_unindent_lines_except_first(text_ll)
-
-        # TODO perhaps implement: string
-
-        # TODO implement: do not allow outside function body
-        if text_full_edited.startswith("return "):
-            return get_dict_parsed_return(text_full_edited)
-
-        if text_full_edited.startswith("def "):
-            return get_dict_parsed_def(text_full_edited)
-
-        text_first, \
-        _, \
-        text_remaining = text_full_edited \
-            .partition(" = ")
-
-        # TODO test
-        if text_first.isalnum() and text_first[0].isupper() and text_remaining != "":
-            dict_item = get_dict_parsed_item(text_remaining)
-
-            return get_dict_memory_allocation(
-                    text_key_memory=text_first,
-                    dict_item=dict_item)
-
-        return get_dict_parsed_item(text_full_edited)
-
     def get_list_dicts_free_multiple(
         text:str):
+
+        def get_dict_parsed_free(
+            text_ll:str):
+
+            text_full_edited = m_common_functions.get_text_unindent_lines_except_first(text_ll)
+
+            # TODO perhaps implement: string
+
+            # TODO implement: do not allow outside function body
+            if text_full_edited.startswith("return "):
+                return get_dict_parsed_return(text_full_edited)
+
+            if text_full_edited.startswith("def "):
+                return get_dict_parsed_def(text_full_edited)
+
+            text_first, \
+            _, \
+            text_remaining = text_full_edited \
+                .partition(" = ")
+
+            # TODO test
+            if text_first.isalnum() and text_first[0].isupper() and text_remaining != "":
+                dict_item = get_dict_parsed_item(text_remaining)
+
+                return get_dict_memory_allocation(
+                        text_key_memory=text_first,
+                        dict_item=dict_item)
+
+            return get_dict_parsed_item(text_full_edited)
 
         iterator_texts_grouped = m_common_functions.get_iterator_texts_grouped_by_indentation(text)
 
