@@ -139,7 +139,7 @@ def get_text_python_expression(
         raise Exception("dict_initial: Invalid \"category\".")
 
     dict_initial = dict_expression \
-        [m_shared.Expression.KEY_TEXT_INITIAL_VALUE]
+        [m_shared.Expression.KEY_OBJECT_INITIAL]
 
     list_dicts_function_calls = dict_expression \
         [m_shared.Expression.KEY_ARRAY_OBJECTS_FUNCTION_CALLS]

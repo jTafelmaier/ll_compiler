@@ -52,7 +52,7 @@ class Literal:
 class Expression:
 
     KEY_TEXT_CATEGORY = "category"
-    KEY_TEXT_INITIAL_VALUE = "initial"
+    KEY_OBJECT_INITIAL = "initial"
     KEY_ARRAY_OBJECTS_FUNCTION_CALLS = "function_calls"
 
 

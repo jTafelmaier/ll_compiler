@@ -185,7 +185,7 @@ def get_dict_data_parsed_ll(
 
         return {
             m_shared.Expression.KEY_TEXT_CATEGORY: "expression",
-            m_shared.Expression.KEY_TEXT_INITIAL_VALUE: dict_initial,
+            m_shared.Expression.KEY_OBJECT_INITIAL: dict_initial,
             m_shared.Expression.KEY_ARRAY_OBJECTS_FUNCTION_CALLS: list_dicts_function_calls}
 
     def get_list_dicts_free_multiple(
