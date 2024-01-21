@@ -2,7 +2,6 @@
 
 
 
-# TODO integrate
 class Expression_return:
 
     KEY_TEXT_CATEGORY = "category"
