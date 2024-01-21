@@ -17,32 +17,6 @@ TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
 def get_text_python_block(
     dict_block:typing.Dict):
 
-    def get_text_python_function_call(
-        text_input:str,
-        dict_function:typing.Dict):
-
-        text_name_function = dict_function \
-            [m_shared.Function_reference.KEY_NAME_FUNCTION]
-
-        list_dicts_arguments = dict_function \
-            [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
-
-        list_texts_arguments_additional = list(
-                map(
-                    get_text_python_expression,
-                    list_dicts_arguments))
-
-        text_arguments_python = ",\n" \
-            .join([
-                    text_input] \
-                + list_texts_arguments_additional)
-
-        return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-            + text_name_function \
-            + "(\n" \
-            + m_common_functions.get_text_indented_one_level(text_arguments_python) \
-            + ")"
-
     def get_text_python_def(
         dict_def:typing.Dict):
 
@@ -110,6 +84,32 @@ def get_text_python_block(
 
     def get_text_python_expression(
         dict_expression:typing.Dict):
+
+        def get_text_python_function_call(
+            text_input:str,
+            dict_function:typing.Dict):
+
+            text_name_function = dict_function \
+                [m_shared.Function_reference.KEY_NAME_FUNCTION]
+
+            list_dicts_arguments = dict_function \
+                [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
+
+            list_texts_arguments_additional = list(
+                    map(
+                        get_text_python_expression,
+                        list_dicts_arguments))
+
+            text_arguments_python = ",\n" \
+                .join([
+                        text_input] \
+                    + list_texts_arguments_additional)
+
+            return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                + text_name_function \
+                + "(\n" \
+                + m_common_functions.get_text_indented_one_level(text_arguments_python) \
+                + ")"
 
         def get_text_literal(
             dict_literal:typing.Dict):
