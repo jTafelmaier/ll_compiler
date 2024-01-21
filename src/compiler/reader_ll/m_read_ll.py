@@ -116,7 +116,6 @@ def get_dict_data_parsed_ll(
             [2:] \
             .partition(" ")
 
-        # TODO test
         return get_dict_parsed_function(
                 text_name=text_name_function,
                 text_arguments=text_arguments)
