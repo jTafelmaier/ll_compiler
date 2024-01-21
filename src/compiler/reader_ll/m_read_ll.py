@@ -156,7 +156,7 @@ def get_dict_data_parsed_ll(
 
         def get_list_dicts_arguments():
 
-            def get_dict_argument_def(
+            def get_dict_argument(
                 text_line_argument:str):
 
                 text_type_argument, \
@@ -173,7 +173,7 @@ def get_dict_data_parsed_ll(
 
             return list(
                     map(
-                        get_dict_argument_def,
+                        get_dict_argument,
                         text_arguments \
                             .split("\n")))
 
