@@ -101,9 +101,9 @@ def get_dict_data_parsed_ll(
                     m_common_functions.get_iterator_texts_grouped_by_indentation(get_text_arguments_final())))
 
         return {
-            m_shared.Function_Item.KEY_TEXT_CATEGORY: "function",
-            m_shared.Function_Item.KEY_NAME_FUNCTION: text_name,
-            m_shared.Function_Item.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
+            m_shared.Function_reference.KEY_TEXT_CATEGORY: "function",
+            m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
+            m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
     def get_dict_parsed_function_call(
         text_function_call:str):

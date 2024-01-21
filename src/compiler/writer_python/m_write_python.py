@@ -15,10 +15,10 @@ def get_text_python_function_call(
     dict_function_call:typing.Dict):
 
     text_name_function = dict_function_call \
-        [m_shared.Function_Item.KEY_NAME_FUNCTION]
+        [m_shared.Function_reference.KEY_NAME_FUNCTION]
 
     list_dicts_arguments = dict_function_call \
-        [m_shared.Function_Item.KEY_ARRAY_OBJECTS_ARGUMENTS]
+        [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
     list_texts_arguments_additional = list(
             map(

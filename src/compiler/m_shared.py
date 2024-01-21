@@ -17,7 +17,7 @@ class Def:
         KEY_TEXT_TYPE = "type"
 
 
-class Function_Item:
+class Function_reference:
 
     KEY_TEXT_CATEGORY = "category"
     KEY_NAME_FUNCTION = "name_function"
