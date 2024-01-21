@@ -68,19 +68,17 @@ def get_text_python_def(
 
     text_arguments_python_final = "" if len(list_dicts_arguments) == 0 else ",\n" + text_arguments_python_initial
 
-    text_python_body = get_text_python(list_dicts_body)
-
-    text_body_python = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+    text_body = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
         + "Input" \
         + text_arguments_python_final \
         + "):\n\n" \
-        + text_python_body
+        + get_text_python(list_dicts_body)
 
     return "def " \
         + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
         + text_name_function \
         + "(\n" \
-        + m_common_functions.get_text_indented_one_level(text_body_python)
+        + m_common_functions.get_text_indented_one_level(text_body)
 
 
 def get_text_python_memory_allocation(
