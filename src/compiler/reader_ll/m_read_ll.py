@@ -115,17 +115,16 @@ def get_dict_data_parsed_ll(
 
         assert text_function_call.startswith("> ")
 
-        name_function, \
+        text_name_function, \
         _, \
         text_arguments = text_function_call \
             [2:] \
             .partition(" ")
 
-        list_dicts_arguments = get_list_dicts_arguments_function_call(text_arguments)
-
-        return {
-            m_shared.Function_call.KEY_NAME_FUNCTION: name_function,
-            m_shared.Function_call.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
+        # TODO test
+        return get_dict_parsed_function(
+                text_name=text_name_function,
+                text_arguments=text_arguments)
 
     def get_dict_memory_allocation(
         text_key_memory:str,

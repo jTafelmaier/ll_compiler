@@ -24,13 +24,6 @@ class Function_Item:
     KEY_ARRAY_OBJECTS_ARGUMENTS = "arguments"
 
 
-# TODO refactor: combine with Function_Item
-class Function_call:
-
-    KEY_NAME_FUNCTION = "name_function"
-    KEY_ARRAY_OBJECTS_ARGUMENTS = "arguments"
-
-
 class Memory_allocation:
 
     KEY_TEXT_CATEGORY = "category"
