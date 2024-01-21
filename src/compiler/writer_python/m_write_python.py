@@ -109,46 +109,33 @@ def get_text_python_memory_allocation(
 def get_text_python_item(
     dict_item:typing.Dict):
 
-    def get_text_python_function_chain(
-        dict_initial:typing.Dict,
-        list_dicts_function_calls:typing.List[typing.Dict]):
+    def get_text_initial(
+        dict_initial:typing.Dict):
 
-        def get_text_initial(
-            dict_initial:typing.Dict):
+        text_category = dict_initial \
+            ["category"]
 
-            text_category = dict_initial \
-                ["category"]
+        if text_category == "memory_read":
+            return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                + dict_initial \
+                    [m_shared.Memory_read.KEY_TEXT_KEY_MEMORY]
 
-            if text_category == "memory_read":
-                return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                    + dict_initial \
-                        [m_shared.Memory_read.KEY_TEXT_KEY_MEMORY]
+        if text_category == "literal":
+            return dict_initial \
+                [m_shared.Literal.KEY_TEXT_VALUE]
 
-            if text_category == "literal":
-                return dict_initial \
-                    [m_shared.Literal.KEY_TEXT_VALUE]
+        if text_category == "function":
+            text_input = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                + "Input"
 
-            if text_category == "function":
-                text_input = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                    + "Input"
+            return "lambda " \
+                + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                + "Input: " \
+                + get_text_python_function_call(
+                        text_input=text_input,
+                        dict_function_call=dict_initial)
 
-                return "lambda " \
-                    + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                    + "Input: " \
-                    + get_text_python_function_call(
-                            text_input=text_input,
-                            dict_function_call=dict_initial)
-
-            raise Exception("dict_initial: Invalid \"category\".")
-
-        text_python_current = get_text_initial(dict_initial)
-
-        for dict_function_call in list_dicts_function_calls:
-            text_python_current = get_text_python_function_call(
-                    text_input=text_python_current,
-                    dict_function_call=dict_function_call)
-
-        return text_python_current
+        raise Exception("dict_initial: Invalid \"category\".")
 
     dict_initial = dict_item \
         [m_shared.Item.KEY_TEXT_INITIAL_VALUE]
@@ -156,9 +143,14 @@ def get_text_python_item(
     list_dicts_function_calls = dict_item \
         [m_shared.Item.KEY_ARRAY_OBJECTS_FUNCTION_CALLS]
 
-    return get_text_python_function_chain(
-            dict_initial=dict_initial,
-            list_dicts_function_calls=list_dicts_function_calls)
+    text_python_current = get_text_initial(dict_initial)
+
+    for dict_function_call in list_dicts_function_calls:
+        text_python_current = get_text_python_function_call(
+                text_input=text_python_current,
+                dict_function_call=dict_function_call)
+
+    return text_python_current
 
 
 def get_text_python_block(
