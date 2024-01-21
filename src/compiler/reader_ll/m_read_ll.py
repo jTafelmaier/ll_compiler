@@ -74,34 +74,34 @@ def get_dict_data_parsed_ll(
             m_shared.Def.KEY_ARRAY_OBJECTS_BODY: list_dicts_body,
             m_shared.Def.KEY_OBJECT_RETURN: dict_return}
 
-    def get_list_dicts_arguments_function_call(
-        text_arguments:str):
-
-        def get_dict_argument(
-            text_argument:str):
-
-            text_argument_edited = m_common_functions.get_text_unindent_lines_except_first(text_argument)
-
-            return get_dict_parsed_item(text_argument_edited)
-
-        def get_text_arguments_final():
-
-            if text_arguments.startswith("[") and text_arguments.endswith("]"):
-                return m_common_functions.get_text_unindented_one_level(
-                        text_arguments \
-                            [1:-1] \
-                            .lstrip("\n"))
-
-            return text_arguments
-
-        return list(
-                map(
-                    get_dict_argument,
-                    m_common_functions.get_iterator_texts_grouped_by_indentation(get_text_arguments_final())))
-
     def get_dict_parsed_function(
         text_name:str,
         text_arguments:str):
+
+        def get_list_dicts_arguments_function_call(
+            text_arguments:str):
+
+            def get_dict_argument(
+                text_argument:str):
+
+                text_argument_edited = m_common_functions.get_text_unindent_lines_except_first(text_argument)
+
+                return get_dict_parsed_item(text_argument_edited)
+
+            def get_text_arguments_final():
+
+                if text_arguments.startswith("[") and text_arguments.endswith("]"):
+                    return m_common_functions.get_text_unindented_one_level(
+                            text_arguments \
+                                [1:-1] \
+                                .lstrip("\n"))
+
+                return text_arguments
+
+            return list(
+                    map(
+                        get_dict_argument,
+                        m_common_functions.get_iterator_texts_grouped_by_indentation(get_text_arguments_final())))
 
         list_dicts_arguments = get_list_dicts_arguments_function_call(text_arguments)
 
