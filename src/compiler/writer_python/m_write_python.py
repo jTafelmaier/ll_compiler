@@ -15,12 +15,12 @@ TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
 
 def get_text_python_function_call(
     text_input:str,
-    dict_function_call:typing.Dict):
+    dict_function:typing.Dict):
 
-    text_name_function = dict_function_call \
+    text_name_function = dict_function \
         [m_shared.Function_reference.KEY_NAME_FUNCTION]
 
-    list_dicts_arguments = dict_function_call \
+    list_dicts_arguments = dict_function \
         [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
     list_texts_arguments_additional = list(
@@ -132,7 +132,7 @@ def get_text_python_expression(
             + ": " \
             + get_text_python_function_call(
                     text_input=TEXT_INPUT,
-                    dict_function_call=dict_function)
+                    dict_function=dict_function)
 
     def get_text_initial(
         dict_initial:typing.Dict):
@@ -155,10 +155,10 @@ def get_text_python_expression(
 
     text_python_current = get_text_initial(dict_initial)
 
-    for dict_function_call in list_dicts_function_calls:
+    for dict_function in list_dicts_function_calls:
         text_python_current = get_text_python_function_call(
                 text_input=text_python_current,
-                dict_function_call=dict_function_call)
+                dict_function=dict_function)
 
     return text_python_current
 
