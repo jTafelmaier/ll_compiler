@@ -11,89 +11,12 @@ from src.compiler import m_shared
 def get_dict_data_parsed_ll(
     text_ll:str):
 
-    def get_dict_parsed_return(
+    def get_dict_parsed_literal(
         text:str):
 
-        dict_expression = get_dict_parsed_expression(text)
-
         return {
-            m_shared.Object_variable.KEY_TEXT_CATEGORY: "return",
-            m_shared.Expression_return.KEY_OBJECT: dict_expression}
-
-    def get_dict_parsed_def(
-        text:str):
-
-        text_header, \
-        _, \
-        text_body = text \
-            .partition("\n\n")
-
-        text_first_line, \
-        _, \
-        text_arguments = text_header \
-            .partition("\n")
-
-        text_type_input, \
-        _, \
-        text_name_function = text_first_line \
-            .rpartition(" ")
-
-        def get_list_dicts_arguments():
-
-            def get_dict_argument_def(
-                text_line_argument:str):
-
-                text_type_argument, \
-                _, \
-                text_name_argument = text_line_argument \
-                    .rpartition(" ")
-
-                return {
-                    m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
-                    m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
-
-            if text_arguments == "":
-                return []
-
-            return list(
-                    map(
-                        get_dict_argument_def,
-                        text_arguments \
-                            .split("\n")))
-
-        list_dicts_arguments = get_list_dicts_arguments()
-
-        list_dicts_body = get_list_dicts_free_multiple(text_body)
-
-        return {
-            m_shared.Object_variable.KEY_TEXT_CATEGORY: "def",
-            m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
-            m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
-            m_shared.Function_definition.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments,
-            m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY: list_dicts_body}
-
-    def get_dict_parsed_function(
-        text_name:str,
-        text_arguments:str):
-
-        def get_text_arguments_final():
-
-            if text_arguments.startswith("[") and text_arguments.endswith("]"):
-                return text_arguments \
-                        [1:-1] \
-                        .lstrip("\n")
-
-            return text_arguments
-
-        list_dicts_arguments = list(
-                map(
-                    get_dict_parsed_expression,
-                    m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(get_text_arguments_final())))
-
-        return {
-            m_shared.Object_variable.KEY_TEXT_CATEGORY: "function",
-            m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
-            m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "literal",
+            m_shared.Literal.KEY_TEXT_VALUE: text}
 
     def get_dict_memory_allocation(
         text_key_memory:str,
@@ -111,12 +34,14 @@ def get_dict_data_parsed_ll(
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_read",
             m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text}
 
-    def get_dict_parsed_literal(
+    def get_dict_parsed_return(
         text:str):
 
+        dict_expression = get_dict_parsed_expression(text)
+
         return {
-            m_shared.Object_variable.KEY_TEXT_CATEGORY: "literal",
-            m_shared.Literal.KEY_TEXT_VALUE: text}
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "return",
+            m_shared.Expression_return.KEY_OBJECT: dict_expression}
 
     def get_dict_parsed_expression(
         text:str):
@@ -187,6 +112,81 @@ def get_dict_data_parsed_ll(
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "expression",
             m_shared.Expression.KEY_OBJECT_INITIAL: dict_initial,
             m_shared.Expression.KEY_ARRAY_OBJECTS_FUNCTION_CALLS: list_dicts_function_calls}
+
+    def get_dict_parsed_function(
+        text_name:str,
+        text_arguments:str):
+
+        def get_text_arguments_final():
+
+            if text_arguments.startswith("[") and text_arguments.endswith("]"):
+                return text_arguments \
+                        [1:-1] \
+                        .lstrip("\n")
+
+            return text_arguments
+
+        list_dicts_arguments = list(
+                map(
+                    get_dict_parsed_expression,
+                    m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(get_text_arguments_final())))
+
+        return {
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "function",
+            m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
+            m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
+
+    def get_dict_parsed_def(
+        text:str):
+
+        text_header, \
+        _, \
+        text_body = text \
+            .partition("\n\n")
+
+        text_first_line, \
+        _, \
+        text_arguments = text_header \
+            .partition("\n")
+
+        text_type_input, \
+        _, \
+        text_name_function = text_first_line \
+            .rpartition(" ")
+
+        def get_list_dicts_arguments():
+
+            def get_dict_argument_def(
+                text_line_argument:str):
+
+                text_type_argument, \
+                _, \
+                text_name_argument = text_line_argument \
+                    .rpartition(" ")
+
+                return {
+                    m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
+                    m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
+
+            if text_arguments == "":
+                return []
+
+            return list(
+                    map(
+                        get_dict_argument_def,
+                        text_arguments \
+                            .split("\n")))
+
+        list_dicts_arguments = get_list_dicts_arguments()
+
+        list_dicts_body = get_list_dicts_free_multiple(text_body)
+
+        return {
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "def",
+            m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
+            m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
+            m_shared.Function_definition.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments,
+            m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY: list_dicts_body}
 
     def get_list_dicts_free_multiple(
         text:str):
