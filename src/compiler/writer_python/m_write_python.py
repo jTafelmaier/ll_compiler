@@ -143,19 +143,12 @@ def get_text_python_expression(
         text_category = dict_initial \
             [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
-        if text_category == "memory_read":
-            return get_text_memory_read(dict_initial)
-
-        if text_category == "literal":
-            return get_text_literal(dict_initial)
-
-        if text_category == "function":
-            return get_text_function(dict_initial)
-
-        raise Exception(
-                "dict_initial: Invalid \"" \
-                    + m_shared.Object_variable.KEY_TEXT_CATEGORY \
-                    + "\".")
+        return {
+            "memory_read": get_text_memory_read,
+            "literal": get_text_literal,
+            "function": get_text_function} \
+            [text_category] \
+            (dict_initial)
 
     dict_initial = dict_expression \
         [m_shared.Expression.KEY_OBJECT_INITIAL]
