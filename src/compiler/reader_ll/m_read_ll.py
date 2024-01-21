@@ -14,9 +14,7 @@ def get_dict_data_parsed_ll(
     def get_dict_parsed_return(
         text_full:str):
 
-        dict_item = get_dict_parsed_item(
-                text_full \
-                    [7:])
+        dict_item = get_dict_parsed_item(text_full)
 
         return {
             m_shared.Item_return.KEY_TEXT_CATEGORY: "return",
@@ -38,7 +36,6 @@ def get_dict_data_parsed_ll(
         text_type_input, \
         _, \
         text_name_function = text_first_line \
-            [4:] \
             .rpartition(" ")
 
         def get_list_dicts_arguments():
@@ -122,7 +119,7 @@ def get_dict_data_parsed_ll(
             m_shared.Literal.KEY_TEXT_VALUE: text}
 
     def get_dict_parsed_item(
-        text_full:str):
+        text_item:str):
 
         set_texts_special_literals = {
             "None",
@@ -174,7 +171,7 @@ def get_dict_data_parsed_ll(
                     text_arguments=text_arguments)
 
         list_texts_grouped = list(
-                m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text_full))
+                m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text_item))
 
         # TODO test further: always at least one item in list?
         dict_initial = get_dict_parsed_initial(
@@ -199,10 +196,14 @@ def get_dict_data_parsed_ll(
             text_ll:str):
 
             if text_ll.startswith("return "):
-                return get_dict_parsed_return(text_ll)
+                return get_dict_parsed_return(
+                        text_ll \
+                            [7:])
 
             if text_ll.startswith("def "):
-                return get_dict_parsed_def(text_ll)
+                return get_dict_parsed_def(
+                        text_ll \
+                            [4:])
 
             text_first, \
             _, \
