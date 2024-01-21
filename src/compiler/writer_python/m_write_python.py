@@ -60,17 +60,23 @@ def get_text_python_def(
             + dict_argument \
                 [m_shared.Function_definition.Argument.KEY_TEXT_NAME]
 
-    text_arguments_python_initial = ",\n" \
-        .join(
-            map(
-                get_text_argument,
-                list_dicts_arguments))
+    def get_text_arguments_python_final():
 
-    text_arguments_python_final = "" if len(list_dicts_arguments) == 0 else ",\n" + text_arguments_python_initial
+        text_arguments_python_initial = ",\n" \
+            .join(
+                map(
+                    get_text_argument,
+                    list_dicts_arguments))
+
+        if len(list_dicts_arguments) == 0:
+            return ""
+        else:
+            return ",\n" \
+                + text_arguments_python_initial
 
     text_body = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
         + "Input" \
-        + text_arguments_python_final \
+        + get_text_arguments_python_final() \
         + "):\n\n" \
         + get_text_python(list_dicts_body)
 
