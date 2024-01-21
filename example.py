@@ -7,6 +7,21 @@ from built_in_functions.built_in_functions import *
 
 def main():
 
+    def nonpython_identity(
+        nonpython_Input):
+
+        def nonpython_identity2(
+            nonpython_Input):
+
+            return nonpython_append(
+                nonpython_Input,
+                "")
+
+        return nonpython_append(
+            nonpython_identity2(
+                nonpython_Input),
+            "")
+
     nonpython_TextTwoHundred = nonpython_toText(
         200)
 
@@ -15,9 +30,10 @@ def main():
             nonpython_map(
                 nonpython_retainIf(
                     nonpython_splitOn(
-                        nonpython_append(
-                            "_ HelLO ;; 12 woRlD hEllo2 !",
-                            nonpython_TextTwoHundred),
+                        nonpython_identity(
+                            nonpython_append(
+                                "_ HelLO ;; 12 woRlD hEllo2 !",
+                                nonpython_TextTwoHundred)),
                         " "),
                     lambda nonpython_Input: nonpython_isAlphabetic(
                         nonpython_Input)),

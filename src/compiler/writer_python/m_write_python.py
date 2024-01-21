@@ -49,11 +49,9 @@ def get_text_python_def(
     list_dicts_arguments = dict_def \
         [m_shared.Function_definition.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
-    list_dicts_body_before_return = dict_def \
+    # TODO ensure at least one return?
+    list_dicts_body = dict_def \
         [m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY]
-
-    dict_return = dict_def \
-        [m_shared.Function_definition.KEY_OBJECT_RETURN]
 
     def get_text_argument(
         dict_argument:typing.Dict):
@@ -70,19 +68,13 @@ def get_text_python_def(
 
     text_arguments_python_final = "" if len(list_dicts_arguments) == 0 else ",\n" + text_arguments_python_initial
 
-    text_python_before_return_raw = get_text_python(list_dicts_body_before_return)
-
-    text_python_before_return_final = text_python_before_return_raw if text_python_before_return_raw == "" else text_python_before_return_raw + "\n\n"
-
-    text_return_python = get_text_python_item(dict_return)
+    text_python_body = get_text_python(list_dicts_body)
 
     text_body_python = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
         + "Input" \
         + text_arguments_python_final \
         + "):\n\n" \
-        + text_python_before_return_final \
-        + "return " \
-        + text_return_python
+        + text_python_body
 
     return "def " \
         + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
@@ -104,6 +96,15 @@ def get_text_python_memory_allocation(
         + text_key_memory \
         + " = " \
         + get_text_python_item(dict_item)
+
+
+def get_text_python_return(
+    dict_return:typing.Dict):
+
+    return "return " \
+        + get_text_python_item(
+                dict_return 
+                    [m_shared.Item_return.KEY_OBJECT])
 
 
 def get_text_python_item(
@@ -162,6 +163,7 @@ def get_text_python_block(
     dict_function = {
         "def": get_text_python_def,
         "memory_allocation": get_text_python_memory_allocation,
+        "return": get_text_python_return,
         "item": get_text_python_item}
 
     return dict_function \

@@ -1,6 +1,17 @@
 
 
 
+def TEXT identity
+
+    def TEXT identity2
+
+        return Input
+            > append ""
+
+    return Input
+        > identity2
+        > append ""
+
 
 TextTwoHundred = 200
     > toText
@@ -8,6 +19,7 @@ TextTwoHundred = 200
 
 TextHelloWorld = "_ HelLO ;; 12 woRlD hEllo2 !"
     > append TextTwoHundred
+    > identity
     > splitOn " "
     > retainIf isAlphabetic
     > map titlecase

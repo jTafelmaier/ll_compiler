@@ -2,6 +2,12 @@
 
 
 
+class Item_return:
+
+    KEY_TEXT_CATEGORY = "category"
+    KEY_OBJECT = "item"
+
+
 class Function_definition:
 
     KEY_TEXT_CATEGORY = "category"
@@ -9,7 +15,6 @@ class Function_definition:
     KEY_TEXT_TYPE_INPUT = "type_input"
     KEY_ARRAY_OBJECTS_ARGUMENTS = "arguments_def"
     KEY_ARRAY_OBJECTS_BODY = "body"
-    KEY_OBJECT_RETURN = "item_return"
 
     class Argument:
 

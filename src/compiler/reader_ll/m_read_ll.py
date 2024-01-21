@@ -11,6 +11,17 @@ from src.compiler import m_shared
 def get_dict_data_parsed_ll(
     text_ll:str):
 
+    def get_dict_parsed_return(
+        text_full:str):
+
+        dict_item = get_dict_parsed_item(
+                text_full \
+                    [7:])
+
+        return {
+            m_shared.Item_return.KEY_TEXT_CATEGORY: "return",
+            m_shared.Item_return.KEY_OBJECT: dict_item}
+
     def get_dict_parsed_def(
         text_full:str):
 
@@ -55,24 +66,14 @@ def get_dict_data_parsed_ll(
 
         list_dicts_arguments = get_list_dicts_arguments()
 
-        text_pre_return, \
-        _, \
-        text_return = text_body \
-            .rpartition("return ")
-
-        list_dicts_body = get_list_dicts_free_multiple(text_pre_return)
-
-        text_return_full_edited = m_common_functions.get_text_unindent_lines_except_first(text_return)
-
-        dict_return = get_dict_parsed_item(text_return_full_edited)
+        list_dicts_body = get_list_dicts_free_multiple(text_body)
 
         return {
             m_shared.Function_definition.KEY_TEXT_CATEGORY: "def",
             m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
             m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
             m_shared.Function_definition.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments,
-            m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY: list_dicts_body,
-            m_shared.Function_definition.KEY_OBJECT_RETURN: dict_return}
+            m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY: list_dicts_body}
 
     def get_dict_parsed_function(
         text_name:str,
@@ -205,6 +206,10 @@ def get_dict_data_parsed_ll(
         text_full_edited = m_common_functions.get_text_unindent_lines_except_first(text_ll)
 
         # TODO perhaps implement: string
+
+        # TODO implement: do not allow outside function body
+        if text_full_edited.startswith("return "):
+            return get_dict_parsed_return(text_full_edited)
 
         if text_full_edited.startswith("def "):
             return get_dict_parsed_def(text_full_edited)

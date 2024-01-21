@@ -16,6 +16,7 @@ Implement, in order:
 - builtin ll file
 - module imports
 - pure - modifying function differentiation
+- perhaps prohibit clashing variable names
 - (automatic parallelization)
 
 
