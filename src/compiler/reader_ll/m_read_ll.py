@@ -105,21 +105,6 @@ def get_dict_data_parsed_ll(
             m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
             m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
-    def get_dict_parsed_function_call(
-        text_function_call:str):
-
-        assert text_function_call.startswith("> ")
-
-        text_name_function, \
-        _, \
-        text_arguments = text_function_call \
-            [2:] \
-            .partition(" ")
-
-        return get_dict_parsed_function(
-                text_name=text_name_function,
-                text_arguments=text_arguments)
-
     def get_dict_memory_allocation(
         text_key_memory:str,
         dict_item:typing.Dict):
@@ -179,6 +164,21 @@ def get_dict_data_parsed_ll(
                         text_arguments=text_second)
 
             return get_dict_parsed_literal(text)
+
+        def get_dict_parsed_function_call(
+            text_function_call:str):
+
+            assert text_function_call.startswith("> ")
+
+            text_name_function, \
+            _, \
+            text_arguments = text_function_call \
+                [2:] \
+                .partition(" ")
+
+            return get_dict_parsed_function(
+                    text_name=text_name_function,
+                    text_arguments=text_arguments)
 
         list_texts_grouped = list(
                 m_common_functions.get_iterator_texts_grouped_by_indentation(text_full))
