@@ -49,7 +49,7 @@ def get_text_python_def(
     list_dicts_arguments = dict_def \
         [m_shared.Function_definition.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
-    # TODO ensure at least one return?
+    # TODO ensure at least one return
     list_dicts_body = dict_def \
         [m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY]
 
