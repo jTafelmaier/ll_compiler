@@ -12,20 +12,20 @@ def get_dict_data_parsed_ll(
     text_ll:str):
 
     def get_dict_parsed_return(
-        text_full:str):
+        text:str):
 
-        dict_expression = get_dict_parsed_expression(text_full)
+        dict_expression = get_dict_parsed_expression(text)
 
         return {
             m_shared.Expression_return.KEY_TEXT_CATEGORY: "return",
             m_shared.Expression_return.KEY_OBJECT: dict_expression}
 
     def get_dict_parsed_def(
-        text_full:str):
+        text:str):
 
         text_header, \
         _, \
-        text_body = text_full \
+        text_body = text \
             .partition("\n\n")
 
         text_first_line, \
@@ -119,7 +119,7 @@ def get_dict_data_parsed_ll(
             m_shared.Literal.KEY_TEXT_VALUE: text}
 
     def get_dict_parsed_expression(
-        text_expression:str):
+        text:str):
 
         set_texts_special_literals = {
             "None",
@@ -156,13 +156,13 @@ def get_dict_data_parsed_ll(
             return get_dict_parsed_literal(text)
 
         def get_dict_parsed_function_call(
-            text_function_call:str):
+            text:str):
 
-            assert text_function_call.startswith("> ")
+            assert text.startswith("> ")
 
             text_name_function, \
             _, \
-            text_arguments = text_function_call \
+            text_arguments = text \
                 [2:] \
                 .partition(" ")
 
@@ -171,7 +171,7 @@ def get_dict_data_parsed_ll(
                     text_arguments=text_arguments)
 
         list_texts_grouped = list(
-                m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text_expression))
+                m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text))
 
         dict_initial = get_dict_parsed_initial(
                 list_texts_grouped \
