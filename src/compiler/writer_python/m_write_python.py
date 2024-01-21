@@ -110,6 +110,33 @@ def get_text_python_return(
 def get_text_python_expression(
     dict_expression:typing.Dict):
 
+    def get_text_memory_read(
+        dict_memory_read:typing.Dict):
+
+        return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+            + dict_memory_read \
+                [m_shared.Memory_read.KEY_TEXT_KEY_MEMORY]
+
+    def get_text_literal(
+        dict_literal:typing.Dict):
+
+        return dict_literal \
+            [m_shared.Literal.KEY_TEXT_VALUE]
+
+    def get_text_function(
+        dict_function:typing.Dict):
+
+        # TODO refactor
+        text_input = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+            + "Input"
+
+        return "lambda " \
+            + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+            + "Input: " \
+            + get_text_python_function_call(
+                    text_input=text_input,
+                    dict_function_call=dict_function)
+
     def get_text_initial(
         dict_initial:typing.Dict):
 
@@ -117,24 +144,13 @@ def get_text_python_expression(
             [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
         if text_category == "memory_read":
-            return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                + dict_initial \
-                    [m_shared.Memory_read.KEY_TEXT_KEY_MEMORY]
+            return get_text_memory_read(dict_initial)
 
         if text_category == "literal":
-            return dict_initial \
-                [m_shared.Literal.KEY_TEXT_VALUE]
+            return get_text_literal(dict_initial)
 
         if text_category == "function":
-            text_input = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                + "Input"
-
-            return "lambda " \
-                + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                + "Input: " \
-                + get_text_python_function_call(
-                        text_input=text_input,
-                        dict_function_call=dict_initial)
+            return get_text_function(dict_initial)
 
         raise Exception(
                 "dict_initial: Invalid \"" \
