@@ -173,7 +173,6 @@ def get_dict_data_parsed_ll(
         list_texts_grouped = list(
                 m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text_item))
 
-        # TODO test further: always at least one item in list?
         dict_initial = get_dict_parsed_initial(
                 list_texts_grouped \
                     [0])
