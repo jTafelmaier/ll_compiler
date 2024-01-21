@@ -22,7 +22,7 @@ def get_text_python_function_call(
 
     list_texts_arguments_additional = list(
             map(
-                get_text_python_item,
+                get_text_python_expression,
                 list_dicts_arguments))
 
     text_arguments_python = ",\n" \
@@ -89,26 +89,26 @@ def get_text_python_memory_allocation(
     text_key_memory = dict_memory_allocation \
         [m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY]
 
-    dict_item = dict_memory_allocation \
+    dict_expression = dict_memory_allocation \
         [m_shared.Memory_allocation.KEY_OBJECT_CONTENT]
 
     return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
         + text_key_memory \
         + " = " \
-        + get_text_python_item(dict_item)
+        + get_text_python_expression(dict_expression)
 
 
 def get_text_python_return(
     dict_return:typing.Dict):
 
     return "return " \
-        + get_text_python_item(
+        + get_text_python_expression(
                 dict_return 
-                    [m_shared.Item_return.KEY_OBJECT])
+                    [m_shared.Expression_return.KEY_OBJECT])
 
 
-def get_text_python_item(
-    dict_item:typing.Dict):
+def get_text_python_expression(
+    dict_expression:typing.Dict):
 
     def get_text_initial(
         dict_initial:typing.Dict):
@@ -138,11 +138,11 @@ def get_text_python_item(
 
         raise Exception("dict_initial: Invalid \"category\".")
 
-    dict_initial = dict_item \
-        [m_shared.Item.KEY_TEXT_INITIAL_VALUE]
+    dict_initial = dict_expression \
+        [m_shared.Expression.KEY_TEXT_INITIAL_VALUE]
 
-    list_dicts_function_calls = dict_item \
-        [m_shared.Item.KEY_ARRAY_OBJECTS_FUNCTION_CALLS]
+    list_dicts_function_calls = dict_expression \
+        [m_shared.Expression.KEY_ARRAY_OBJECTS_FUNCTION_CALLS]
 
     text_python_current = get_text_initial(dict_initial)
 
@@ -164,7 +164,7 @@ def get_text_python_block(
         "def": get_text_python_def,
         "memory_allocation": get_text_python_memory_allocation,
         "return": get_text_python_return,
-        "item": get_text_python_item}
+        "expression": get_text_python_expression}
 
     return dict_function \
         [text_category_block] \

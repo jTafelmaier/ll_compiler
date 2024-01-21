@@ -14,11 +14,11 @@ def get_dict_data_parsed_ll(
     def get_dict_parsed_return(
         text_full:str):
 
-        dict_item = get_dict_parsed_item(text_full)
+        dict_expression = get_dict_parsed_expression(text_full)
 
         return {
-            m_shared.Item_return.KEY_TEXT_CATEGORY: "return",
-            m_shared.Item_return.KEY_OBJECT: dict_item}
+            m_shared.Expression_return.KEY_TEXT_CATEGORY: "return",
+            m_shared.Expression_return.KEY_OBJECT: dict_expression}
 
     def get_dict_parsed_def(
         text_full:str):
@@ -87,7 +87,7 @@ def get_dict_data_parsed_ll(
 
         list_dicts_arguments = list(
                 map(
-                    get_dict_parsed_item,
+                    get_dict_parsed_expression,
                     m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(get_text_arguments_final())))
 
         return {
@@ -97,12 +97,12 @@ def get_dict_data_parsed_ll(
 
     def get_dict_memory_allocation(
         text_key_memory:str,
-        dict_item:typing.Dict):
+        dict_expression:typing.Dict):
 
         return {
             m_shared.Memory_allocation.KEY_TEXT_CATEGORY: "memory_allocation",
             m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY: text_key_memory,
-            m_shared.Memory_allocation.KEY_OBJECT_CONTENT: dict_item}
+            m_shared.Memory_allocation.KEY_OBJECT_CONTENT: dict_expression}
 
     def get_dict_parsed_memory_read(
         text:str):
@@ -118,8 +118,8 @@ def get_dict_data_parsed_ll(
             m_shared.Literal.KEY_TEXT_CATEGORY: "literal",
             m_shared.Literal.KEY_TEXT_VALUE: text}
 
-    def get_dict_parsed_item(
-        text_item:str):
+    def get_dict_parsed_expression(
+        text_expression:str):
 
         set_texts_special_literals = {
             "None",
@@ -171,7 +171,7 @@ def get_dict_data_parsed_ll(
                     text_arguments=text_arguments)
 
         list_texts_grouped = list(
-                m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text_item))
+                m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text_expression))
 
         dict_initial = get_dict_parsed_initial(
                 list_texts_grouped \
@@ -184,9 +184,9 @@ def get_dict_data_parsed_ll(
                         [1:]))
 
         return {
-            m_shared.Item.KEY_TEXT_CATEGORY: "item",
-            m_shared.Item.KEY_TEXT_INITIAL_VALUE: dict_initial,
-            m_shared.Item.KEY_ARRAY_OBJECTS_FUNCTION_CALLS: list_dicts_function_calls}
+            m_shared.Expression.KEY_TEXT_CATEGORY: "expression",
+            m_shared.Expression.KEY_TEXT_INITIAL_VALUE: dict_initial,
+            m_shared.Expression.KEY_ARRAY_OBJECTS_FUNCTION_CALLS: list_dicts_function_calls}
 
     def get_list_dicts_free_multiple(
         text:str):
@@ -213,13 +213,13 @@ def get_dict_data_parsed_ll(
 
                 assert text_first[0].isupper()
 
-                dict_item = get_dict_parsed_item(text_remaining)
+                dict_expression = get_dict_parsed_expression(text_remaining)
 
                 return get_dict_memory_allocation(
                         text_key_memory=text_first,
-                        dict_item=dict_item)
+                        dict_expression=dict_expression)
 
-            return get_dict_parsed_item(text_ll)
+            return get_dict_parsed_expression(text_ll)
 
         iterator_texts_grouped = m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text)
 

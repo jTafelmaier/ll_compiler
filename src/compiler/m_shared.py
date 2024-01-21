@@ -2,10 +2,11 @@
 
 
 
-class Item_return:
+# TODO integrate
+class Expression_return:
 
     KEY_TEXT_CATEGORY = "category"
-    KEY_OBJECT = "item"
+    KEY_OBJECT = "expression"
 
 
 class Function_definition:
@@ -33,7 +34,7 @@ class Memory_allocation:
 
     KEY_TEXT_CATEGORY = "category"
     KEY_TEXT_KEY_MEMORY = "key_memory_allocation"
-    KEY_OBJECT_CONTENT = "item"
+    KEY_OBJECT_CONTENT = "expression"
 
 
 class Memory_read:
@@ -48,7 +49,7 @@ class Literal:
     KEY_TEXT_VALUE = "value"
 
 
-class Item:
+class Expression:
 
     KEY_TEXT_CATEGORY = "category"
     KEY_TEXT_INITIAL_VALUE = "initial"
