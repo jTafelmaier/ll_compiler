@@ -110,18 +110,18 @@ def get_text_python_return(
 def get_text_python_expression(
     dict_expression:typing.Dict):
 
+    def get_text_literal(
+        dict_literal:typing.Dict):
+
+        return dict_literal \
+            [m_shared.Literal.KEY_TEXT_VALUE]
+
     def get_text_memory_read(
         dict_memory_read:typing.Dict):
 
         return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
             + dict_memory_read \
                 [m_shared.Memory_read.KEY_TEXT_KEY_MEMORY]
-
-    def get_text_literal(
-        dict_literal:typing.Dict):
-
-        return dict_literal \
-            [m_shared.Literal.KEY_TEXT_VALUE]
 
     def get_text_function(
         dict_function:typing.Dict):
@@ -144,8 +144,8 @@ def get_text_python_expression(
             [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
         return {
-            "memory_read": get_text_memory_read,
             "literal": get_text_literal,
+            "memory_read": get_text_memory_read,
             "function": get_text_function} \
             [text_category] \
             (dict_initial)
