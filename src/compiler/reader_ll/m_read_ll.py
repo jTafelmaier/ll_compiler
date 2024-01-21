@@ -198,7 +198,6 @@ def get_dict_data_parsed_ll(
         def get_dict_parsed_free(
             text_ll:str):
 
-            # TODO implement: do not allow outside function body
             if text_ll.startswith("return "):
                 return get_dict_parsed_return(text_ll)
 
