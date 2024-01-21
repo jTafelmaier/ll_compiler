@@ -117,7 +117,7 @@ def get_dict_data_parsed_ll(
         text_name:str,
         text_arguments:str):
 
-        def get_text_arguments_final():
+        def get_text_arguments():
 
             if text_arguments.startswith("[") and text_arguments.endswith("]"):
                 return text_arguments \
@@ -129,7 +129,7 @@ def get_dict_data_parsed_ll(
         list_dicts_arguments = list(
                 map(
                     get_dict_parsed_expression,
-                    m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(get_text_arguments_final())))
+                    m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(get_text_arguments())))
 
         return {
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "function",
