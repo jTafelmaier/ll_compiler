@@ -3,6 +3,7 @@
 
 
 Implement, in order:
+- comments
 - type inference
 - map and retainIf should return iterators (lazy execution)
 - floats, tuples, sets etc.

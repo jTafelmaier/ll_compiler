@@ -34,10 +34,10 @@ TextHelloWorld
 
 
 TextHelloWorld
-    > if [
+    > if
         isAlphabetic
         toOtherItem "True"
-        toOtherItem "False"]
+        toOtherItem "False"
     > prepend "Text is alphabetic: "
     > print
 

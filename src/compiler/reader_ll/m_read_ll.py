@@ -85,10 +85,15 @@ def get_dict_data_parsed_ll(
 
             assert text.startswith("> ")
 
+            # TODO test further
             text_name_function, \
             _, \
             text_arguments = text \
                 [2:] \
+                .replace(
+                    "\n",
+                    " ",
+                    1) \
                 .partition(" ")
 
             return get_dict_parsed_function(
@@ -117,19 +122,10 @@ def get_dict_data_parsed_ll(
         text_name:str,
         text_arguments:str):
 
-        def get_text_arguments():
-
-            if text_arguments.startswith("[") and text_arguments.endswith("]"):
-                return text_arguments \
-                        [1:-1] \
-                        .lstrip("\n")
-
-            return text_arguments
-
         list_dicts_arguments = list(
                 map(
                     get_dict_parsed_expression,
-                    m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(get_text_arguments())))
+                    m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text_arguments)))
 
         return {
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "function",
