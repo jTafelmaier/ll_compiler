@@ -188,21 +188,21 @@ def get_dict_data_parsed_ll(
         text:str):
 
         def get_dict_parsed_free(
-            text_ll:str):
+            text_block:str):
 
-            if text_ll.startswith("return "):
+            if text_block.startswith("return "):
                 return get_dict_parsed_return(
-                        text_ll \
+                        text_block \
                             [7:])
 
-            if text_ll.startswith("def "):
+            if text_block.startswith("def "):
                 return get_dict_parsed_def(
-                        text_ll \
+                        text_block \
                             [4:])
 
             text_first, \
             _, \
-            text_remaining = text_ll \
+            text_remaining = text_block \
                 .partition(" = ")
 
             if text_first.isalnum() and text_remaining != "":
@@ -215,7 +215,7 @@ def get_dict_data_parsed_ll(
                         text_key_memory=text_first,
                         dict_expression=dict_expression)
 
-            return get_dict_parsed_expression(text_ll)
+            return get_dict_parsed_expression(text_block)
 
         iterator_texts_grouped = m_common_functions.get_iterator_texts_grouped_by_and_remove_indentation(text)
 
