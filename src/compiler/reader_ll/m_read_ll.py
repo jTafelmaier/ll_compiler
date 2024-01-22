@@ -224,6 +224,19 @@ def get_dict_data_parsed_ll(
                     get_dict_parsed_free,
                     iterator_texts_grouped))
 
+    def is_not_comment_line(
+        text_line:str):
+
+        return not text_line \
+            .startswith("# ")
+
+    text_without_comments = "\n" \
+        .join(
+            filter(
+                is_not_comment_line,
+                text_ll \
+                    .split("\n")))
+
     return {
-        "data": get_list_dicts_free_multiple(text_ll)}
+        "data": get_list_dicts_free_multiple(text_without_comments)}
 
