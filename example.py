@@ -59,7 +59,7 @@ def main():
                 lambda nonpython_Input: nonpython_toOtherItem(
                     nonpython_Input,
                     "False")),
-            "Text\nis alphabetic: "))
+            "Text is alphabetic: "))
 
     return None
 
