@@ -3,7 +3,11 @@
 
 
 Implement, in order:
-- type inference
+- built in ll file?
+- type inference for literals
+- type inference for expressions using built in functions
+- type inference for user-defined functions
+- type inference for expressions using user-defined functions
 - map and retainIf should return iterators (lazy execution)
 - floats, tuples, sets etc.
 - data classes
@@ -13,7 +17,6 @@ Implement, in order:
 - VScode: show argument names when multiple arguments passed
 - pre-return in function defs
 - function groups / namespaces
-- builtin ll file
 - module imports
 - pure - modifying function differentiation
 - perhaps prohibit clashing variable names
