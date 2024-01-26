@@ -3,6 +3,7 @@
 
 
 Implement, in order:
+- line numbers
 - built in ll file?
 - type inference for literals
 - type inference for expressions using built in functions
