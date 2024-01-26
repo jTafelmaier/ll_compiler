@@ -20,7 +20,7 @@ def get_text_python_block(
     def get_text_python_comment(
         dict_comment:typing.Dict):
 
-        return "# LL Comment: " \
+        return "# Nonpython Comment: " \
             + dict_comment \
                 [m_shared.Comment.KEY_TEXT]
 

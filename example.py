@@ -25,7 +25,7 @@ def main():
     nonpython_TextTwoHundred = nonpython_toText(
         200)
 
-    # LL Comment: comment
+    # Nonpython Comment: comment
 
     nonpython_TextHelloWorld = nonpython_append(
         nonpython_joined(
