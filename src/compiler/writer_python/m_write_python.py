@@ -17,6 +17,13 @@ TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
 def get_text_python_block(
     dict_block:typing.Dict):
 
+    def get_text_python_comment(
+        dict_comment:typing.Dict):
+
+        return "# LL Comment: " \
+            + dict_comment \
+                [m_shared.Comment.KEY_TEXT]
+
     def get_text_python_def(
         dict_def:typing.Dict):
 
@@ -166,6 +173,7 @@ def get_text_python_block(
         [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
     dict_function = {
+        "comment": get_text_python_comment,
         "def": get_text_python_def,
         "memory_allocation": get_text_python_memory_allocation,
         "return": get_text_python_return,

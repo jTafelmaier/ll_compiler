@@ -34,6 +34,13 @@ def get_dict_data_parsed_ll(
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_read",
             m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text}
 
+    def get_dict_parsed_comment(
+        text:str):
+
+        return {
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "comment",
+            m_shared.Comment.KEY_TEXT: text}
+
     def get_dict_parsed_return(
         text:str):
 
@@ -190,6 +197,11 @@ def get_dict_data_parsed_ll(
         def get_dict_parsed_free(
             text_block:str):
 
+            if text_block.startswith("# "):
+                return get_dict_parsed_comment(
+                        text_block \
+                            [2:])
+
             if text_block.startswith("return "):
                 return get_dict_parsed_return(
                         text_block \
@@ -224,19 +236,6 @@ def get_dict_data_parsed_ll(
                     get_dict_parsed_free,
                     iterator_texts_grouped))
 
-    def is_not_comment_line(
-        text_line:str):
-
-        return not text_line \
-            .startswith("# ")
-
-    text_without_comments = "\n" \
-        .join(
-            filter(
-                is_not_comment_line,
-                text_ll \
-                    .split("\n")))
-
     return {
-        "data": get_list_dicts_free_multiple(text_without_comments)}
+        "data": get_list_dicts_free_multiple(text_ll)}
 

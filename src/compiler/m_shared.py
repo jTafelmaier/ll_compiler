@@ -7,6 +7,11 @@ class Object_variable:
     KEY_TEXT_CATEGORY = "category"
 
 
+class Comment:
+
+    KEY_TEXT = "text"
+
+
 class Expression_return:
 
     KEY_OBJECT = "expression"
