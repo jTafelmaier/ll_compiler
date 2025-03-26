@@ -219,7 +219,7 @@ def get_dict_data_parsed_ll(
         text_token_first = list_tokens_first \
             [0]
 
-        if text_token_first == "#":
+        if text_token_first == "NOTE":
             return get_dict_parsed_comment(list_block)
 
         if text_token_first == "return":

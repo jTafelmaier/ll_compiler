@@ -4,7 +4,6 @@
 
 Implement, in order:
 - replace memory allocation (=) by >> in sequence
-- replace comment (#) by NOTE
 - option for a function "object" to be the first item in a function sequence (input to the first function call)
 - where (like in Haskell)
 - built in ll file?
