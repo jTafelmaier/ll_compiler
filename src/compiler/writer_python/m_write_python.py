@@ -20,9 +20,13 @@ def get_text_python_block(
     def get_text_python_comment(
         dict_comment:typing.Dict):
 
-        return "# Nonpython Comment: " \
-            + dict_comment \
-                [m_shared.Comment.KEY_TEXT]
+        return "\n" \
+            .join(
+                map(
+                    lambda text_comment: "# Nonpython Comment: " + text_comment,
+                    dict_comment \
+                        [m_shared.Comment.KEY_TEXT] \
+                        .split("\n")))
 
     def get_text_python_def(
         dict_def:typing.Dict):
@@ -172,6 +176,9 @@ def get_text_python_block(
     text_category_block = dict_block \
         [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
+    if text_category_block == "empty":
+        return None
+
     dict_function = {
         "comment": get_text_python_comment,
         "def": get_text_python_def,
@@ -189,9 +196,11 @@ def get_text_python(
 
     return "\n\n" \
         .join(
-            map(
-                get_text_python_block,
-                list_dicts_blocks))
+            filter(
+                lambda dict_python: dict_python is not None,
+                map(
+                    get_text_python_block,
+                    list_dicts_blocks)))
 
 
 def get_text_python_main(

@@ -3,16 +3,19 @@
 
 
 Implement, in order:
-- line numbers
+- replace memory allocation (=) by >> in sequence
+- replace comment (#) by NOTE
+- option for a function "object" to be the first item in a function sequence (input to the first function call)
+- where (like in Haskell)
 - built in ll file?
 - type inference for literals
 - type inference for expressions using built in functions
 - type inference for user-defined functions
 - type inference for expressions using user-defined functions
 - map and retainIf should return iterators (lazy execution)
-- floats, tuples, sets etc.
+- floats, lists, tuples, sets etc.
 - data classes
-- enums
+- enums (for struct attribute access, important feature!)
 - some way to specify that multiple arguments must have the same type
 - VScode: implement language server for ll
 - VScode: show argument names when multiple arguments passed

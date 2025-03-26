@@ -34,17 +34,18 @@ def get_iterator_lists_pairs_lines_grouped_by_and_remove_indentation(
 
         list_pairs_lines_block = []
 
-        # TODO test
+        # TODO test further
+        bool_in_block = False
+
         for pair_line in iterator_reversed_pairs_lines:
 
             index_line, \
             text_line = pair_line
 
-            if text_line == "" and len(list_pairs_lines_block) == 0:
-                continue
-
             # TODO refactor
             if text_line.startswith("    "):
+                bool_in_block = True
+
                 list_pairs_lines_block \
                     .append((
                         index_line,
@@ -55,6 +56,9 @@ def get_iterator_lists_pairs_lines_grouped_by_and_remove_indentation(
                     .append(pair_line)
 
                 if text_line != "":
+                    bool_in_block = False
+
+                if not bool_in_block:
                     yield list(reversed(list_pairs_lines_block))
                     list_pairs_lines_block = []
 
@@ -72,13 +76,14 @@ def get_iterator_texts_grouped_by_and_remove_indentation(
 
     return map(
             lambda list_pairs_lines: "\n"
-                .join(map(
-                    lambda pair: pair[-1],
-                    list_pairs_lines)),
+                .join(
+                    map(
+                        lambda pair: pair[-1],
+                        list_pairs_lines)),
             get_iterator_lists_pairs_lines_grouped_by_and_remove_indentation(iterable_pairs_lines))
 
 
-def get_dict_tokens(
+def get_item_tokens(
     text:str):
 
     def get_list_tokens_line(
@@ -89,23 +94,34 @@ def get_dict_tokens(
 
         def get_iterator_tokens():
 
-            in_string = False
+            bool_in_string = False
 
             character_last = "\n"
 
             list_characters_current = []
 
-            # TODO test
-            # TODO type and list brackets
+            # TODO test further
             for character in text_line:
 
-                if character == " " and not in_string:
+                bool_token_terminated_here = False
+
+                if not bool_in_string and character == " ":
                     if character_last == " ":
                         raise Exception(
                                 "Line " \
                                     + str(index_line) \
                                     + ": Two consecutive whitespaces are not allowed.")
+                    bool_token_terminated_here = True
 
+                if character == "\"" and character_last != "\\":
+                    bool_in_string = not bool_in_string
+                    if not bool_in_string:
+                        bool_token_terminated_here = True
+
+                        list_characters_current \
+                            .append(character)
+
+                if bool_token_terminated_here:
                     yield "" \
                         .join(list_characters_current)
 
@@ -114,25 +130,17 @@ def get_dict_tokens(
                     list_characters_current \
                         .append(character)
 
-                if character == "\"" and character_last != "\\":
-                    in_string = not in_string
-                    if not in_string:
-                        yield "" \
-                            .join(list_characters_current)
-
-                        list_characters_current = []
-
                 character_last = character
 
-            if len(list_characters_current) > 0:
-                yield "" \
-                    .join(list_characters_current)
-
-            if in_string:
+            if bool_in_string:
                 raise Exception(
                         "Line " \
                             + str(index_line) \
                             + ": String not terminated.")
+
+            if len(list_characters_current) > 0:
+                yield "" \
+                    .join(list_characters_current)
 
         return list(get_iterator_tokens())
 
@@ -140,6 +148,7 @@ def get_dict_tokens(
         list_pairs_lines:typing.List[typing.Tuple[int, str]]):
 
         # TODO when list_pairs_lines is empty
+
         if len(list_pairs_lines) == 1:
 
             pair_line = list_pairs_lines \
@@ -153,20 +162,16 @@ def get_dict_tokens(
                 "index_line": index_line,
                 "list_tokens": get_list_tokens_line(pair_line)}
 
-        # TODO test
         return list(
                 map(
                     get_list_or_dict_tokens_section,
                     get_iterator_lists_pairs_lines_grouped_by_and_remove_indentation(list_pairs_lines)))
 
-    list_or_dict_tokens_blocks = get_list_or_dict_tokens_section(
+    return get_list_or_dict_tokens_section(
             list(
                 enumerate(
                     text \
                         .split("\n"))))
-
-    return {
-        "tokens": list_or_dict_tokens_blocks}
 
 
 def get_tuple_partitions_list(
@@ -187,7 +192,7 @@ def get_tuple_partitions_list(
         list_partition \
             .append(item)
 
-    # TODO test
+    # TODO test further
     return (
         list_partition,
         list_separator,
