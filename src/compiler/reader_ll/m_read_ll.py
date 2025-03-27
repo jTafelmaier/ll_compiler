@@ -28,24 +28,6 @@ def get_dict_data_parsed_ll(
         else:
             return item_block
 
-    def get_dict_memory_allocation(
-        list_block:typing.List):
-
-        list_tokens_first_line = get_list_tokens_first(list_block)
-
-        text_key_memory = list_tokens_first_line \
-            [0] \
-            [1:]
-
-        del list_tokens_first_line[0:2]
-
-        dict_expression = get_dict_parsed_expression(list_block)
-
-        return {
-            m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_allocation",
-            m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY: text_key_memory,
-            m_shared.Memory_allocation.KEY_OBJECT_CONTENT: dict_expression}
-
     def get_dict_parsed_comment(
         list_block:typing.List):
 
@@ -76,13 +58,13 @@ def get_dict_data_parsed_ll(
 
         del get_list_tokens_first(list_block)[0]
 
-        dict_expression = get_dict_parsed_expression(list_block)
+        dict_operations = get_dict_parsed_operations(list_block)
 
         return {
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "return",
-            m_shared.Expression_return.KEY_OBJECT: dict_expression}
+            m_shared.Operations_return.KEY_OBJECT: dict_operations}
 
-    def get_dict_parsed_expression(
+    def get_dict_parsed_operations(
         item_block:typing.Union[typing.Dict, typing.List]):
 
         if isinstance(item_block, dict):
@@ -105,13 +87,24 @@ def get_dict_data_parsed_ll(
 
             list_dicts_arguments = list(
                     map(
-                        get_dict_parsed_expression,
+                        get_dict_parsed_operations,
                         list_block))
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: "function",
                 m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
                 m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
+
+        def get_dict_memory_allocation(
+            list_block:typing.List):
+
+            text_key_memory = get_list_tokens_first(list_block) \
+                [0] \
+                [1:]
+
+            return {
+                m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_allocation",
+                m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY: text_key_memory}
 
         def get_dict_parsed_initial():
 
@@ -137,11 +130,19 @@ def get_dict_data_parsed_ll(
 
             list_tokens_first = get_list_tokens_first(list_block)
 
-            assert list_tokens_first[0] == ">"
+            if list_tokens_first[0] == ">":
 
-            del list_tokens_first[0]
+                del list_tokens_first[0]
 
-            return get_dict_parsed_function(list_block)
+                return get_dict_parsed_function(list_block)
+
+            if list_tokens_first[0] == "#":
+
+                del list_tokens_first[0]
+
+                return get_dict_memory_allocation(list_block)
+
+            raise Exception("unknown operation")
 
         dict_initial = get_dict_parsed_initial()
 
@@ -152,9 +153,9 @@ def get_dict_data_parsed_ll(
                         [1:]))
 
         return {
-            m_shared.Object_variable.KEY_TEXT_CATEGORY: "expression",
-            m_shared.Expression.KEY_OBJECT_INITIAL: dict_initial,
-            m_shared.Expression.KEY_ARRAY_OBJECTS_OPERATIONS: list_dicts_operations}
+            m_shared.Object_variable.KEY_TEXT_CATEGORY: "operations",
+            m_shared.Operations.KEY_OBJECT_INITIAL: dict_initial,
+            m_shared.Operations.KEY_ARRAY_OBJECTS_OPERATIONS: list_dicts_operations}
 
     def get_dict_parsed_function_definition(
         list_block:typing.List):
@@ -226,15 +227,11 @@ def get_dict_data_parsed_ll(
         if text_token_first == "---->":
             return get_dict_parsed_return(list_block)
 
+        # TODO perhaps move
         if text_token_first == "!":
             return get_dict_parsed_comment(list_block)
 
-        if len(list_tokens_first) >= 2:
-            if list_tokens_first[1] == "=":
-
-                return get_dict_memory_allocation(list_block)
-
-        return get_dict_parsed_expression(list_block)
+        return get_dict_parsed_operations(list_block)
 
     def get_list_dicts_multiple_blocks(
         item_blocks:typing.Union[typing.Dict, typing.List]):

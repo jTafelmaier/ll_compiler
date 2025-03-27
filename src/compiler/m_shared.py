@@ -12,9 +12,9 @@ class Comment:
     KEY_TEXT = "text"
 
 
-class Expression_return:
+class Operations_return:
 
-    KEY_OBJECT = "expression"
+    KEY_OBJECT = "operations"
 
 
 class Function_definition:
@@ -39,7 +39,6 @@ class Function_reference:
 class Memory_allocation:
 
     KEY_TEXT_KEY_MEMORY = "key_memory_allocation"
-    KEY_OBJECT_CONTENT = "expression"
 
 
 class Memory_read:
@@ -52,7 +51,7 @@ class Literal:
     KEY_TEXT_VALUE = "value"
 
 
-class Expression:
+class Operations:
 
     KEY_OBJECT_INITIAL = "initial"
     KEY_ARRAY_OBJECTS_OPERATIONS = "operations"

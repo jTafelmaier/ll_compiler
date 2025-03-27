@@ -71,30 +71,16 @@ def get_text_python_block(
             + "(\n" \
             + m_common_functions.get_text_indented_one_level(text_body)
 
-    def get_text_python_memory_allocation(
-        dict_memory_allocation:typing.Dict):
-
-        text_key_memory = dict_memory_allocation \
-            [m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY]
-
-        dict_expression = dict_memory_allocation \
-            [m_shared.Memory_allocation.KEY_OBJECT_CONTENT]
-
-        return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-            + text_key_memory \
-            + " = " \
-            + get_text_python_expression(dict_expression)
-
     def get_text_python_return(
         dict_return:typing.Dict):
 
         return "return " \
-            + get_text_python_expression(
+            + get_text_python_operations(
                     dict_return 
-                        [m_shared.Expression_return.KEY_OBJECT])
+                        [m_shared.Operations_return.KEY_OBJECT])
 
-    def get_text_python_expression(
-        dict_expression:typing.Dict):
+    def get_text_python_operations(
+        dict_operations:typing.Dict):
 
         def get_text_python_function_call(
             text_input:str,
@@ -106,9 +92,10 @@ def get_text_python_block(
             list_dicts_arguments = dict_function \
                 [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
+            # TODO only allow expressions
             list_texts_arguments_additional = list(
                     map(
-                        get_text_python_expression,
+                        get_text_python_operations,
                         list_dicts_arguments))
 
             text_arguments_python = ",\n" \
@@ -158,20 +145,44 @@ def get_text_python_block(
                 [text_category] \
                 (dict_initial)
 
-        dict_initial = dict_expression \
-            [m_shared.Expression.KEY_OBJECT_INITIAL]
+        dict_initial = dict_operations \
+            [m_shared.Operations.KEY_OBJECT_INITIAL]
 
-        list_dicts_function_calls = dict_expression \
-            [m_shared.Expression.KEY_ARRAY_OBJECTS_OPERATIONS]
+        list_dicts_operations = dict_operations \
+            [m_shared.Operations.KEY_ARRAY_OBJECTS_OPERATIONS]
 
-        text_python_current = get_text_initial(dict_initial)
+        text_python_finished_expressions = ""
 
-        for dict_function in list_dicts_function_calls:
-            text_python_current = get_text_python_function_call(
-                    text_input=text_python_current,
-                    dict_function=dict_function)
+        text_python_current_expression = get_text_initial(dict_initial)
 
-        return text_python_current
+        for dict_operation in list_dicts_operations:
+            text_category = dict_operation \
+                [m_shared.Object_variable.KEY_TEXT_CATEGORY]
+
+            if text_category == "function":
+                text_python_current_expression = get_text_python_function_call(
+                        text_input=text_python_current_expression,
+                        dict_function=dict_operation)
+
+            if text_category == "memory_allocation":
+
+                text_key_memory = dict_operation \
+                    [m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY]
+
+                # TODO refactor
+                text_python_finished_expressions = text_python_finished_expressions \
+                    + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                    + text_key_memory \
+                    + " = " \
+                    + text_python_current_expression \
+                    + "\n\n"
+
+                # TODO implement: only do this if there are further operations
+                text_python_current_expression = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                    + text_key_memory
+
+        return text_python_finished_expressions \
+            + text_python_current_expression
 
     text_category_block = dict_block \
         [m_shared.Object_variable.KEY_TEXT_CATEGORY]
@@ -182,9 +193,8 @@ def get_text_python_block(
     dict_function = {
         "comment": get_text_python_comment,
         "def": get_text_python_def,
-        "memory_allocation": get_text_python_memory_allocation,
         "return": get_text_python_return,
-        "expression": get_text_python_expression}
+        "operations": get_text_python_operations}
 
     return dict_function \
         [text_category_block] \

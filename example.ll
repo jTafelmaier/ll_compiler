@@ -19,7 +19,7 @@ def :Text appendTwice
 
 ! comment
 
-$HelloWorld = 200
+200
     > toText
     > prepend "_ HelLO ;; 12 woRlD hEllo2 !"
     > appendTwice ""
@@ -28,9 +28,7 @@ $HelloWorld = 200
     > map titlecase
     > joined ", "
     > append "!"
-
-
-$HelloWorld
+    # $HelloWorld
     > prepend "Text is: "
     > print
 
