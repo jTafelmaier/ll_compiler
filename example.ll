@@ -2,31 +2,28 @@
 
 
 
-def :Text appendTwice
-    :Text $T
+def :Text standardise
+    :Text $Separator
 
-    def :Text inner
+    def :Text standardiseList
 
         ----> $Input
-            > prepend ""
-            > append ""
+            > retainIf isAlphabetic
+            > map titlecase
 
     ----> $Input
-        > append $T
-        > append $T
-        > inner
-        > inner
+        > splitOn $Separator
+        > standardiseList
+        > joined $Separator
+
 
 ! this is a comment
+
 
 200
     > toText
     > prepend "_ HelLO ;; 12 woRlD hEllo2 !"
-    > appendTwice ""
-    > splitOn " "
-    > retainIf isAlphabetic
-    > map titlecase
-    > joined ", "
+    > standardise " "
     > append "!"
     # $HelloWorld
     > prepend "Text is: "
