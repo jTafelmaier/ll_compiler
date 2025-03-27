@@ -17,11 +17,11 @@ def main():
 
     item_blocks = m_common_functions.get_item_tokens(text_ll)
 
-    with open("tokens.json", "w", encoding="utf-8") as file_json:
-        file_json \
-            .write(json.dumps(item_blocks, indent=4, ensure_ascii=False))
-
     dict_data = m_read_ll.get_dict_data_parsed_ll(item_blocks)
+
+    # with open("data.json", "w", encoding="utf-8") as file_json:
+    #     file_json \
+    #         .write(json.dumps(dict_data, indent=4, ensure_ascii=False))
 
     text_python_main = m_write_python.get_text_python_main(dict_data)
 
