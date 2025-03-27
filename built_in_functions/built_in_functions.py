@@ -30,6 +30,14 @@ def nonpython_toText(
     return str(int_input)
 
 
+def nonpython_add(
+    int_input:int,
+    int_to_add:int):
+
+    return int_input \
+        + int_to_add
+
+
 def nonpython_isAlphabetic(
     text_input:str):
 

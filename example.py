@@ -35,7 +35,9 @@ def main():
         nonpython_standardise(
             nonpython_prepend(
                 nonpython_toText(
-                    200),
+                    nonpython_add(
+                        100,
+                        100)),
                 "_ HelLO ;; 12 woRlD hEllo2 !"),
             " "),
         "!")

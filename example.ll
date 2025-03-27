@@ -20,7 +20,8 @@ def :Text standardise
 ! this is a comment
 
 
-200
+100
+    > add 100
     > toText
     > prepend "_ HelLO ;; 12 woRlD hEllo2 !"
     > standardise " "
