@@ -65,10 +65,7 @@ def get_dict_data_parsed_ll(
     def get_dict_parsed_operations(
         item_block:typing.Union[typing.Dict, typing.List]):
 
-        if isinstance(item_block, dict):
-            list_block = [item_block]
-        else:
-            list_block = item_block
+        list_block = get_list_block(item_block)
 
         def get_dict_parsed_function(
             list_block:typing.List):
@@ -97,8 +94,7 @@ def get_dict_data_parsed_ll(
             list_block:typing.List):
 
             text_key_memory = get_list_tokens_first(list_block) \
-                [0] \
-                [1:]
+                [0]
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_write",
@@ -112,10 +108,10 @@ def get_dict_data_parsed_ll(
             if text_first[0].islower():
                 return get_dict_parsed_function(list_block[:1])
 
-            if text_first[0] == "$":
+            if text_first[0].isupper():
                 return {
                     m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_read",
-                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_first[1:]}
+                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_first}
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: "literal",
@@ -174,7 +170,7 @@ def get_dict_data_parsed_ll(
                 [KEY_LIST_TOKENS]
 
             return {
-                m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument[1:],
+                m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
                 m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
 
         _, \

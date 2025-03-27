@@ -3,13 +3,13 @@
 
 
 def :Text standardise
-    :Text $Separator
+    :Text Separator
 
-    ----> $Input
-        > splitOn $Separator
+    ----> Input
+        > splitOn Separator
         > retainIf isAlphabetic
         > map titlecase
-        > joined $Separator
+        > joined Separator
 
 
 100
@@ -19,12 +19,12 @@ def :Text standardise
     > prepend "_ HelLO ;; 12 woRlD hEllo2 !"
     > standardise " "
     > append "!"
-    # $HelloWorld
+    # HelloWorld
     > prepend "Text is: "
     > print
 
 
-$HelloWorld
+HelloWorld
     > if
         isAlphabetic
         toOtherItem "True"
