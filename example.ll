@@ -3,23 +3,23 @@
 
 
 def :Text appendTwice
-    :Text #T
+    :Text $T
 
     def :Text inner
 
-        ----> #Input
+        ----> $Input
             > prepend ""
             > append ""
 
-    ----> #Input
-        > append #T
-        > append #T
+    ----> $Input
+        > append $T
+        > append $T
         > inner
         > inner
 
 ! comment
 
-#HelloWorld = 200
+$HelloWorld = 200
     > toText
     > prepend "_ HelLO ;; 12 woRlD hEllo2 !"
     > appendTwice ""
@@ -30,12 +30,12 @@ def :Text appendTwice
     > append "!"
 
 
-#HelloWorld
+$HelloWorld
     > prepend "Text is: "
     > print
 
 
-#HelloWorld
+$HelloWorld
     > if
         isAlphabetic
         toOtherItem "True"

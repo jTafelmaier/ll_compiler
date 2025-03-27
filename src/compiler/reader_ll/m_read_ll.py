@@ -121,7 +121,7 @@ def get_dict_data_parsed_ll(
             if text_first[0].islower():
                 return get_dict_parsed_function(list_block[:1])
 
-            if text_first[0] == "#":
+            if text_first[0] == "$":
                 return {
                     m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_read",
                     m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_first[1:]}
