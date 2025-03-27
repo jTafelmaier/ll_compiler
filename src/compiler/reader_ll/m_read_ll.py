@@ -34,7 +34,8 @@ def get_dict_data_parsed_ll(
         list_tokens_first_line = get_list_tokens_first(list_block)
 
         text_key_memory = list_tokens_first_line \
-            [0]
+            [0] \
+            [1:]
 
         del list_tokens_first_line[0:2]
 
@@ -120,10 +121,10 @@ def get_dict_data_parsed_ll(
             if text_first[0].islower():
                 return get_dict_parsed_function(list_block[:1])
 
-            if text_first[0].isupper():
+            if text_first[0] == "#":
                 return {
                     m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_read",
-                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_first}
+                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_first[1:]}
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: "literal",
@@ -177,7 +178,7 @@ def get_dict_data_parsed_ll(
                 [KEY_LIST_TOKENS]
 
             return {
-                m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
+                m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument[1:],
                 m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
 
         _, \
