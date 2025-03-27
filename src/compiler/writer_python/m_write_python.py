@@ -164,10 +164,10 @@ def get_text_python_block(
                         text_input=text_python_current_expression,
                         dict_function=dict_operation)
 
-            if text_category == "memory_allocation":
+            if text_category == "memory_write":
 
                 text_key_memory = dict_operation \
-                    [m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY]
+                    [m_shared.Memory_write.KEY_TEXT_KEY_MEMORY]
 
                 # TODO refactor
                 text_python_finished_expressions = text_python_finished_expressions \

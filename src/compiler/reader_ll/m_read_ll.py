@@ -93,7 +93,7 @@ def get_dict_data_parsed_ll(
                 m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
                 m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
-        def get_dict_parsed_memory_allocation(
+        def get_dict_parsed_memory_write(
             list_block:typing.List):
 
             text_key_memory = get_list_tokens_first(list_block) \
@@ -101,8 +101,8 @@ def get_dict_data_parsed_ll(
                 [1:]
 
             return {
-                m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_allocation",
-                m_shared.Memory_allocation.KEY_TEXT_KEY_MEMORY: text_key_memory}
+                m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_write",
+                m_shared.Memory_write.KEY_TEXT_KEY_MEMORY: text_key_memory}
 
         def get_dict_parsed_initial():
 
@@ -134,7 +134,7 @@ def get_dict_data_parsed_ll(
 
             return {
                 ">": get_dict_parsed_function,
-                "#": get_dict_parsed_memory_allocation,
+                "#": get_dict_parsed_memory_write,
                 "!": get_dict_parsed_comment} \
                 [text_token_first] \
                 (list_block)

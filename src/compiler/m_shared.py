@@ -36,9 +36,9 @@ class Function_reference:
     KEY_ARRAY_OBJECTS_ARGUMENTS = "arguments"
 
 
-class Memory_allocation:
+class Memory_write:
 
-    KEY_TEXT_KEY_MEMORY = "key_memory_allocation"
+    KEY_TEXT_KEY_MEMORY = "key_memory_write"
 
 
 class Memory_read:
