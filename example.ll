@@ -2,8 +2,8 @@
 
 
 
-def :Text standardise
-    :Text Separator
+def Text standardise
+    Text Separator
 
     return Input
         > splitOn Separator
