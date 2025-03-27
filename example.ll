@@ -6,10 +6,10 @@ def TEXT identity
 
     def TEXT identity2
 
-        return Input
+        ----> Input
             > append ""
 
-    return Input
+    ----> Input
         > identity2
         > append ""
 
@@ -17,7 +17,7 @@ def TEXT identity
 TextTwoHundred = 200
     > toText
 
-NOTE comment
+note comment
 
 TextHelloWorld = "_ HelLO ;; 12 woRlD hEllo2 !"
     > append TextTwoHundred
