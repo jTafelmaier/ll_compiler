@@ -12,8 +12,8 @@ def :Text standardise
         > joined Separator
 
 
-100
-    > add 100
+80
+    > add 20
     > toText
     ! this is a comment
     > prepend "_ HelLO ;; 12 woRlD hEllo2 !"

@@ -25,8 +25,8 @@ def main():
 
     intermediate = nonpython_toText(
         nonpython_add(
-            100,
-            100))
+            80,
+            20))
 
     # Nonpython Comment: this is a comment
     nonpython_HelloWorld = nonpython_append(
