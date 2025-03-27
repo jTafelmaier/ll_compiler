@@ -17,7 +17,7 @@ def :Text appendTwice
         > inner
         > inner
 
-! comment
+! this is a comment
 
 200
     > toText
