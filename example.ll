@@ -13,14 +13,11 @@ def TEXT identity
         > identity2
         > append ""
 
-
-TwoHundred = 200
-    > toText
-
 note comment
 
-HelloWorld = "_ HelLO ;; 12 woRlD hEllo2 !"
-    > append TwoHundred
+HelloWorld = 200
+    > toText
+    > prepend "_ HelLO ;; 12 woRlD hEllo2 !"
     > identity
     > splitOn " "
     > retainIf isAlphabetic

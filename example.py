@@ -22,9 +22,6 @@ def main():
                 nonpython_Input),
             "")
 
-    nonpython_TwoHundred = nonpython_toText(
-        200)
-
     # Nonpython Comment: comment
 
     nonpython_HelloWorld = nonpython_append(
@@ -33,9 +30,10 @@ def main():
                 nonpython_retainIf(
                     nonpython_splitOn(
                         nonpython_identity(
-                            nonpython_append(
-                                "_ HelLO ;; 12 woRlD hEllo2 !",
-                                nonpython_TwoHundred)),
+                            nonpython_prepend(
+                                nonpython_toText(
+                                    200),
+                                "_ HelLO ;; 12 woRlD hEllo2 !")),
                         " "),
                     lambda nonpython_Input: nonpython_isAlphabetic(
                         nonpython_Input)),
