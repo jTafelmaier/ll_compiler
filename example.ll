@@ -5,7 +5,7 @@
 def :Text standardise
     :Text Separator
 
-    ----> Input
+    return Input
         > splitOn Separator
         > retainIf isAlphabetic
         > map titlecase

@@ -215,7 +215,7 @@ def get_dict_data_parsed_ll(
         if text_token_first == "def":
             return get_dict_parsed_function_definition(list_block)
 
-        if text_token_first == "---->":
+        if text_token_first == "return":
             return get_dict_parsed_return(list_block)
 
         return get_dict_parsed_operations(list_block)
