@@ -2,23 +2,27 @@
 
 
 
-def TEXT identity
+def :Text appendTwice
+    :Text T
 
-    def TEXT identity2
+    def :Text inner
 
         ----> Input
+            > prepend ""
             > append ""
 
     ----> Input
-        > identity2
-        > append ""
+        > append T
+        > append T
+        > inner
+        > inner
 
 ! comment
 
 HelloWorld = 200
     > toText
     > prepend "_ HelLO ;; 12 woRlD hEllo2 !"
-    > identity
+    > appendTwice ""
     > splitOn " "
     > retainIf isAlphabetic
     > map titlecase

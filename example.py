@@ -7,20 +7,26 @@ from built_in_functions.built_in_functions import *
 
 def main():
 
-    def nonpython_identity(
-        nonpython_Input):
+    def nonpython_appendTwice(
+        nonpython_Input,
+        nonpython_T):
 
-        def nonpython_identity2(
+        def nonpython_inner(
             nonpython_Input):
 
             return nonpython_append(
-                nonpython_Input,
+                nonpython_prepend(
+                    nonpython_Input,
+                    ""),
                 "")
 
-        return nonpython_append(
-            nonpython_identity2(
-                nonpython_Input),
-            "")
+        return nonpython_inner(
+            nonpython_inner(
+                nonpython_append(
+                    nonpython_append(
+                        nonpython_Input,
+                        nonpython_T),
+                    nonpython_T)))
 
     # Nonpython Comment: comment
 
@@ -29,11 +35,12 @@ def main():
             nonpython_map(
                 nonpython_retainIf(
                     nonpython_splitOn(
-                        nonpython_identity(
+                        nonpython_appendTwice(
                             nonpython_prepend(
                                 nonpython_toText(
                                     200),
-                                "_ HelLO ;; 12 woRlD hEllo2 !")),
+                                "_ HelLO ;; 12 woRlD hEllo2 !"),
+                            ""),
                         " "),
                     lambda nonpython_Input: nonpython_isAlphabetic(
                         nonpython_Input)),
