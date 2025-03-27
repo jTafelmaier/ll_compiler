@@ -219,14 +219,14 @@ def get_dict_data_parsed_ll(
         text_token_first = list_tokens_first \
             [0]
 
-        if text_token_first == "note":
-            return get_dict_parsed_comment(list_block)
-
         if text_token_first == "def":
             return get_dict_parsed_function_definition(list_block)
 
         if text_token_first == "---->":
             return get_dict_parsed_return(list_block)
+
+        if text_token_first == "!":
+            return get_dict_parsed_comment(list_block)
 
         if len(list_tokens_first) >= 2:
             if list_tokens_first[1] == "=":

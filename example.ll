@@ -13,7 +13,7 @@ def TEXT identity
         > identity2
         > append ""
 
-note comment
+! comment
 
 HelloWorld = 200
     > toText
