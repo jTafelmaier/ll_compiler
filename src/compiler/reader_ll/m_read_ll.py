@@ -54,8 +54,6 @@ def get_dict_data_parsed_ll(
     def get_dict_parsed_return(
         list_block:typing.List):
 
-        del get_list_tokens_first(list_block)[0]
-
         dict_operations = get_dict_parsed_operations(list_block)
 
         return {
@@ -173,7 +171,6 @@ def get_dict_data_parsed_ll(
                 m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
                 m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
 
-        _, \
         text_type_input, \
         text_name_function = get_list_tokens_first(list_block)
 
@@ -212,13 +209,18 @@ def get_dict_data_parsed_ll(
         text_token_first = list_tokens_first \
             [0]
 
+        del list_tokens_first[0]
+
         if text_token_first == "def":
             return get_dict_parsed_function_definition(list_block)
 
         if text_token_first == "return":
             return get_dict_parsed_return(list_block)
 
-        return get_dict_parsed_operations(list_block)
+        if text_token_first == "---->":
+            return get_dict_parsed_operations(list_block)
+    
+        raise Exception("unknown block type")
 
     def get_list_dicts_multiple_blocks(
         item_blocks:typing.Union[typing.Dict, typing.List]):

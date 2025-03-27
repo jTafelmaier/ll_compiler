@@ -12,7 +12,7 @@ def :Text standardise
         > joined Separator
 
 
-80
+----> 80
     > add 20
     > toText
     ! this is a comment
@@ -24,7 +24,7 @@ def :Text standardise
     > print
 
 
-HelloWorld
+----> HelloWorld
     > if
         isAlphabetic
         toOtherItem "True"
