@@ -17,7 +17,7 @@ TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
 def get_text_python_block(
     dict_block:typing.Dict):
 
-    def get_text_python_def(
+    def get_text_function_definition(
         dict_def:typing.Dict):
 
         text_name_function = dict_def \
@@ -60,18 +60,18 @@ def get_text_python_block(
             + "(\n" \
             + m_common_functions.get_text_indented_one_level(text_body)
 
-    def get_text_python_return(
+    def get_text_return(
         dict_return:typing.Dict):
 
         return "return " \
-            + get_text_python_operations(
+            + get_text_operations(
                     dict_return 
                         [m_shared.Operations_return.KEY_OBJECT])
 
-    def get_text_python_operations(
+    def get_text_operations(
         dict_operations:typing.Dict):
 
-        def get_text_python_function_call(
+        def get_text_function_call(
             text_input:str,
             dict_function:typing.Dict):
 
@@ -84,7 +84,7 @@ def get_text_python_block(
             # TODO only allow expressions
             list_texts_arguments_additional = list(
                     map(
-                        get_text_python_operations,
+                        get_text_operations,
                         list_dicts_arguments))
 
             text_arguments_python = ",\n" \
@@ -98,7 +98,7 @@ def get_text_python_block(
                 + m_common_functions.get_text_indented_one_level(text_arguments_python) \
                 + ")"
 
-        def get_text_python_comment(
+        def get_text_comment(
             dict_comment:typing.Dict):
 
             return "\n" \
@@ -128,7 +128,7 @@ def get_text_python_block(
             return "lambda " \
                 + TEXT_INPUT \
                 + ": " \
-                + get_text_python_function_call(
+                + get_text_function_call(
                         text_input=TEXT_INPUT,
                         dict_function=dict_function)
 
@@ -155,7 +155,7 @@ def get_text_python_block(
                 [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
             if text_category == "function":
-                text_python_current_expression = get_text_python_function_call(
+                text_python_current_expression = get_text_function_call(
                         text_input=text_python_current_expression,
                         dict_function=dict_operation)
 
@@ -183,7 +183,7 @@ def get_text_python_block(
                     + "intermediate = " \
                     + text_python_current_expression \
                     + "\n\n" \
-                    + get_text_python_comment(dict_operation) \
+                    + get_text_comment(dict_operation) \
                     + "\n"
 
                 # TODO implement: only do this if there are further operations
@@ -199,9 +199,9 @@ def get_text_python_block(
         return None
 
     dict_function = {
-        "def": get_text_python_def,
-        "return": get_text_python_return,
-        "operations": get_text_python_operations}
+        "def": get_text_function_definition,
+        "return": get_text_return,
+        "operations": get_text_operations}
 
     return dict_function \
         [text_category_block] \
