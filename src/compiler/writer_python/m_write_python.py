@@ -17,17 +17,6 @@ TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
 def get_text_python_block(
     dict_block:typing.Dict):
 
-    def get_text_python_comment(
-        dict_comment:typing.Dict):
-
-        return "\n" \
-            .join(
-                map(
-                    lambda text_comment: "# Nonpython Comment: " + text_comment,
-                    dict_comment \
-                        [m_shared.Comment.KEY_TEXT] \
-                        .split("\n")))
-
     def get_text_python_def(
         dict_def:typing.Dict):
 
@@ -109,6 +98,17 @@ def get_text_python_block(
                 + m_common_functions.get_text_indented_one_level(text_arguments_python) \
                 + ")"
 
+        def get_text_python_comment(
+            dict_comment:typing.Dict):
+
+            return "\n" \
+                .join(
+                    map(
+                        lambda text_comment: "# Nonpython Comment: " + text_comment,
+                        dict_comment \
+                            [m_shared.Comment.KEY_TEXT] \
+                            .split("\n")))
+
         def get_text_literal(
             dict_literal:typing.Dict):
 
@@ -181,6 +181,19 @@ def get_text_python_block(
                 text_python_current_expression = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
                     + text_key_memory
 
+            if text_category == "comment":
+
+                # TODO refactor
+                text_python_finished_expressions = text_python_finished_expressions \
+                    + "intermediate = " \
+                    + text_python_current_expression \
+                    + "\n\n" \
+                    + get_text_python_comment(dict_operation) \
+                    + "\n"
+
+                # TODO implement: only do this if there are further operations
+                text_python_current_expression = "intermediate"
+
         return text_python_finished_expressions \
             + text_python_current_expression
 
@@ -191,7 +204,6 @@ def get_text_python_block(
         return None
 
     dict_function = {
-        "comment": get_text_python_comment,
         "def": get_text_python_def,
         "return": get_text_python_return,
         "operations": get_text_python_operations}

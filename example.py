@@ -29,16 +29,17 @@ def main():
                     nonpython_Separator)),
             nonpython_Separator)
 
-    # Nonpython Comment: this is a comment
+    intermediate = nonpython_prepend(
+        nonpython_toText(
+            nonpython_add(
+                100,
+                100)),
+        "_ HelLO ;; 12 woRlD hEllo2 !")
 
+    # Nonpython Comment: this is a comment
     nonpython_HelloWorld = nonpython_append(
         nonpython_standardise(
-            nonpython_prepend(
-                nonpython_toText(
-                    nonpython_add(
-                        100,
-                        100)),
-                "_ HelLO ;; 12 woRlD hEllo2 !"),
+            intermediate,
             " "),
         "!")
 

@@ -45,8 +45,6 @@ def get_dict_data_parsed_ll(
                             get_text_unmodified,
                             item_block))
 
-        del get_list_tokens_first(list_block)[0]
-
         text = get_text_unmodified(list_block)
 
         return {
@@ -95,7 +93,7 @@ def get_dict_data_parsed_ll(
                 m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
                 m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
-        def get_dict_memory_allocation(
+        def get_dict_parsed_memory_allocation(
             list_block:typing.List):
 
             text_key_memory = get_list_tokens_first(list_block) \
@@ -130,19 +128,16 @@ def get_dict_data_parsed_ll(
 
             list_tokens_first = get_list_tokens_first(list_block)
 
-            if list_tokens_first[0] == ">":
+            text_token_first = list_tokens_first[0]
 
-                del list_tokens_first[0]
+            del list_tokens_first[0]
 
-                return get_dict_parsed_function(list_block)
-
-            if list_tokens_first[0] == "#":
-
-                del list_tokens_first[0]
-
-                return get_dict_memory_allocation(list_block)
-
-            raise Exception("unknown operation")
+            return {
+                ">": get_dict_parsed_function,
+                "#": get_dict_parsed_memory_allocation,
+                "!": get_dict_parsed_comment} \
+                [text_token_first] \
+                (list_block)
 
         dict_initial = get_dict_parsed_initial()
 
@@ -226,10 +221,6 @@ def get_dict_data_parsed_ll(
 
         if text_token_first == "---->":
             return get_dict_parsed_return(list_block)
-
-        # TODO perhaps move
-        if text_token_first == "!":
-            return get_dict_parsed_comment(list_block)
 
         return get_dict_parsed_operations(list_block)
 
