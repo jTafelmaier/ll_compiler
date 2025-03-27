@@ -55,7 +55,7 @@ class Literal:
 class Expression:
 
     KEY_OBJECT_INITIAL = "initial"
-    KEY_ARRAY_OBJECTS_FUNCTION_CALLS = "function_calls"
+    KEY_ARRAY_OBJECTS_OPERATIONS = "operations"
 
 
 

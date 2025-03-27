@@ -162,7 +162,7 @@ def get_text_python_block(
             [m_shared.Expression.KEY_OBJECT_INITIAL]
 
         list_dicts_function_calls = dict_expression \
-            [m_shared.Expression.KEY_ARRAY_OBJECTS_FUNCTION_CALLS]
+            [m_shared.Expression.KEY_ARRAY_OBJECTS_OPERATIONS]
 
         text_python_current = get_text_initial(dict_initial)
 

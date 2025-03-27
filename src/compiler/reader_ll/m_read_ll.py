@@ -130,7 +130,7 @@ def get_dict_data_parsed_ll(
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: "literal",
                 m_shared.Literal.KEY_TEXT_VALUE: text_first}
 
-        def get_dict_parsed_function_call(
+        def get_dict_parsed_operation(
             item_block:typing.Union[typing.Dict, typing.List]):
 
             list_block = get_list_block(item_block)
@@ -145,16 +145,16 @@ def get_dict_data_parsed_ll(
 
         dict_initial = get_dict_parsed_initial()
 
-        list_dicts_function_calls = list(
+        list_dicts_operations = list(
                 map(
-                    get_dict_parsed_function_call,
+                    get_dict_parsed_operation,
                     list_block \
                         [1:]))
 
         return {
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "expression",
             m_shared.Expression.KEY_OBJECT_INITIAL: dict_initial,
-            m_shared.Expression.KEY_ARRAY_OBJECTS_FUNCTION_CALLS: list_dicts_function_calls}
+            m_shared.Expression.KEY_ARRAY_OBJECTS_OPERATIONS: list_dicts_operations}
 
     def get_dict_parsed_function_definition(
         list_block:typing.List):
