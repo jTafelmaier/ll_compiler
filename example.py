@@ -28,7 +28,7 @@ def main():
                         nonpython_T),
                     nonpython_T)))
 
-    # Nonpython Comment: comment
+    # Nonpython Comment: this is a comment
 
     nonpython_HelloWorld = nonpython_append(
         nonpython_joined(
