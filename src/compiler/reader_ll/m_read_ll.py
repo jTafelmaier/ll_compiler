@@ -128,8 +128,8 @@ def get_dict_data_parsed_ll(
 
             return {
                 ">": get_dict_parsed_function,
-                "#": get_dict_parsed_memory_write,
-                "!": get_dict_parsed_comment} \
+                "save": get_dict_parsed_memory_write,
+                "note": get_dict_parsed_comment} \
                 [text_token_first] \
                 (list_block)
 
@@ -211,15 +211,15 @@ def get_dict_data_parsed_ll(
 
         del list_tokens_first[0]
 
+        if text_token_first == "start":
+            return get_dict_parsed_operations(list_block)
+
         if text_token_first == "def":
             return get_dict_parsed_function_definition(list_block)
 
         if text_token_first == "return":
             return get_dict_parsed_return(list_block)
 
-        if text_token_first == "---->":
-            return get_dict_parsed_operations(list_block)
-    
         raise Exception("unknown block type")
 
     def get_list_dicts_multiple_blocks(
