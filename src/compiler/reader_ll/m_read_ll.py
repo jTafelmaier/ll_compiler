@@ -127,9 +127,9 @@ def get_dict_data_parsed_ll(
             del list_tokens_first[0]
 
             return {
-                ">": get_dict_parsed_function,
-                "save": get_dict_parsed_memory_write,
-                "note": get_dict_parsed_comment} \
+                ":": get_dict_parsed_comment,
+                "|": get_dict_parsed_function,
+                "#": get_dict_parsed_memory_write} \
                 [text_token_first] \
                 (list_block)
 
