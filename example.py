@@ -22,12 +22,12 @@ def main():
                 nonpython_Input),
             "")
 
-    nonpython_TextTwoHundred = nonpython_toText(
+    nonpython_TwoHundred = nonpython_toText(
         200)
 
     # Nonpython Comment: comment
 
-    nonpython_TextHelloWorld = nonpython_append(
+    nonpython_HelloWorld = nonpython_append(
         nonpython_joined(
             nonpython_map(
                 nonpython_retainIf(
@@ -35,7 +35,7 @@ def main():
                         nonpython_identity(
                             nonpython_append(
                                 "_ HelLO ;; 12 woRlD hEllo2 !",
-                                nonpython_TextTwoHundred)),
+                                nonpython_TwoHundred)),
                         " "),
                     lambda nonpython_Input: nonpython_isAlphabetic(
                         nonpython_Input)),
@@ -46,13 +46,13 @@ def main():
 
     nonpython_print(
         nonpython_prepend(
-            nonpython_TextHelloWorld,
+            nonpython_HelloWorld,
             "Text is: "))
 
     nonpython_print(
         nonpython_prepend(
             nonpython_if(
-                nonpython_TextHelloWorld,
+                nonpython_HelloWorld,
                 lambda nonpython_Input: nonpython_isAlphabetic(
                     nonpython_Input),
                 lambda nonpython_Input: nonpython_toOtherItem(

@@ -14,13 +14,13 @@ def TEXT identity
         > append ""
 
 
-TextTwoHundred = 200
+TwoHundred = 200
     > toText
 
 note comment
 
-TextHelloWorld = "_ HelLO ;; 12 woRlD hEllo2 !"
-    > append TextTwoHundred
+HelloWorld = "_ HelLO ;; 12 woRlD hEllo2 !"
+    > append TwoHundred
     > identity
     > splitOn " "
     > retainIf isAlphabetic
@@ -29,12 +29,12 @@ TextHelloWorld = "_ HelLO ;; 12 woRlD hEllo2 !"
     > append "!"
 
 
-TextHelloWorld
+HelloWorld
     > prepend "Text is: "
     > print
 
 
-TextHelloWorld
+HelloWorld
     > if
         isAlphabetic
         toOtherItem "True"
