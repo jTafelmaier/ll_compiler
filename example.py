@@ -11,35 +11,29 @@ def main():
         nonpython_Input,
         nonpython_Separator):
 
-        def nonpython_standardiseList(
-            nonpython_Input):
-
-            return nonpython_map(
+        return nonpython_joined(
+            nonpython_map(
                 nonpython_retainIf(
-                    nonpython_Input,
+                    nonpython_splitOn(
+                        nonpython_Input,
+                        nonpython_Separator),
                     lambda nonpython_Input: nonpython_isAlphabetic(
                         nonpython_Input)),
                 lambda nonpython_Input: nonpython_titlecase(
-                    nonpython_Input))
-
-        return nonpython_joined(
-            nonpython_standardiseList(
-                nonpython_splitOn(
-                    nonpython_Input,
-                    nonpython_Separator)),
+                    nonpython_Input)),
             nonpython_Separator)
 
-    intermediate = nonpython_prepend(
-        nonpython_toText(
-            nonpython_add(
-                100,
-                100)),
-        "_ HelLO ;; 12 woRlD hEllo2 !")
+    intermediate = nonpython_toText(
+        nonpython_add(
+            100,
+            100))
 
     # Nonpython Comment: this is a comment
     nonpython_HelloWorld = nonpython_append(
         nonpython_standardise(
-            intermediate,
+            nonpython_prepend(
+                intermediate,
+                "_ HelLO ;; 12 woRlD hEllo2 !"),
             " "),
         "!")
 

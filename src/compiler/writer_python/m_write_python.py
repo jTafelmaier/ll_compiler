@@ -132,28 +132,23 @@ def get_text_python_block(
                         text_input=TEXT_INPUT,
                         dict_function=dict_function)
 
-        def get_text_initial(
-            dict_initial:typing.Dict):
-
-            text_category = dict_initial \
-                [m_shared.Object_variable.KEY_TEXT_CATEGORY]
-
-            return {
-                "literal": get_text_literal,
-                "memory_read": get_text_memory_read,
-                "function": get_text_function} \
-                [text_category] \
-                (dict_initial)
-
         dict_initial = dict_operations \
             [m_shared.Operations.KEY_OBJECT_INITIAL]
 
         list_dicts_operations = dict_operations \
             [m_shared.Operations.KEY_ARRAY_OBJECTS_OPERATIONS]
 
-        text_python_finished_expressions = ""
+        text_category = dict_initial \
+            [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
-        text_python_current_expression = get_text_initial(dict_initial)
+        text_python_current_expression = {
+            "literal": get_text_literal,
+            "memory_read": get_text_memory_read,
+            "function": get_text_function} \
+            [text_category] \
+            (dict_initial)
+
+        text_python_finished_expressions = ""
 
         for dict_operation in list_dicts_operations:
             text_category = dict_operation \

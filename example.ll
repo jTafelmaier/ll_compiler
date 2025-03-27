@@ -5,23 +5,18 @@
 def :Text standardise
     :Text $Separator
 
-    def :Text standardiseList
-
-        ----> $Input
-            > retainIf isAlphabetic
-            > map titlecase
-
     ----> $Input
         > splitOn $Separator
-        > standardiseList
+        > retainIf isAlphabetic
+        > map titlecase
         > joined $Separator
 
 
 100
     > add 100
     > toText
-    > prepend "_ HelLO ;; 12 woRlD hEllo2 !"
     ! this is a comment
+    > prepend "_ HelLO ;; 12 woRlD hEllo2 !"
     > standardise " "
     > append "!"
     # $HelloWorld
