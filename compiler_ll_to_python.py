@@ -3,8 +3,8 @@
 import json
 
 from src.auxiliary import m_common_functions
-from src.compiler.reader_ll import m_read_ll
-from src.compiler.writer_python import m_write_python
+from src.compiler import m_read_ll
+from src.compiler import m_write_python
 
 
 
