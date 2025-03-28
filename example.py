@@ -5,7 +5,8 @@ from built_in_functions.built_in_functions import *
 
 
 
-def main():
+def nonpython_main(
+    nonpython_Input):
 
     def nonpython_standardise(
         nonpython_Input,
@@ -42,7 +43,7 @@ def main():
             nonpython_HelloWorld,
             "Text is: "))
 
-    nonpython_print(
+    return nonpython_print(
         nonpython_prepend(
             nonpython_if(
                 nonpython_HelloWorld,
@@ -56,9 +57,7 @@ def main():
                     "False")),
             "Text is alphabetic: "))
 
-    return None
-
 
 if __name__ == "__main__":
-    main()
+    nonpython_main()
 

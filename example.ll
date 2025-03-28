@@ -2,31 +2,32 @@
 
 
 
-def TEXT standardise
-    TEXT Separator
+def TEXT main
 
-    return Input
-        | splitOn Separator
-        | retainIf isAlphabetic
-        | map titlecase
-        | joined Separator
+    def TEXT standardise
+        TEXT Separator
 
+        return Input
+            | splitOn Separator
+            | retainIf isAlphabetic
+            | map titlecase
+            | joined Separator
 
-load| 80
-    | add 20
-    | toText
-    : this is a comment
-    | prepend "Hello world error_1"
-    | standardise " "
-    | append "!"
-    # HelloWorld
-    | prepend "Text is: "
-    | print
-load| HelloWorld
-    | if
-        isAlphabetic
-        toOtherItem "True"
-        toOtherItem "False"
-    | prepend "Text is alphabetic: "
-    | print
+    load| 80
+        | add 20
+        | toText
+        : this is a comment
+        | prepend "Hello world error_1"
+        | standardise " "
+        | append "!"
+        # HelloWorld
+        | prepend "Text is: "
+        | print
+    return HelloWorld
+        | if
+            isAlphabetic
+            toOtherItem "True"
+            toOtherItem "False"
+        | prepend "Text is alphabetic: "
+        | print
 
