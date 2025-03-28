@@ -51,15 +51,6 @@ def get_dict_data_parsed_ll(
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "comment",
             m_shared.Comment.KEY_TEXT: text}
 
-    def get_dict_parsed_return(
-        list_block:typing.List):
-
-        dict_operations = get_dict_parsed_operations(list_block)
-
-        return {
-            m_shared.Object_variable.KEY_TEXT_CATEGORY: "return",
-            m_shared.Operations_return.KEY_OBJECT: dict_operations}
-
     def get_dict_parsed_operations(
         item_block:typing.Union[typing.Dict, typing.List]):
 
@@ -216,9 +207,6 @@ def get_dict_data_parsed_ll(
 
         if text_token_first == "def":
             return get_dict_parsed_function_definition(list_block)
-
-        if text_token_first == "return":
-            return get_dict_parsed_return(list_block)
 
         raise Exception("unknown block type")
 

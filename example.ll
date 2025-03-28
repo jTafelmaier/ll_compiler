@@ -7,7 +7,7 @@ def TEXT main
     def TEXT standardise
         TEXT Separator
 
-        return Input
+        load| Input
             | splitOn Separator
             | retainIf isAlphabetic
             | map titlecase
@@ -23,7 +23,7 @@ def TEXT main
         # HelloWorld
         | prepend "Text is: "
         | print
-    return HelloWorld
+    load| HelloWorld
         | if
             isAlphabetic
             toOtherItem "True"

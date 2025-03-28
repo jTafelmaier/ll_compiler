@@ -50,23 +50,18 @@ def get_text_python_block(
                                 get_text_argument,
                                 list_dicts_arguments)))
 
+        # TODO refactor once there is only a single body block
         text_body = get_text_arguments() \
             + "):\n\n" \
-            + get_text_python(list_dicts_body)
+            + get_text_python(list_dicts_body[:-1]) \
+            + "\n\nreturn " \
+            + get_text_python(list_dicts_body[-1:])
 
         return "def " \
             + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
             + text_name_function \
             + "(\n" \
             + m_common_functions.get_text_indented_one_level(text_body)
-
-    def get_text_return(
-        dict_return:typing.Dict):
-
-        return "return " \
-            + get_text_operations(
-                    dict_return 
-                        [m_shared.Operations_return.KEY_OBJECT])
 
     def get_text_operations(
         dict_operations:typing.Dict):
@@ -198,9 +193,9 @@ def get_text_python_block(
     if text_category_block == "empty":
         return None
 
+    # TODO refactor
     dict_function = {
         "def": get_text_function_definition,
-        "return": get_text_return,
         "operations": get_text_operations}
 
     return dict_function \
