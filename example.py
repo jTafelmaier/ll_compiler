@@ -33,7 +33,7 @@ def main():
         nonpython_standardise(
             nonpython_prepend(
                 intermediate,
-                "_ HelLO ;; 12 woRlD hEllo2 !"),
+                "Hello world error_1"),
             " "),
         "!")
 
