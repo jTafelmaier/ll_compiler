@@ -12,7 +12,7 @@ def TEXT standardise
         | joined Separator
 
 
-start 80
+load| 80
     | add 20
     | toText
     : this is a comment
@@ -22,9 +22,7 @@ start 80
     # HelloWorld
     | prepend "Text is: "
     | print
-
-
-start HelloWorld
+load| HelloWorld
     | if
         isAlphabetic
         toOtherItem "True"

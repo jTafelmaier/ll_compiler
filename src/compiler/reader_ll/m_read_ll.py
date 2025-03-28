@@ -211,7 +211,7 @@ def get_dict_data_parsed_ll(
 
         del list_tokens_first[0]
 
-        if text_token_first == "start":
+        if text_token_first == "load|":
             return get_dict_parsed_operations(list_block)
 
         if text_token_first == "def":
