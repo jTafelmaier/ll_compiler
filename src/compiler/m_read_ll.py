@@ -28,29 +28,6 @@ def get_dict_data_parsed_ll(
         else:
             return item_block
 
-    def get_dict_parsed_comment(
-        list_block:typing.List):
-
-        def get_text_unmodified(
-            item_block:typing.Union[typing.Dict, typing.List]):
-
-            if isinstance(item_block, dict):
-                return " " \
-                    .join(item_block \
-                        [KEY_LIST_TOKENS])
-            else:
-                return "\n" \
-                    .join(
-                        map(
-                            get_text_unmodified,
-                            item_block))
-
-        text = get_text_unmodified(list_block)
-
-        return {
-            m_shared.Object_variable.KEY_TEXT_CATEGORY: "comment",
-            m_shared.Comment.KEY_TEXT: text}
-
     def get_dict_parsed_function_definition(
         list_def:typing.List):
 
@@ -129,6 +106,29 @@ def get_dict_data_parsed_ll(
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_write",
                 m_shared.Memory_write.KEY_TEXT_KEY_MEMORY: text_key_memory}
+
+        def get_dict_parsed_comment(
+            list_block:typing.List):
+
+            def get_text_unmodified(
+                item_block:typing.Union[typing.Dict, typing.List]):
+
+                if isinstance(item_block, dict):
+                    return " " \
+                        .join(item_block \
+                            [KEY_LIST_TOKENS])
+                else:
+                    return "\n" \
+                        .join(
+                            map(
+                                get_text_unmodified,
+                                item_block))
+
+            text = get_text_unmodified(list_block)
+
+            return {
+                m_shared.Object_variable.KEY_TEXT_CATEGORY: "comment",
+                m_shared.Comment.KEY_TEXT: text}
 
         def get_dict_parsed_operation(
             item_block:typing.Union[typing.Dict, typing.List]):
