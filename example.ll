@@ -4,25 +4,25 @@
 
 def TEXT main
 
-    | append " error_1"
+    | add " error_1"
     ! this is a comment
-    | splitOn " "
-    | retainIf isAlphabetic
-    | map titlecase
-    | joined " "
-    | append "!"
+    | split " "
+    | filter isAlphabetic
+    | map title
+    | join " "
+    | add "!"
     > HelloWorld
     | if
         isAlphabetic
-        toOtherItem "True"
-        toOtherItem "False"
-    | printWith "Text is alphabetic: "
-    | toOtherItem HelloWorld
-    | printWith "Text is: "
+        to "True"
+        to "False"
+    | logWith "Text is alphabetic: "
+    | to HelloWorld
+    | logWith "Text is: "
 
-    def TEXT printWith
-        TEXT Note
+    def TEXT logWith
+        TEXT TextLeft
 
-        | prepend Note
-        | print
+        | prepend TextLeft
+        | log
 

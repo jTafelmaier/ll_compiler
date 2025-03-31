@@ -5,7 +5,7 @@ import typing
 
 
 
-def nonpython_toOtherItem(
+def nonpython_to(
     item_input:typing.Any,
     item_other:typing.Any):
 
@@ -30,7 +30,7 @@ def nonpython_toText(
     return str(int_input)
 
 
-def nonpython_add(
+def nonpython_Iadd(
     int_input:int,
     int_to_add:int):
 
@@ -47,13 +47,13 @@ def nonpython_isAlphabetic(
 
 def nonpython_prepend(
     text_input:str,
-    text_to_prepend:str):
+    text_to_add:str):
 
-    return text_to_prepend \
+    return text_to_add \
         + text_input
 
 
-def nonpython_append(
+def nonpython_add(
     text_input:str,
     text_to_append:str):
 
@@ -68,28 +68,28 @@ def nonpython_reversed(
         [::-1]
 
 
-def nonpython_lowercase(
+def nonpython_lower(
     text_input:str):
 
     return text_input \
         .lower()
 
 
-def nonpython_uppercase(
+def nonpython_upper(
     text_input:str):
 
     return text_input \
         .upper()
 
 
-def nonpython_titlecase(
+def nonpython_title(
     text_input:str):
 
     return text_input \
         .title()
 
 
-def nonpython_splitOn(
+def nonpython_split(
     text_input:str,
     text_separator:str):
 
@@ -97,7 +97,7 @@ def nonpython_splitOn(
         .split(text_separator)
 
 
-def nonpython_print(
+def nonpython_log(
     text_input:str):
 
     print(text_input)
@@ -115,7 +115,7 @@ def nonpython_map(
                 list_items))
 
 
-def nonpython_retainIf(
+def nonpython_filter(
     list_items:typing.List,
     function:typing.Callable[[typing.Any], bool]):
 
@@ -125,7 +125,7 @@ def nonpython_retainIf(
                 list_items))
 
 
-def nonpython_joined(
+def nonpython_join(
     list_texts_input:typing.List[str],
     text_join:str):
 
