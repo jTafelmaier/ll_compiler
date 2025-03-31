@@ -18,10 +18,10 @@ def nonpython_main(
                     nonpython_splitOn(
                         nonpython_Input,
                         nonpython_Separator),
-                    lambda nonpython_Input: nonpython_isAlphabetic(
-                        nonpython_Input)),
-                lambda nonpython_Input: nonpython_titlecase(
-                    nonpython_Input)),
+                    lambda var_lambda: nonpython_isAlphabetic(
+                        var_lambda)),
+                lambda var_lambda: nonpython_titlecase(
+                    var_lambda)),
             nonpython_Separator)
 
     intermediate = nonpython_toText(
@@ -49,13 +49,13 @@ def nonpython_main(
                             nonpython_HelloWorld,
                             "Text is: ")),
                     nonpython_HelloWorld),
-                lambda nonpython_Input: nonpython_isAlphabetic(
-                    nonpython_Input),
-                lambda nonpython_Input: nonpython_toOtherItem(
-                    nonpython_Input,
+                lambda var_lambda: nonpython_isAlphabetic(
+                    var_lambda),
+                lambda var_lambda: nonpython_toOtherItem(
+                    var_lambda,
                     "True"),
-                lambda nonpython_Input: nonpython_toOtherItem(
-                    nonpython_Input,
+                lambda var_lambda: nonpython_toOtherItem(
+                    var_lambda,
                     "False")),
             "Text is alphabetic: "))
 

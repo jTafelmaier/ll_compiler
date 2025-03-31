@@ -13,6 +13,8 @@ TEXT_PREFIX_TO_AVOID_NAME_CLASHES = "nonpython_"
 TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
     + "Input"
 
+TEXT_VAR_LAMBDA = "var_lambda"
+
 
 def get_text_python_def(
     dict_def:typing.Dict):
@@ -62,12 +64,11 @@ def get_text_python_def(
         def get_text_function(
             dict_function:typing.Dict):
 
-            # TODO error: name clashes with function "Input"
             return "lambda " \
-                + TEXT_INPUT \
+                + TEXT_VAR_LAMBDA \
                 + ": " \
                 + get_text_function_call(
-                        text_input=TEXT_INPUT,
+                        text_input=TEXT_VAR_LAMBDA,
                         dict_function=dict_function)
 
         text_category = dict_expression \
