@@ -62,6 +62,7 @@ def get_text_python_def(
         def get_text_function(
             dict_function:typing.Dict):
 
+            # TODO error: name clashes with function "Input"
             return "lambda " \
                 + TEXT_INPUT \
                 + ": " \
@@ -92,16 +93,10 @@ def get_text_python_def(
                             [m_shared.Comment.KEY_TEXT] \
                             .split("\n")))
 
-        dict_initial = dict_def \
-            [m_shared.Function_definition.KEY_OBJECT_INITIAL]
-
         list_dicts_operations = dict_def \
             [m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS]
 
-        text_category = dict_initial \
-            [m_shared.Object_variable.KEY_TEXT_CATEGORY]
-
-        text_python_current_expression = get_text_expression(dict_initial)
+        text_python_current_expression = TEXT_INPUT
 
         text_python_finished_expressions = ""
 

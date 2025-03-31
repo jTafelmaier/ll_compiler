@@ -7,13 +7,12 @@ def TEXT main
     def TEXT standardise
         TEXT Separator
 
-        load| Input
-            | splitOn Separator
+        | splitOn Separator
             | retainIf isAlphabetic
             | map titlecase
             | joined Separator
 
-    load| 80
+    | toOtherItem 80
         | add 20
         | toText
         : this is a comment

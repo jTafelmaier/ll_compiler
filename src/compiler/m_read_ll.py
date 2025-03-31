@@ -171,17 +171,10 @@ def get_dict_data_parsed_ll(
                 get_dict_parsed_function_definition,
                 list_blocks_body_filtered[:-1]))
 
-        list_operations = get_list_block(list_blocks_body_filtered[-1])
-
-        del get_list_tokens_first(list_operations)[0]
-
-        dict_initial = get_dict_parsed_expression(list_operations)
-
         list_dicts_operations = list(
                 map(
                     get_dict_parsed_operation,
-                    list_operations \
-                        [1:]))
+                    get_list_block(list_blocks_body_filtered[-1])))
 
         return {
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "def",
@@ -189,7 +182,6 @@ def get_dict_data_parsed_ll(
             m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
             m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_arguments,
             m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS: list_dicts_inner_defs,
-            m_shared.Function_definition.KEY_OBJECT_INITIAL: dict_initial,
             m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_operations}
 
     return get_dict_parsed_function_definition(list_file[4])
