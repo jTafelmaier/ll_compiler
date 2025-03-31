@@ -15,11 +15,11 @@ def TEXT main
     | toOtherItem 80
     | add 20
     | toText
-    : this is a comment
+    note this is a comment
     | prepend "Hello world error_1"
     | standardise " "
     | append "!"
-    # HelloWorld
+    save HelloWorld
     | prepend "Text is: "
     | print
     | toOtherItem HelloWorld
