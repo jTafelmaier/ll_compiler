@@ -4,26 +4,25 @@
 
 def TEXT main
 
-    | prepend "Hello world error_1 "
-    | standardise " "
+    | append " error_1"
+    note this is a comment
+    | splitOn " "
+    | retainIf isAlphabetic
+    | map titlecase
+    | joined " "
     | append "!"
     save HelloWorld
-    | prepend "Text is: "
-    | print
-    note this is a comment
-    | toOtherItem HelloWorld
     | if
         isAlphabetic
         toOtherItem "True"
         toOtherItem "False"
-    | prepend "Text is alphabetic: "
-    | print
+    | printWith "Text is alphabetic: "
+    | toOtherItem HelloWorld
+    | printWith "Text is: "
 
-    def TEXT standardise
-        TEXT Separator
+    def TEXT printWith
+        TEXT Note
 
-        | splitOn Separator
-        | retainIf isAlphabetic
-        | map titlecase
-        | joined Separator
+        | prepend Note
+        | print
 
