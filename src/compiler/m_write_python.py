@@ -14,95 +14,37 @@ TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
     + "Input"
 
 
-def get_text_python_block(
-    dict_block:typing.Dict):
+def get_text_python_def(
+    dict_def:typing.Dict):
 
-    def get_text_function_definition(
-        dict_def:typing.Dict):
+    def get_text_function_call(
+        text_input:str,
+        dict_function:typing.Dict):
 
-        text_name_function = dict_def \
-            [m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION]
+        text_name_function = dict_function \
+            [m_shared.Function_reference.KEY_NAME_FUNCTION]
 
-        # text_type_input = dict_def \
-        #     [m_shared.Function_definition.KEY_TEXT_TYPE_INPUT]
+        list_dicts_arguments = dict_function \
+            [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
-        list_dicts_arguments = dict_def \
-            [m_shared.Function_definition.KEY_ARRAY_OBJECTS_ARGUMENTS]
+        list_texts_arguments_additional = list(
+                map(
+                    get_text_expression,
+                    list_dicts_arguments))
 
-        # TODO ensure at least one return
-        list_dicts_body = dict_def \
-            [m_shared.Function_definition.KEY_ARRAY_OBJECTS_BODY]
+        text_arguments_python = ",\n" \
+            .join([
+                    text_input] \
+                + list_texts_arguments_additional)
 
-        def get_text_arguments():
-
-            def get_text_argument(
-                dict_argument:typing.Dict):
-
-                return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                    + dict_argument \
-                        [m_shared.Function_definition.Argument.KEY_TEXT_NAME]
-
-            return ",\n" \
-                .join(
-                    [TEXT_INPUT] \
-                        + list(
-                            map(
-                                get_text_argument,
-                                list_dicts_arguments)))
-
-        # TODO refactor once there is only a single body block
-        text_body = get_text_arguments() \
-            + "):\n\n" \
-            + get_text_python(list_dicts_body[:-1]) \
-            + "\n\nreturn " \
-            + get_text_python(list_dicts_body[-1:])
-
-        return "def " \
-            + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+        return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
             + text_name_function \
             + "(\n" \
-            + m_common_functions.get_text_indented_one_level(text_body)
+            + m_common_functions.get_text_indented_one_level(text_arguments_python) \
+            + ")"
 
-    def get_text_operations(
-        dict_operations:typing.Dict):
-
-        def get_text_function_call(
-            text_input:str,
-            dict_function:typing.Dict):
-
-            text_name_function = dict_function \
-                [m_shared.Function_reference.KEY_NAME_FUNCTION]
-
-            list_dicts_arguments = dict_function \
-                [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
-
-            # TODO only allow expressions
-            list_texts_arguments_additional = list(
-                    map(
-                        get_text_operations,
-                        list_dicts_arguments))
-
-            text_arguments_python = ",\n" \
-                .join([
-                        text_input] \
-                    + list_texts_arguments_additional)
-
-            return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                + text_name_function \
-                + "(\n" \
-                + m_common_functions.get_text_indented_one_level(text_arguments_python) \
-                + ")"
-
-        def get_text_comment(
-            dict_comment:typing.Dict):
-
-            return "\n" \
-                .join(
-                    map(
-                        lambda text_comment: "# Nonpython Comment: " + text_comment,
-                        dict_comment \
-                            [m_shared.Comment.KEY_TEXT] \
-                            .split("\n")))
+    def get_text_expression(
+        dict_expression:typing.Dict):
 
         def get_text_literal(
             dict_literal:typing.Dict):
@@ -127,21 +69,39 @@ def get_text_python_block(
                         text_input=TEXT_INPUT,
                         dict_function=dict_function)
 
-        dict_initial = dict_operations \
-            [m_shared.Operations.KEY_OBJECT_INITIAL]
-
-        list_dicts_operations = dict_operations \
-            [m_shared.Operations.KEY_ARRAY_OBJECTS_OPERATIONS]
-
-        text_category = dict_initial \
+        text_category = dict_expression \
             [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
-        text_python_current_expression = {
+        return {
             "literal": get_text_literal,
             "memory_read": get_text_memory_read,
             "function": get_text_function} \
             [text_category] \
-            (dict_initial)
+            (dict_expression)
+
+    def get_text_operations():
+
+        def get_text_comment(
+            dict_comment:typing.Dict):
+
+            return "\n" \
+                .join(
+                    map(
+                        lambda text_comment: "# Nonpython Comment: " + text_comment,
+                        dict_comment \
+                            [m_shared.Comment.KEY_TEXT] \
+                            .split("\n")))
+
+        dict_initial = dict_def \
+            [m_shared.Function_definition.KEY_OBJECT_INITIAL]
+
+        list_dicts_operations = dict_def \
+            [m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS]
+
+        text_category = dict_initial \
+            [m_shared.Object_variable.KEY_TEXT_CATEGORY]
+
+        text_python_current_expression = get_text_expression(dict_initial)
 
         text_python_finished_expressions = ""
 
@@ -159,7 +119,6 @@ def get_text_python_block(
                 text_key_memory = dict_operation \
                     [m_shared.Memory_write.KEY_TEXT_KEY_MEMORY]
 
-                # TODO refactor
                 text_python_finished_expressions = text_python_finished_expressions \
                     + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
                     + text_key_memory \
@@ -167,13 +126,12 @@ def get_text_python_block(
                     + text_python_current_expression \
                     + "\n\n"
 
-                # TODO implement: only do this if there are further operations
                 text_python_current_expression = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
                     + text_key_memory
 
             if text_category == "comment":
 
-                # TODO refactor
+                # TODO duplicate code
                 text_python_finished_expressions = text_python_finished_expressions \
                     + "intermediate = " \
                     + text_python_current_expression \
@@ -181,44 +139,62 @@ def get_text_python_block(
                     + get_text_comment(dict_operation) \
                     + "\n"
 
-                # TODO implement: only do this if there are further operations
                 text_python_current_expression = "intermediate"
 
         return text_python_finished_expressions \
+            + "return " \
             + text_python_current_expression
 
-    text_category_block = dict_block \
-        [m_shared.Object_variable.KEY_TEXT_CATEGORY]
+    def inner():
 
-    if text_category_block == "empty":
-        return None
+        def get_text_arguments():
 
-    # TODO refactor
-    dict_function = {
-        "def": get_text_function_definition,
-        "operations": get_text_operations}
+            def get_text_argument(
+                dict_argument:typing.Dict):
 
-    return dict_function \
-        [text_category_block] \
-        (dict_block)
+                return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                    + dict_argument \
+                        [m_shared.Function_definition.Argument.KEY_TEXT_NAME]
 
+            return ",\n" \
+                .join(
+                    [TEXT_INPUT] \
+                        + list(
+                            map(
+                                get_text_argument,
+                                dict_def \
+                                    [m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS])))
 
-def get_text_python(
-    list_dicts_blocks:typing.List[typing.Dict]):
+        text_name_function = dict_def \
+            [m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION]
 
-    return "\n\n" \
-        .join(
-            filter(
-                lambda dict_python: dict_python is not None,
-                map(
-                    get_text_python_block,
-                    list_dicts_blocks)))
+        # text_type_input = dict_def \
+        #     [m_shared.Function_definition.KEY_TEXT_TYPE_INPUT]
+
+        text_body = get_text_arguments() \
+            + "):\n\n" \
+            + "\n\n" \
+                .join(
+                    list(
+                        map(
+                            get_text_python_def,
+                            dict_def \
+                                [m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS])) \
+                    + [get_text_operations()])
+
+        return "def " \
+            + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+            + text_name_function \
+            + "(\n" \
+            + m_common_functions.get_text_indented_one_level(text_body)
+
+    return inner()
 
 
 def get_text_python_main(
-    dict:typing):
+    dict_def:typing):
 
-    text_python = get_text_python(dict["data"])
+    text_python = get_text_python_def(dict_def)
 
     return "\n\nfrom built_in_functions.built_in_functions import *\n\n\n\n\n" \
         + text_python \

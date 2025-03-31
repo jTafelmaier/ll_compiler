@@ -12,21 +12,18 @@ class Comment:
     KEY_TEXT = "text"
 
 
-class Operations_return:
-
-    KEY_OBJECT = "operations"
-
-
 class Function_definition:
 
-    KEY_TEXT_NAME_FUNCTION = "name_function_def"
+    KEY_TEXT_NAME_FUNCTION = "name_function"
     KEY_TEXT_TYPE_INPUT = "type_input"
-    KEY_ARRAY_OBJECTS_ARGUMENTS = "arguments_def"
-    KEY_ARRAY_OBJECTS_BODY = "body"
+    KEY_ARRAY_DICTS_ARGUMENTS = "arguments"
+    KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS = "inner_function_definitions"
+    KEY_OBJECT_INITIAL = "initial"
+    KEY_ARRAY_DICTS_OPERATIONS = "operations"
 
     class Argument:
 
-        KEY_TEXT_NAME = "name_argument_def"
+        KEY_TEXT_NAME = "name_argument"
         KEY_TEXT_TYPE = "type"
 
 
@@ -49,13 +46,4 @@ class Memory_read:
 class Literal:
 
     KEY_TEXT_VALUE = "value"
-
-
-class Operations:
-
-    KEY_OBJECT_INITIAL = "initial"
-    KEY_ARRAY_OBJECTS_OPERATIONS = "operations"
-
-
-
 

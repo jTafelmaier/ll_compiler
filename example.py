@@ -12,8 +12,6 @@ def nonpython_main(
         nonpython_Input,
         nonpython_Separator):
 
-
-
         return nonpython_joined(
             nonpython_map(
                 nonpython_retainIf(
@@ -40,15 +38,15 @@ def nonpython_main(
             " "),
         "!")
 
-    nonpython_print(
-        nonpython_prepend(
-            nonpython_HelloWorld,
-            "Text is: "))
-
     return nonpython_print(
         nonpython_prepend(
             nonpython_if(
-                nonpython_HelloWorld,
+                nonpython_toOtherItem(
+                    nonpython_print(
+                        nonpython_prepend(
+                            nonpython_HelloWorld,
+                            "Text is: ")),
+                    nonpython_HelloWorld),
                 lambda nonpython_Input: nonpython_isAlphabetic(
                     nonpython_Input),
                 lambda nonpython_Input: nonpython_toOtherItem(

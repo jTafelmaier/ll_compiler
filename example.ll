@@ -23,7 +23,7 @@ def TEXT main
         # HelloWorld
         | prepend "Text is: "
         | print
-    load| HelloWorld
+        | toOtherItem HelloWorld
         | if
             isAlphabetic
             toOtherItem "True"
