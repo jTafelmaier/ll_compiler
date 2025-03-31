@@ -24,30 +24,25 @@ def nonpython_main(
                     var_lambda)),
             nonpython_Separator)
 
-    intermediate = nonpython_toText(
-        nonpython_add(
-            nonpython_toOtherItem(
-                nonpython_Input,
-                80),
-            20))
-
-    # Nonpython Comment: this is a comment
     nonpython_HelloWorld = nonpython_append(
         nonpython_standardise(
             nonpython_prepend(
-                intermediate,
-                "Hello world error_1"),
+                nonpython_Input,
+                "Hello world error_1 "),
             " "),
         "!")
 
+    intermediate = nonpython_print(
+        nonpython_prepend(
+            nonpython_HelloWorld,
+            "Text is: "))
+
+    # Nonpython Comment: this is a comment
     return nonpython_print(
         nonpython_prepend(
             nonpython_if(
                 nonpython_toOtherItem(
-                    nonpython_print(
-                        nonpython_prepend(
-                            nonpython_HelloWorld,
-                            "Text is: ")),
+                    intermediate,
                     nonpython_HelloWorld),
                 lambda var_lambda: nonpython_isAlphabetic(
                     var_lambda),

@@ -4,16 +4,13 @@
 
 def TEXT main
 
-    | toOtherItem 80
-    | add 20
-    | toText
-    note this is a comment
-    | prepend "Hello world error_1"
+    | prepend "Hello world error_1 "
     | standardise " "
     | append "!"
     save HelloWorld
     | prepend "Text is: "
     | print
+    note this is a comment
     | toOtherItem HelloWorld
     | if
         isAlphabetic
