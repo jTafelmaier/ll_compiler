@@ -192,7 +192,7 @@ def get_text_python_def(
 
 
 def get_text_python_main(
-    dict_def:typing):
+    dict_def:typing.Dict):
 
     text_python = get_text_python_def(dict_def)
 
