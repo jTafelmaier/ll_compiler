@@ -163,29 +163,29 @@ def get_dict_data_parsed_ll(
                     get_dict_argument,
                     list_arguments))
 
-        list_items_reversed_operations, \
+        list_items_operations, \
         _, \
-        list_lists_reversed_function_definitions = m_common_functions.get_tuple_partitions_list(
-                list_items=list(reversed(list_blocks_body)),
+        list_lists_function_definitions = m_common_functions.get_tuple_partitions_list(
+                list_items=list_blocks_body,
                 function_separate=is_empty_block)
 
         list_dicts_inner_definitions = list(
             map(
                 get_dict_parsed_function_definition,
-                reversed(list_lists_reversed_function_definitions[::2])))
+                list_lists_function_definitions[::2]))
 
         list_dicts_operations = list(
                 map(
                     get_dict_parsed_operation,
-                    reversed(list_items_reversed_operations)))
+                    list_items_operations))
 
         return {
             m_shared.Object_variable.KEY_TEXT_CATEGORY: "def",
             m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
             m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
             m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_arguments,
-            m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS: list_dicts_inner_definitions,
-            m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_operations}
+            m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_operations,
+            m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS: list_dicts_inner_definitions}
 
     return get_dict_parsed_function_definition(list_file[4])
 

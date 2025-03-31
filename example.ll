@@ -4,14 +4,6 @@
 
 def TEXT main
 
-    def TEXT standardise
-        TEXT Separator
-
-        | splitOn Separator
-        | retainIf isAlphabetic
-        | map titlecase
-        | joined Separator
-
     | toOtherItem 80
     | add 20
     | toText
@@ -29,4 +21,12 @@ def TEXT main
         toOtherItem "False"
     | prepend "Text is alphabetic: "
     | print
+
+    def TEXT standardise
+        TEXT Separator
+
+        | splitOn Separator
+        | retainIf isAlphabetic
+        | map titlecase
+        | joined Separator
 
