@@ -5,13 +5,13 @@
 def TEXT main
 
     | append " error_1"
-    note this is a comment
+    ! this is a comment
     | splitOn " "
     | retainIf isAlphabetic
     | map titlecase
     | joined " "
     | append "!"
-    save HelloWorld
+    > HelloWorld
     | if
         isAlphabetic
         toOtherItem "True"
