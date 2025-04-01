@@ -2,27 +2,31 @@
 
 
 
-def TEXT main
+thread TEXT main
 
     | add " error_1"
-    ! this is a comment
+    : TODO improve this example
     | split " "
-    | filter isAlphabetic
-    | map title
-    | join " "
+    | joinByTitle
     | add "!"
     > HelloWorld
     | if
         isAlphabetic
         to "True"
         to "False"
-    | logWith "Text is alphabetic: "
+    | logWith "Text is alphabetic "
     | to HelloWorld
-    | logWith "Text is: "
+    | logWith "Text is "
 
-    def TEXT logWith
-        TEXT TextLeft
+    thread LIST[TEXT] joinByTitle
 
-        | prepend TextLeft
+        | filter isAlphabetic
+        | map title
+        | join " "
+
+    thread TEXT logWith
+        TEXT Text
+
+        | prepend Text
         | log
 

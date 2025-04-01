@@ -53,7 +53,6 @@ def get_dict_data_parsed_ll(
                 m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
                 m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
 
-        # TODO refactor
         def get_dict_parsed_expression(
             item_block:typing.Union[typing.Dict, typing.List]):
 
@@ -144,7 +143,7 @@ def get_dict_data_parsed_ll(
             return {
                 "|": get_dict_parsed_function,
                 ">": get_dict_parsed_memory_write,
-                "!": get_dict_parsed_comment} \
+                ":": get_dict_parsed_comment} \
                 [text_token_first] \
                 (list_block)
 
@@ -180,7 +179,6 @@ def get_dict_data_parsed_ll(
                     list_items_operations))
 
         return {
-            m_shared.Object_variable.KEY_TEXT_CATEGORY: "def",
             m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
             m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
             m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_arguments,

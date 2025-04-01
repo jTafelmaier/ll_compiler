@@ -101,6 +101,7 @@ def get_text_python_def(
 
         text_python_finished_expressions = ""
 
+        # TODO refactor
         for dict_operation in list_dicts_operations:
             text_category = dict_operation \
                 [m_shared.Object_variable.KEY_TEXT_CATEGORY]
