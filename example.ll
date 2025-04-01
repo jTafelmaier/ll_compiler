@@ -14,11 +14,12 @@ thread TEXT main
     > HelloWorld
     | if
         isAlphabetic
-        to "True"
-        to "False"
-    | logWith "Text is alphabetic: "
+        to "Text is alphabetic."
+        to "Text is not alphabetic."
+    | log
     | to HelloWorld
-    | logWith "Text is: "
+    | add "\""
+    | logWith "Text is: \""
 
     thread TEXT logWith
         TEXT Text

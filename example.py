@@ -37,21 +37,22 @@ def nonpython_main(
         "!")
 
     return nonpython_logWith(
-        nonpython_to(
-            nonpython_logWith(
-                nonpython_if(
-                    nonpython_HelloWorld,
-                    lambda var_lambda: nonpython_isAlphabetic(
-                        var_lambda),
-                    lambda var_lambda: nonpython_to(
-                        var_lambda,
-                        "True"),
-                    lambda var_lambda: nonpython_to(
-                        var_lambda,
-                        "False")),
-                "Text is alphabetic: "),
-            nonpython_HelloWorld),
-        "Text is: ")
+        nonpython_add(
+            nonpython_to(
+                nonpython_log(
+                    nonpython_if(
+                        nonpython_HelloWorld,
+                        lambda var_lambda: nonpython_isAlphabetic(
+                            var_lambda),
+                        lambda var_lambda: nonpython_to(
+                            var_lambda,
+                            "Text is alphabetic."),
+                        lambda var_lambda: nonpython_to(
+                            var_lambda,
+                            "Text is not alphabetic."))),
+                nonpython_HelloWorld),
+            "\""),
+        "Text is: \"")
 
 
 if __name__ == "__main__":
