@@ -16,9 +16,9 @@ thread TEXT main
         isAlphabetic
         to "True"
         to "False"
-    | logWith "Text is alphabetic "
+    | logWith "Text is alphabetic: "
     | to HelloWorld
-    | logWith "Text is "
+    | logWith "Text is: "
 
     thread TEXT logWith
         TEXT Text

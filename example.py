@@ -49,9 +49,9 @@ def nonpython_main(
                     lambda var_lambda: nonpython_to(
                         var_lambda,
                         "False")),
-                "Text is alphabetic "),
+                "Text is alphabetic: "),
             nonpython_HelloWorld),
-        "Text is ")
+        "Text is: ")
 
 
 if __name__ == "__main__":
