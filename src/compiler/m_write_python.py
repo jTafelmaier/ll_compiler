@@ -29,15 +29,13 @@ def get_text_python_def(
         list_dicts_arguments = dict_function \
             [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
-        list_texts_arguments_additional = list(
-                map(
-                    get_text_expression,
-                    list_dicts_arguments))
-
         text_arguments_python = ",\n" \
             .join([
                     text_input] \
-                + list_texts_arguments_additional)
+                + list(
+                    map(
+                        get_text_expression,
+                        list_dicts_arguments)))
 
         return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
             + text_name_function \

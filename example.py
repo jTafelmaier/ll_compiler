@@ -23,16 +23,19 @@ def nonpython_main(
 
     def nonpython_logWith(
         nonpython_Input,
-        nonpython_Text):
+        nonpython_TextL,
+        nonpython_TextR):
 
         return nonpython_log(
-            nonpython_prepend(
-                nonpython_Input,
-                nonpython_Text))
+            nonpython_add(
+                nonpython_prepend(
+                    nonpython_Input,
+                    nonpython_TextL),
+                nonpython_TextR))
 
-    intermediate = nonpython_add(
+    intermediate = nonpython_to(
         nonpython_Input,
-        " error_1")
+        "Hello World error_1")
 
     # Nonpython Comment: TODO improve this example
     nonpython_HelloWorld = nonpython_add(
@@ -55,9 +58,11 @@ def nonpython_main(
                     lambda var_lambda: nonpython_to(
                         var_lambda,
                         "False")),
-                "Text is alphabetic "),
+                "Text is alphabetic ",
+                ""),
             nonpython_HelloWorld),
-        "Text is ")
+        "Text is ",
+        "")
 
 
 if __name__ == "__main__":

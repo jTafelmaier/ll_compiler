@@ -4,7 +4,7 @@
 
 thread TEXT main
 
-    | add " error_1"
+    | to "Hello World error_1"
     : TODO improve this example
     | split " "
     | joinByTitle
@@ -14,9 +14,13 @@ thread TEXT main
         isAlphabetic
         to "True"
         to "False"
-    | logWith "Text is alphabetic "
+    | logWith
+        "Text is alphabetic "
+        ""
     | to HelloWorld
-    | logWith "Text is "
+    | logWith
+        "Text is "
+        ""
 
     thread LIST[TEXT] joinByTitle
 
@@ -25,8 +29,10 @@ thread TEXT main
         | join " "
 
     thread TEXT logWith
-        TEXT Text
+        TEXT TextL
+        TEXT TextR
 
-        | prepend Text
+        | prepend TextL
+        | add TextR
         | log
 
