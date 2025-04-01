@@ -7,32 +7,22 @@ thread TEXT main
     | to "Hello World error_1"
     : TODO improve this example
     | split " "
-    | joinByTitle
+    | filter isAlphabetic
+    | map title
+    | join " "
     | add "!"
     > HelloWorld
     | if
         isAlphabetic
         to "True"
         to "False"
-    | logWith
-        "Text is alphabetic "
-        ""
+    | logWith "Text is alphabetic "
     | to HelloWorld
-    | logWith
-        "Text is "
-        ""
-
-    thread LIST[TEXT] joinByTitle
-
-        | filter isAlphabetic
-        | map title
-        | join " "
+    | logWith "Text is "
 
     thread TEXT logWith
-        TEXT TextL
-        TEXT TextR
+        TEXT Text
 
-        | prepend TextL
-        | add TextR
+        | prepend Text
         | log
 

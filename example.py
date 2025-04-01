@@ -8,30 +8,14 @@ from built_in_functions.built_in_functions import *
 def nonpython_main(
     nonpython_Input):
 
-    def nonpython_joinByTitle(
-        nonpython_Input):
-
-        return nonpython_join(
-            nonpython_map(
-                nonpython_filter(
-                    nonpython_Input,
-                    lambda var_lambda: nonpython_isAlphabetic(
-                        var_lambda)),
-                lambda var_lambda: nonpython_title(
-                    var_lambda)),
-            " ")
-
     def nonpython_logWith(
         nonpython_Input,
-        nonpython_TextL,
-        nonpython_TextR):
+        nonpython_Text):
 
         return nonpython_log(
-            nonpython_add(
-                nonpython_prepend(
-                    nonpython_Input,
-                    nonpython_TextL),
-                nonpython_TextR))
+            nonpython_prepend(
+                nonpython_Input,
+                nonpython_Text))
 
     intermediate = nonpython_to(
         nonpython_Input,
@@ -39,10 +23,17 @@ def nonpython_main(
 
     # Nonpython Comment: TODO improve this example
     nonpython_HelloWorld = nonpython_add(
-        nonpython_joinByTitle(
-            nonpython_split(
-                intermediate,
-                " ")),
+        nonpython_join(
+            nonpython_map(
+                nonpython_filter(
+                    nonpython_split(
+                        intermediate,
+                        " "),
+                    lambda var_lambda: nonpython_isAlphabetic(
+                        var_lambda)),
+                lambda var_lambda: nonpython_title(
+                    var_lambda)),
+            " "),
         "!")
 
     return nonpython_logWith(
@@ -58,11 +49,9 @@ def nonpython_main(
                     lambda var_lambda: nonpython_to(
                         var_lambda,
                         "False")),
-                "Text is alphabetic ",
-                ""),
+                "Text is alphabetic "),
             nonpython_HelloWorld),
-        "Text is ",
-        "")
+        "Text is ")
 
 
 if __name__ == "__main__":
