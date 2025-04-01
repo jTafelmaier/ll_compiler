@@ -13,7 +13,7 @@ function calls          function(item)              item | function
 method calls            item.method()               item | method
 indexing                item[0]                     item | atIndex 0
 overwrite               item[0] = 42                item | overwriteAt 0 42
-del                     del item[0]                 item | deleteAt 0
+delete                  del item[0]                 item | deleteAt 0
 
 
 
