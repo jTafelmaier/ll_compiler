@@ -12,6 +12,7 @@ unary operators         not item                    item | not
 function calls          function(item)              item | function
 method calls            item.method()               item | method
 indexing                item[0]                     item | atIndex 0
+slicing                 item[1:]                    item | slice 1
 overwrite               item[0] = 42                item | overwriteAt 0 42
 delete                  del item[0]                 item | deleteAt 0
 
@@ -21,17 +22,26 @@ delete                  del item[0]                 item | deleteAt 0
 EXAMPLE
 
 PYTHON:
-result = reverse(custom_function(str(list[0] + 2).upper()) + " Level") + " right"
+    print("\n".join(map(lambda text: "item: " + text, filter(lambda text: text.isAlpha(), listInput[0].split(" ")))) \
+        + "\n" \
+        + "\n".join(map(lambda text: "item: " + text, listInput[1:])))
+
 
 NEW LANGUAGE:
-    list
-        | atIndex 0
-        | add 2
-        | toString
-        | upper
-        | custom_function
-        | append " Level"
-        | reverse
-        | append " right"
-        > result
+
+    | to listInput
+    | slice 1
+    | map (prepend "item: ")
+    | join "\n"
+    > text2
+
+    | to listInput
+    | atIndex 0
+    | split " "
+    | filter isAlphabetic
+    | map (prepend "item: ")
+    | join "\n"
+    | add "\n"
+    | add text2
+    | print
 
