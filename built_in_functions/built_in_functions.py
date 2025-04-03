@@ -30,12 +30,20 @@ def nonpython_toText(
     return str(int_input)
 
 
-def nonpython_Iadd(
+def nonpython_plus(
     int_input:int,
     int_to_add:int):
 
     return int_input \
         + int_to_add
+
+
+def nonpython_minus(
+    int_input:int,
+    int_arg:int):
+
+    return int_input \
+        - int_arg
 
 
 def nonpython_isAlphabetic(
@@ -131,4 +139,18 @@ def nonpython_join(
 
     return text_join \
         .join(list_texts_input)
+
+
+def nonpython_length(
+    list_input:typing.List):
+
+    return len(list_input)
+
+
+def nonpython_equalsInt(
+    int_input:int,
+    int_arg:int):
+
+    return int_input \
+        == int_arg
 
