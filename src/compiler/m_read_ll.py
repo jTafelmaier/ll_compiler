@@ -142,7 +142,7 @@ def get_dict_data_parsed_ll(
 
             return {
                 "|": get_dict_parsed_function,
-                ">": get_dict_parsed_memory_write,
+                ">>": get_dict_parsed_memory_write,
                 ":": get_dict_parsed_comment} \
                 [text_token_first] \
                 (list_block)

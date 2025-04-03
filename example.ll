@@ -11,7 +11,7 @@ thread TEXT main
     | map title
     | join " "
     | add "!"
-    > HelloWorld
+    >> HelloWorld
     | if
         isAlphabetic
         to "Text is alphabetic."
