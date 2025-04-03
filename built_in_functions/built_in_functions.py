@@ -5,6 +5,12 @@ import typing
 
 
 
+def nonpython_unchanged(
+    item_input:typing.Any):
+
+    return item_input
+
+
 def nonpython_to(
     item_input:typing.Any,
     item_other:typing.Any):
@@ -109,6 +115,15 @@ def nonpython_log(
     text_input:str):
 
     print(text_input)
+
+    return text_input
+
+
+def nonpython_logOther(
+    text_input:str,
+    text_other:str):
+
+    print(text_other)
 
     return text_input
 
