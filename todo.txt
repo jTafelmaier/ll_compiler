@@ -3,7 +3,6 @@
 
 
 Implement, in order:
-- option for a function "object" to be the first item in a function sequence (input to the first function call)
 - built in ll file?
 - type inference for literals
 - type inference for expressions using built in functions
