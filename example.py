@@ -54,7 +54,3 @@ def nonpython_Main(
             nonpython_Lowercase,
             nonpython_Uppercase))
 
-
-if __name__ == "__main__":
-    nonpython_main()
-

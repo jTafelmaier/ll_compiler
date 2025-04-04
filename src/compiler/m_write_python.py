@@ -176,7 +176,5 @@ def get_text_python_main(
 
     return "\n\nfrom built_in_functions.built_in_functions import *\n\n\n\n\n" \
         + text_python \
-        + "\n\n\nif __name__ == \"__main__\":\n    " \
-        + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-        + "main()\n\n"
+        + "\n\n"
 
