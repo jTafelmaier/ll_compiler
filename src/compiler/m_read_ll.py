@@ -66,7 +66,7 @@ def get_dict_data_parsed_ll(
                 [0]
 
             if text_first[0].isupper():
-                return get_dict_parsed_function(list_block[:1])
+                return get_dict_parsed_function(list_block)
 
             if text_first[0].islower():
                 return {
