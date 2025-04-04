@@ -85,7 +85,7 @@ def get_dict_data_parsed_ll(
             text_name = list_tokens_first \
                 [0]
 
-            del list_tokens_first[0]
+            del list_tokens_first[:2]
 
             if len(list_tokens_first) == 0:
                 del list_block[0]
