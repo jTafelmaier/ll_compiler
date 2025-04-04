@@ -3,7 +3,7 @@
 import typing
 
 from src.auxiliary import m_common_functions
-from src.compiler import m_shared
+from src.auxiliary import m_shared
 
 
 
