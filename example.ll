@@ -3,10 +3,10 @@
 
 
 chain TEXT main
-    | to "Hello World error_1" # TODO improve this example
+    | to "Hello World error_1"
     | split " "
     | filter isAlphabetic
-    | map title
+    | map title # TODO improve this example
     | join " "
     | add "!"
     > HelloWorld
