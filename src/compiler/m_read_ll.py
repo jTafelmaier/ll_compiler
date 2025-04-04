@@ -43,11 +43,12 @@ def get_dict_data_parsed_ll(
                     == 0
 
         def get_dict_argument(
-            dict_block_argument:typing.Dict):
+            text_argument:str):
 
             text_type_argument, \
-            text_name_argument = dict_block_argument \
-                [KEY_LIST_TOKENS]
+            _, \
+            text_name_argument = text_argument \
+                .partition(".")
 
             return {
                 m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
@@ -123,15 +124,18 @@ def get_dict_data_parsed_ll(
                 [text_token_first] \
                 (list_block)
 
+        list_tokens_first = get_list_tokens_first(list_def)
+
         _, \
         text_type_input, \
-        text_name_function = get_list_tokens_first(list_def)
+        text_name_function = list_tokens_first \
+            [:3]
 
-        list_arguments, \
-        _, \
-        list_blocks_body = m_common_functions.get_tuple_partitions_list(
-                list_items=list_def[1:],
-                function_separate=is_empty_block)
+        list_arguments = list_tokens_first \
+            [3:]
+
+        list_blocks_body = list_def \
+            [1:]
 
         list_dicts_arguments = list(
                 map(
