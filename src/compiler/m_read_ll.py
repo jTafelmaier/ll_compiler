@@ -54,7 +54,7 @@ def get_dict_data_parsed_ll(
             list_dicts_arguments = list(
                     map(
                         get_dict_parsed_expression,
-                        list_tokens[1:]))
+                        list_tokens[2:]))
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_FUNCTION,
@@ -115,7 +115,7 @@ def get_dict_data_parsed_ll(
                 map(
                     get_dict_argument,
                     list_tokens_first \
-                        [3:]))
+                        [4:]))
 
         list_dicts_parsed_operations = list(
                 map(
