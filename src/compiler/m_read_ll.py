@@ -45,18 +45,6 @@ def get_dict_data_parsed_ll(
                         [KEY_LIST_TOKENS]) \
                     == 0
 
-        def get_dict_argument(
-            text_argument:str):
-
-            text_type_argument, \
-            _, \
-            text_name_argument = text_argument \
-                .partition(KEYWORD_SEPARATOR_TYPE)
-
-            return {
-                m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
-                m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
-
         def get_dict_parsed_expression(
             item_block:typing.Union[typing.Dict, typing.List]):
 
@@ -126,6 +114,18 @@ def get_dict_data_parsed_ll(
                 KEYWORD_SAVE: get_dict_parsed_memory_write} \
                 [text_token_first] \
                 (list_block)
+
+        def get_dict_argument(
+            text_argument:str):
+
+            text_type_argument, \
+            _, \
+            text_name_argument = text_argument \
+                .partition(KEYWORD_SEPARATOR_TYPE)
+
+            return {
+                m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
+                m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
 
         list_tokens_first = get_list_tokens_first(list_def)
 
