@@ -46,17 +46,17 @@ def nonpython_Main(
                                         "Stage 1:"),
                                     " "),
                                 nonpython_Isalphabetic),
-                            nonpython_Title),
+                            nonpython_Titlecase),
                         " "),
                     ": Hello World!"),
                 "Stage 2:"),
             nonpython_Isalphabetic,
             lambda var_lambda: nonpython_To(
                 var_lambda,
-                "Text is alphabetic."),
+                nonpython_Lowercase),
             lambda var_lambda: nonpython_To(
                 var_lambda,
-                "Text is not alphabetic.")))
+                nonpython_Uppercase)))
 
 
 if __name__ == "__main__":

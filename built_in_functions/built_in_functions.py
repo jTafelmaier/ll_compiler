@@ -82,21 +82,21 @@ def nonpython_Reversed(
         [::-1]
 
 
-def nonpython_Lower(
+def nonpython_Lowercase(
     text_input:str):
 
     return text_input \
         .lower()
 
 
-def nonpython_Upper(
+def nonpython_Uppercase(
     text_input:str):
 
     return text_input \
         .upper()
 
 
-def nonpython_Title(
+def nonpython_Titlecase(
     text_input:str):
 
     return text_input \
