@@ -6,51 +6,25 @@ from built_in_functions.built_in_functions import *
 
 
 def nonpython_Main(
-    nonpython_Input):
+    nonpython_input):
 
     def nonpython_Logwithquotes(
-        nonpython_Input,
-        nonpython_Textprefix):
-
-        def nonpython_Nothing(
-            nonpython_Input):
-
-            return nonpython_To(
-                nonpython_To(
-                    nonpython_To(
-                        nonpython_To(
-                            nonpython_Input,
-                            nonpython_Input),
-                        nonpython_Input),
-                    nonpython_Input),
-                nonpython_Input)
+        nonpython_input,
+        nonpython_prefix):
 
         return nonpython_To(
             nonpython_Log(
                 nonpython_Addleft(
                     nonpython_Addleft(
                         nonpython_Addright(
-                            nonpython_Input,
+                            nonpython_input,
                             "\""),
                         "\""),
-                    nonpython_Textprefix)),
-            nonpython_Input)
-
-    def nonpython_Nothing(
-        nonpython_Input):
-
-        return nonpython_To(
-            nonpython_To(
-                nonpython_To(
-                    nonpython_To(
-                        nonpython_Input,
-                        nonpython_Input),
-                    nonpython_Input),
-                nonpython_Input),
-            nonpython_Input)
+                    nonpython_prefix)),
+            nonpython_input)
 
     nonpython_hello = nonpython_To(
-        nonpython_Input,
+        nonpython_input,
         "Hello")
 
     nonpython_world = nonpython_To(
@@ -67,10 +41,8 @@ def nonpython_Main(
                                 nonpython_Split(
                                     nonpython_Logwithquotes(
                                         nonpython_To(
-                                            nonpython_To(
-                                                nonpython_world,
-                                                nonpython_Input),
-                                            nonpython_Input),
+                                            nonpython_world,
+                                            nonpython_input),
                                         "Stage 1:"),
                                     " "),
                                 nonpython_Isalphabetic),

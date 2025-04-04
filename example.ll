@@ -3,41 +3,28 @@
 
 
 START TEXT Main
-    | To -- "Hello"
+    | To "Hello"
     + hello
-    | To -- "World"
+    | To "World"
     + world
-    | To -- Input
-    | To -- Input
-    | Logwithquotes -- "Stage 1:"
-    | Split -- " "
-    | Filter -- Isalphabetic
-    | Map -- Title # TODO improve this example
-    | Join -- " "
-    | Addright -- ": Hello World!"
-    | Logwithquotes -- "Stage 2:"
-    | If --
+    | To input
+    | Logwithquotes "Stage 1:"
+    | Split " "
+    | Filter Isalphabetic
+    | Map Title # TODO improve this example
+    | Join " "
+    | Addright ": Hello World!"
+    | Logwithquotes "Stage 2:"
+    | If
         Isalphabetic
-        To -- "Text is alphabetic."
-        To -- "Text is not alphabetic."
+        To "Text is alphabetic."
+        To "Text is not alphabetic."
     | Log
 
-    START TEXT Logwithquotes TEXT:Textprefix
-        | Addright -- "\""
-        | Addleft -- "\""
-        | Addleft -- Textprefix
+    START TEXT Logwithquotes TEXT:prefix
+        | Addright "\""
+        | Addleft "\""
+        | Addleft prefix
         | Log
-        | To -- Input
-
-        START TEXT Nothing
-            | To -- Input
-            | To -- Input
-            | To -- Input
-            | To -- Input
-
-    START TEXT Nothing
-        | To -- Input
-        | To -- Input
-        | To -- Input
-        | To -- Input
+        | To input
 
