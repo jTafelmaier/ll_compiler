@@ -62,6 +62,11 @@ def get_text_python_def(
         def get_text_function(
             dict_function:typing.Dict):
 
+            if len(dict_function[m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]) == 0:
+                return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                    + dict_function \
+                        [m_shared.Function_reference.KEY_NAME_FUNCTION]
+
             return "lambda " \
                 + TEXT_VAR_LAMBDA \
                 + ": " \

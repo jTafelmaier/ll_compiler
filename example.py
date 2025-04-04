@@ -26,10 +26,8 @@ def nonpython_main(
                             nonpython_Input,
                             "Hello World error_1"),
                         " "),
-                    lambda var_lambda: nonpython_isAlphabetic(
-                        var_lambda)),
-                lambda var_lambda: nonpython_title(
-                    var_lambda)),
+                    nonpython_isAlphabetic),
+                nonpython_title),
             " "),
         "!")
 
@@ -39,8 +37,7 @@ def nonpython_main(
                 nonpython_log(
                     nonpython_if(
                         nonpython_HelloWorld,
-                        lambda var_lambda: nonpython_isAlphabetic(
-                            var_lambda),
+                        nonpython_isAlphabetic,
                         lambda var_lambda: nonpython_to(
                             var_lambda,
                             "Text is alphabetic."),
