@@ -5,48 +5,86 @@ from built_in_functions.built_in_functions import *
 
 
 
-def nonpython_main(
+def nonpython_Main(
     nonpython_Input):
 
-    def nonpython_logWith(
+    def nonpython_Logwithquotes(
         nonpython_Input,
-        nonpython_Text):
+        nonpython_Textprefix):
 
-        return nonpython_log(
-            nonpython_prepend(
-                nonpython_Input,
-                nonpython_Text))
+        def nonpython_Nothing(
+            nonpython_Input):
 
-    nonpython_HelloWorld = nonpython_add(
-        nonpython_join(
-            nonpython_map(
-                nonpython_filter(
-                    nonpython_split(
-                        nonpython_to(
+            return nonpython_To(
+                nonpython_To(
+                    nonpython_To(
+                        nonpython_To(
                             nonpython_Input,
-                            "Hello World error_1"),
-                        " "),
-                    nonpython_isAlphabetic),
-                nonpython_title),
-            " "),
-        "!")
+                            nonpython_Input),
+                        nonpython_Input),
+                    nonpython_Input),
+                nonpython_Input)
 
-    return nonpython_logWith(
-        nonpython_add(
-            nonpython_to(
-                nonpython_log(
-                    nonpython_if(
-                        nonpython_HelloWorld,
-                        nonpython_isAlphabetic,
-                        lambda var_lambda: nonpython_to(
-                            var_lambda,
-                            "Text is alphabetic."),
-                        lambda var_lambda: nonpython_to(
-                            var_lambda,
-                            "Text is not alphabetic."))),
-                nonpython_HelloWorld),
-            "\""),
-        "Text is: \"")
+        return nonpython_To(
+            nonpython_Log(
+                nonpython_Addleft(
+                    nonpython_Addleft(
+                        nonpython_Addright(
+                            nonpython_Input,
+                            "\""),
+                        "\""),
+                    nonpython_Textprefix)),
+            nonpython_Input)
+
+    def nonpython_Nothing(
+        nonpython_Input):
+
+        return nonpython_To(
+            nonpython_To(
+                nonpython_To(
+                    nonpython_To(
+                        nonpython_Input,
+                        nonpython_Input),
+                    nonpython_Input),
+                nonpython_Input),
+            nonpython_Input)
+
+    nonpython_hello = nonpython_To(
+        nonpython_Input,
+        "Hello")
+
+    nonpython_world = nonpython_To(
+        nonpython_hello,
+        "World")
+
+    return nonpython_Log(
+        nonpython_If(
+            nonpython_Logwithquotes(
+                nonpython_Addright(
+                    nonpython_Join(
+                        nonpython_Map(
+                            nonpython_Filter(
+                                nonpython_Split(
+                                    nonpython_Logwithquotes(
+                                        nonpython_To(
+                                            nonpython_To(
+                                                nonpython_world,
+                                                nonpython_Input),
+                                            nonpython_Input),
+                                        "Stage 1:"),
+                                    " "),
+                                nonpython_Isalphabetic),
+                            nonpython_Title),
+                        " "),
+                    ": Hello World!"),
+                "Stage 2:"),
+            nonpython_Isalphabetic,
+            lambda var_lambda: nonpython_To(
+                var_lambda,
+                "Text is alphabetic."),
+            lambda var_lambda: nonpython_To(
+                var_lambda,
+                "Text is not alphabetic.")))
 
 
 if __name__ == "__main__":

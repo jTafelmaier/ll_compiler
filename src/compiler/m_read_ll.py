@@ -12,7 +12,7 @@ def get_dict_data_parsed_ll(
     list_file:typing.List):
 
     KEYWORD_OPERATION = "|"
-    KEYWORD_SAVE = ">"
+    KEYWORD_SAVE = "+"
     KEYWORD_SEPARATOR_TYPE = ":"
     KEY_LIST_TOKENS = "list_tokens"
 
@@ -65,10 +65,10 @@ def get_dict_data_parsed_ll(
             text_first = get_list_tokens_first(list_block) \
                 [0]
 
-            if text_first[0].islower():
+            if text_first[0].isupper():
                 return get_dict_parsed_function(list_block[:1])
 
-            if text_first[0].isupper():
+            if text_first[0].islower():
                 return {
                     m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_read",
                     m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_first}

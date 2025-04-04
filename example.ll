@@ -2,24 +2,42 @@
 
 
 
-chain TEXT main
-    | to "Hello World error_1"
-    | split " "
-    | filter isAlphabetic
-    | map title # TODO improve this example
-    | join " "
-    | add "!"
-    > HelloWorld
-    | if
-        isAlphabetic
-        to "Text is alphabetic."
-        to "Text is not alphabetic."
-    | log
-    | to HelloWorld
-    | add "\""
-    | logWith "Text is: \""
+START TEXT Main
+    | To "Hello"
+    + hello
+    | To "World"
+    + world
+    | To Input
+    | To Input
+    | Logwithquotes "Stage 1:"
+    | Split " "
+    | Filter Isalphabetic
+    | Map Title # TODO improve this example
+    | Join " "
+    | Addright ": Hello World!"
+    | Logwithquotes "Stage 2:"
+    | If
+        Isalphabetic
+        To "Text is alphabetic."
+        To "Text is not alphabetic."
+    | Log
 
-    chain TEXT logWith TEXT:Text
-        | prepend Text
-        | log
+    START TEXT Logwithquotes TEXT:Textprefix
+        | Addright "\""
+        | Addleft "\""
+        | Addleft Textprefix
+        | Log
+        | To Input
+
+        START TEXT Nothing
+            | To Input
+            | To Input
+            | To Input
+            | To Input
+
+    START TEXT Nothing
+        | To Input
+        | To Input
+        | To Input
+        | To Input
 

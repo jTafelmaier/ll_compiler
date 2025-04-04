@@ -11,7 +11,7 @@ def main():
 
     import example
 
-    example.nonpython_main("example input")
+    example.nonpython_Main("example input")
 
     return None
 
