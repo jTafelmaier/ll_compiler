@@ -12,7 +12,7 @@ def get_dict_data_parsed_ll(
     list_file:typing.List):
 
     KEYWORD_OPERATION = "|"
-    KEYWORD_SAVE = ">>"
+    KEYWORD_SAVE = ">"
     KEYWORD_SEPARATOR_TYPE = ":"
     KEY_LIST_TOKENS = "list_tokens"
 

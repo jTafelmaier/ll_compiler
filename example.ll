@@ -2,14 +2,14 @@
 
 
 
-thread TEXT main
+chain TEXT main
     | to "Hello World error_1" # TODO improve this example
     | split " "
     | filter isAlphabetic
     | map title
     | join " "
     | add "!"
-    >> HelloWorld
+    > HelloWorld
     | if
         isAlphabetic
         to "Text is alphabetic."
@@ -19,7 +19,7 @@ thread TEXT main
     | add "\""
     | logWith "Text is: \""
 
-    thread TEXT logWith TEXT:Text
+    chain TEXT logWith TEXT:Text
         | prepend Text
         | log
 
