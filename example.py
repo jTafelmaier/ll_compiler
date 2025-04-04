@@ -17,17 +17,14 @@ def nonpython_main(
                 nonpython_Input,
                 nonpython_Text))
 
-    intermediate = nonpython_to(
-        nonpython_Input,
-        "Hello World error_1")
-
-    # Nonpython Comment: TODO improve this example
     nonpython_HelloWorld = nonpython_add(
         nonpython_join(
             nonpython_map(
                 nonpython_filter(
                     nonpython_split(
-                        intermediate,
+                        nonpython_to(
+                            nonpython_Input,
+                            "Hello World error_1"),
                         " "),
                     lambda var_lambda: nonpython_isAlphabetic(
                         var_lambda)),

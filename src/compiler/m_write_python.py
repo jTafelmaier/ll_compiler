@@ -81,17 +81,6 @@ def get_text_python_def(
 
     def get_text_operations():
 
-        def get_text_comment(
-            dict_comment:typing.Dict):
-
-            return "\n" \
-                .join(
-                    map(
-                        lambda text_comment: "# Nonpython Comment: " + text_comment,
-                        dict_comment \
-                            [m_shared.Comment.KEY_TEXT] \
-                            .split("\n")))
-
         list_dicts_operations = dict_def \
             [m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS]
 
@@ -101,6 +90,7 @@ def get_text_python_def(
 
         # TODO refactor
         for dict_operation in list_dicts_operations:
+
             text_category = dict_operation \
                 [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
@@ -123,18 +113,6 @@ def get_text_python_def(
 
                 text_python_current_expression = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
                     + text_key_memory
-
-            if text_category == "comment":
-
-                # TODO duplicate code
-                text_python_finished_expressions = text_python_finished_expressions \
-                    + "intermediate = " \
-                    + text_python_current_expression \
-                    + "\n\n" \
-                    + get_text_comment(dict_operation) \
-                    + "\n"
-
-                text_python_current_expression = "intermediate"
 
         return text_python_finished_expressions \
             + "return " \

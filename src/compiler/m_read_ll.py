@@ -106,29 +106,6 @@ def get_dict_data_parsed_ll(
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_write",
                 m_shared.Memory_write.KEY_TEXT_KEY_MEMORY: text_key_memory}
 
-        def get_dict_parsed_comment(
-            list_block:typing.List):
-
-            def get_text_unmodified(
-                item_block:typing.Union[typing.Dict, typing.List]):
-
-                if isinstance(item_block, dict):
-                    return " " \
-                        .join(item_block \
-                            [KEY_LIST_TOKENS])
-                else:
-                    return "\n" \
-                        .join(
-                            map(
-                                get_text_unmodified,
-                                item_block))
-
-            text = get_text_unmodified(list_block)
-
-            return {
-                m_shared.Object_variable.KEY_TEXT_CATEGORY: "comment",
-                m_shared.Comment.KEY_TEXT: text}
-
         def get_dict_parsed_operation(
             item_block:typing.Union[typing.Dict, typing.List]):
 
@@ -142,8 +119,7 @@ def get_dict_data_parsed_ll(
 
             return {
                 "|": get_dict_parsed_function,
-                ">>": get_dict_parsed_memory_write,
-                ":": get_dict_parsed_comment} \
+                ">>": get_dict_parsed_memory_write} \
                 [text_token_first] \
                 (list_block)
 

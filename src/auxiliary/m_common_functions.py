@@ -105,13 +105,16 @@ def get_item_tokens(
 
                 bool_token_terminated_here = False
 
-                if not bool_in_string and character == " ":
-                    if character_last == " ":
-                        raise Exception(
-                                "Line " \
-                                    + str(index_line) \
-                                    + ": Two consecutive whitespaces are not allowed.")
-                    bool_token_terminated_here = True
+                if not bool_in_string:
+                    if character == ":":
+                        return
+                    if character == " ":
+                        if character_last == " ":
+                            raise Exception(
+                                    "Line " \
+                                        + str(index_line) \
+                                        + ": Two consecutive whitespaces are not allowed.")
+                        bool_token_terminated_here = True
 
                 if character == "\"" and character_last != "\\":
                     bool_in_string = not bool_in_string

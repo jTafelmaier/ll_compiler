@@ -4,8 +4,7 @@
 
 thread TEXT main
 
-    | to "Hello World error_1"
-    : TODO improve this example
+    | to "Hello World error_1" : TODO improve this example
     | split " "
     | filter isAlphabetic
     | map title
