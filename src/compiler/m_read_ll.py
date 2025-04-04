@@ -11,7 +11,7 @@ from src.auxiliary import m_shared
 def get_dict_data_parsed_ll(
     list_file:typing.List):
 
-    KEYWORD_OPERATION = "|"
+    KEYWORD_FUNCTION_CALL = "|"
     KEYWORD_MEMORY_WRITE = "+"
     KEYWORD_SEPARATOR_TYPE = ":"
     KEY_LIST_TOKENS = "list_tokens"
@@ -78,7 +78,7 @@ def get_dict_data_parsed_ll(
                 [KEY_LIST_TOKENS]
 
             return {
-                KEYWORD_OPERATION: get_dict_parsed_function,
+                KEYWORD_FUNCTION_CALL: get_dict_parsed_function,
                 KEYWORD_MEMORY_WRITE: get_dict_parsed_memory_write} \
                 [list_tokens[0]] \
                 (list_tokens[1:])
