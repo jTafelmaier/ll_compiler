@@ -78,9 +78,9 @@ def get_text_python_def(
             [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
         return {
-            "literal": get_text_literal,
-            "memory_read": get_text_memory_read,
-            "function": get_text_function} \
+            m_shared.KEY_CATEGORY_LITERAL: get_text_literal,
+            m_shared.KEY_CATEGORY_MEMORY_READ: get_text_memory_read,
+            m_shared.KEY_CATEGORY_FUNCTION: get_text_function} \
             [text_category] \
             (dict_expression)
 
@@ -99,12 +99,12 @@ def get_text_python_def(
             text_category = dict_operation \
                 [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
-            if text_category == "function":
+            if text_category == m_shared.KEY_CATEGORY_FUNCTION:
                 text_python_current_expression = get_text_function_call(
                         text_input=text_python_current_expression,
                         dict_function=dict_operation)
 
-            if text_category == "memory_write":
+            if text_category == m_shared.KEY_CATEGORY_MEMORY_WRITE:
 
                 text_key_memory = dict_operation \
                     [m_shared.Memory_write.KEY_TEXT_KEY_MEMORY]

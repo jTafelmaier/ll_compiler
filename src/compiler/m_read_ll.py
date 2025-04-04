@@ -58,11 +58,11 @@ def get_dict_data_parsed_ll(
 
             if text_first[0].islower():
                 return {
-                    m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_read",
+                    m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_READ,
                     m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_first}
 
             return {
-                m_shared.Object_variable.KEY_TEXT_CATEGORY: "literal",
+                m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_LITERAL,
                 m_shared.Literal.KEY_TEXT_VALUE: text_first}
 
         def get_dict_parsed_function(
@@ -84,7 +84,7 @@ def get_dict_data_parsed_ll(
                         list_block))
 
             return {
-                m_shared.Object_variable.KEY_TEXT_CATEGORY: "function",
+                m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_FUNCTION,
                 m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
                 m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
@@ -95,7 +95,7 @@ def get_dict_data_parsed_ll(
                 [0]
 
             return {
-                m_shared.Object_variable.KEY_TEXT_CATEGORY: "memory_write",
+                m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_WRITE,
                 m_shared.Memory_write.KEY_TEXT_KEY_MEMORY: text_key_memory}
 
         def get_dict_parsed_operation(

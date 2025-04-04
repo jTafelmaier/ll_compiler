@@ -2,6 +2,12 @@
 
 
 
+KEY_CATEGORY_LITERAL = "literal"
+KEY_CATEGORY_FUNCTION = "function"
+KEY_CATEGORY_MEMORY_READ = "memory_read"
+KEY_CATEGORY_MEMORY_WRITE = "memory_write"
+
+
 class Object_variable:
 
     KEY_TEXT_CATEGORY = "category"
