@@ -12,24 +12,9 @@ def get_dict_data_parsed_ll(
     list_file:typing.List):
 
     KEYWORD_OPERATION = "|"
-    KEYWORD_SAVE = "+"
+    KEYWORD_MEMORY_WRITE = "+"
     KEYWORD_SEPARATOR_TYPE = ":"
     KEY_LIST_TOKENS = "list_tokens"
-
-    def get_list_tokens_first(
-        list_block:typing.List):
-
-        return list_block \
-            [0] \
-            [KEY_LIST_TOKENS]
-
-    def get_list_block(
-        item_block:typing.Union[typing.Dict, typing.List]):
-
-        if isinstance(item_block, dict):
-            return [item_block]
-        else:
-            return item_block
 
     def get_dict_parsed_function_definition(
         list_def:typing.List):
@@ -46,42 +31,30 @@ def get_dict_data_parsed_ll(
                     == 0
 
         def get_dict_parsed_expression(
-            item_block:typing.Union[typing.Dict, typing.List]):
+            text_expression:str):
 
-            list_block = get_list_block(item_block)
+            if text_expression[0].isupper():
+                return get_dict_parsed_function([text_expression])
 
-            text_first = get_list_tokens_first(list_block) \
-                [0]
-
-            if text_first[0].isupper():
-                return get_dict_parsed_function(list_block)
-
-            if text_first[0].islower():
+            if text_expression[0].islower():
                 return {
                     m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_READ,
-                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_first}
+                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_expression}
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_LITERAL,
-                m_shared.Literal.KEY_TEXT_VALUE: text_first}
+                m_shared.Literal.KEY_TEXT_VALUE: text_expression}
 
         def get_dict_parsed_function(
-            list_block:typing.List):
+            list_tokens:typing.List[str]):
 
-            list_tokens_first = get_list_tokens_first(list_block)
-
-            text_name = list_tokens_first \
+            text_name = list_tokens \
                 [0]
-
-            del list_tokens_first[0]
-
-            if len(list_tokens_first) == 0:
-                del list_block[0]
 
             list_dicts_arguments = list(
                     map(
                         get_dict_parsed_expression,
-                        list_block))
+                        list_tokens[1:]))
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_FUNCTION,
@@ -89,9 +62,9 @@ def get_dict_data_parsed_ll(
                 m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
         def get_dict_parsed_memory_write(
-            list_block:typing.List):
+            list_tokens:typing.List[str]):
 
-            text_key_memory = get_list_tokens_first(list_block) \
+            text_key_memory = list_tokens \
                 [0]
 
             return {
@@ -99,21 +72,16 @@ def get_dict_data_parsed_ll(
                 m_shared.Memory_write.KEY_TEXT_KEY_MEMORY: text_key_memory}
 
         def get_dict_parsed_operation(
-            item_block:typing.Union[typing.Dict, typing.List]):
+            dict_operation:typing.Dict):
 
-            list_block = get_list_block(item_block)
-
-            list_tokens_first = get_list_tokens_first(list_block)
-
-            text_token_first = list_tokens_first[0]
-
-            del list_tokens_first[0]
+            list_tokens = dict_operation \
+                [KEY_LIST_TOKENS]
 
             return {
                 KEYWORD_OPERATION: get_dict_parsed_function,
-                KEYWORD_SAVE: get_dict_parsed_memory_write} \
-                [text_token_first] \
-                (list_block)
+                KEYWORD_MEMORY_WRITE: get_dict_parsed_memory_write} \
+                [list_tokens[0]] \
+                (list_tokens[1:])
 
         def get_dict_argument(
             text_argument:str):
@@ -127,43 +95,45 @@ def get_dict_data_parsed_ll(
                 m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
                 m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
 
-        list_tokens_first = get_list_tokens_first(list_def)
+        list_tokens_first = list_def \
+            [0] \
+            [KEY_LIST_TOKENS]
 
         _, \
         text_type_input, \
         text_name_function = list_tokens_first \
             [:3]
 
-        list_items_operations, \
+        list_dicts_operations, \
         _, \
-        list_lists_function_definitions = m_common_functions.get_tuple_partitions_list(
+        list_lists_inner_definitions = m_common_functions.get_tuple_partitions_list(
                 list_items=list_def \
                     [1:],
                 function_separate=is_empty_block)
 
-        list_dicts_arguments = list(
+        list_dicts_parsed_arguments = list(
                 map(
                     get_dict_argument,
                     list_tokens_first \
                         [3:]))
 
-        list_dicts_operations = list(
+        list_dicts_parsed_operations = list(
                 map(
                     get_dict_parsed_operation,
-                    list_items_operations))
+                    list_dicts_operations))
 
-        list_dicts_inner_definitions = list(
+        list_dicts_parsed_inner_definitions = list(
                 map(
                     get_dict_parsed_function_definition,
-                    list_lists_function_definitions \
+                    list_lists_inner_definitions \
                         [::2]))
 
         return {
             m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
             m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
-            m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_arguments,
-            m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_operations,
-            m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS: list_dicts_inner_definitions}
+            m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_parsed_arguments,
+            m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_parsed_operations,
+            m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS: list_dicts_parsed_inner_definitions}
 
     return get_dict_parsed_function_definition(list_file[4])
 

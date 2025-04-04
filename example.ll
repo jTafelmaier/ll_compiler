@@ -15,10 +15,7 @@ START TEXT Main
     | Join " "
     | Addright ": Hello World!"
     | Logwithquotes "Stage 2:"
-    | If
-        Isalphabetic
-        Lowercase
-        Uppercase
+    | If Isalphabetic Lowercase Uppercase
     | Log
 
     START TEXT Logwithquotes TEXT:prefix
