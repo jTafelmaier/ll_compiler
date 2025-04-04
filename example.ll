@@ -3,7 +3,7 @@
 
 
 thread TEXT main
-    | to "Hello World error_1" : TODO improve this example
+    | to "Hello World error_1" # TODO improve this example
     | split " "
     | filter isAlphabetic
     | map title
@@ -19,7 +19,7 @@ thread TEXT main
     | add "\""
     | logWith "Text is: \""
 
-    thread TEXT logWith TEXT.Text
+    thread TEXT logWith TEXT:Text
         | prepend Text
         | log
 

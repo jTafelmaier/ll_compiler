@@ -11,6 +11,9 @@ from src.compiler import m_shared
 def get_dict_data_parsed_ll(
     list_file:typing.List):
 
+    KEYWORD_OPERATION = "|"
+    KEYWORD_SAVE = ">>"
+    KEYWORD_SEPARATOR_TYPE = ":"
     KEY_LIST_TOKENS = "list_tokens"
 
     def get_list_tokens_first(
@@ -48,7 +51,7 @@ def get_dict_data_parsed_ll(
             text_type_argument, \
             _, \
             text_name_argument = text_argument \
-                .partition(".")
+                .partition(KEYWORD_SEPARATOR_TYPE)
 
             return {
                 m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
@@ -119,8 +122,8 @@ def get_dict_data_parsed_ll(
             del list_tokens_first[0]
 
             return {
-                "|": get_dict_parsed_function,
-                ">>": get_dict_parsed_memory_write} \
+                KEYWORD_OPERATION: get_dict_parsed_function,
+                KEYWORD_SAVE: get_dict_parsed_memory_write} \
                 [text_token_first] \
                 (list_block)
 

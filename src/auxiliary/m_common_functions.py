@@ -106,7 +106,7 @@ def get_item_tokens(
                 bool_token_terminated_here = False
 
                 if not bool_in_string:
-                    if character == ":":
+                    if character == "#":
                         return
                     if character == " ":
                         if character_last == " ":
