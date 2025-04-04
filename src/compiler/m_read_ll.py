@@ -134,32 +134,29 @@ def get_dict_data_parsed_ll(
         text_name_function = list_tokens_first \
             [:3]
 
-        list_arguments = list_tokens_first \
-            [3:]
-
-        list_blocks_body = list_def \
-            [1:]
+        list_items_operations, \
+        _, \
+        list_lists_function_definitions = m_common_functions.get_tuple_partitions_list(
+                list_items=list_def \
+                    [1:],
+                function_separate=is_empty_block)
 
         list_dicts_arguments = list(
                 map(
                     get_dict_argument,
-                    list_arguments))
-
-        list_items_operations, \
-        _, \
-        list_lists_function_definitions = m_common_functions.get_tuple_partitions_list(
-                list_items=list_blocks_body,
-                function_separate=is_empty_block)
-
-        list_dicts_inner_definitions = list(
-            map(
-                get_dict_parsed_function_definition,
-                list_lists_function_definitions[::2]))
+                    list_tokens_first \
+                        [3:]))
 
         list_dicts_operations = list(
                 map(
                     get_dict_parsed_operation,
                     list_items_operations))
+
+        list_dicts_inner_definitions = list(
+                map(
+                    get_dict_parsed_function_definition,
+                    list_lists_function_definitions \
+                        [::2]))
 
         return {
             m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
