@@ -136,7 +136,7 @@ def get_dict_data_parsed_ll(
             m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
             m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_parsed_arguments,
             m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_parsed_operations,
-            m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS: list_dicts_parsed_inner_definitions}
+            m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_DEFINITIONS: list_dicts_parsed_inner_definitions}
 
     return get_dict_parsed_function_definition(list_file[4])
 

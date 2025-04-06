@@ -19,7 +19,7 @@ class Function_definition:
     KEY_TEXT_TYPE_INPUT = "type_input"
     KEY_ARRAY_DICTS_ARGUMENTS = "arguments"
     KEY_ARRAY_DICTS_OPERATIONS = "operations"
-    KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS = "inner_function_definitions"
+    KEY_ARRAY_DICTS_INNER_DEFINITIONS = "inner_definitions"
 
     class Argument:
 

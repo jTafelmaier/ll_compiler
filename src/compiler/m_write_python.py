@@ -157,7 +157,7 @@ def get_text_python_def(
                         map(
                             get_text_python_def,
                             dict_def \
-                                [m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_FUNCTION_DEFINITIONS])) \
+                                [m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_DEFINITIONS])) \
                     + [get_text_operations()])
 
         return "def " \
