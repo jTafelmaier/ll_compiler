@@ -16,8 +16,8 @@ TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
 TEXT_VAR_LAMBDA = "var_lambda"
 
 
-def get_text_python_def(
-    dict_def:typing.Dict):
+def get_text_python_definition(
+    dict_definition:typing.Dict):
 
     def get_text_function_call(
         text_input:str,
@@ -86,7 +86,7 @@ def get_text_python_def(
 
     def get_text_operations():
 
-        list_dicts_operations = dict_def \
+        list_dicts_operations = dict_definition \
             [m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS]
 
         text_python_current_expression = TEXT_INPUT
@@ -123,7 +123,7 @@ def get_text_python_def(
             + "return " \
             + text_python_current_expression
 
-    def inner():
+    def get_text_python_definition_function():
 
         def get_text_arguments():
 
@@ -140,10 +140,10 @@ def get_text_python_def(
                         + list(
                             map(
                                 get_text_argument,
-                                dict_def \
+                                dict_definition \
                                     [m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS])))
 
-        text_name_function = dict_def \
+        text_name_function = dict_definition \
             [m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION]
 
         # text_type_input = dict_def \
@@ -155,8 +155,8 @@ def get_text_python_def(
                 .join(
                     list(
                         map(
-                            get_text_python_def,
-                            dict_def \
+                            get_text_python_definition,
+                            dict_definition \
                                 [m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_DEFINITIONS])) \
                     + [get_text_operations()])
 
@@ -166,13 +166,15 @@ def get_text_python_def(
             + "(\n" \
             + m_common_functions.get_text_indented_one_level(text_body)
 
-    return inner()
-
+    return {
+        m_shared.KEY_CATEGORY_DEFINITION_FUNCTION: get_text_python_definition_function} \
+        [dict_definition[m_shared.Object_variable.KEY_TEXT_CATEGORY]] \
+        ()
 
 def get_text_python_main(
-    dict_def:typing.Dict):
+    dict_definition:typing.Dict):
 
-    text_python = get_text_python_def(dict_def)
+    text_python = get_text_python_definition(dict_definition)
 
     return "\n\nfrom built_in_functions.built_in_functions import *\n\n\n\n\n" \
         + text_python \

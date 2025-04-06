@@ -11,13 +11,15 @@ from src.auxiliary import m_shared
 def get_dict_data_parsed_ll(
     list_file:typing.List):
 
+    KEYWORD_DEFINITION_FUNCTION = "START"
     KEYWORD_FUNCTION_CALL = "|"
     KEYWORD_MEMORY_WRITE = "+"
     KEYWORD_SEPARATOR_TYPE = ":"
+
     KEY_LIST_TOKENS = "list_tokens"
 
     def get_dict_parsed_definition(
-        list_def:typing.List):
+        list_definition:typing.List):
 
         def is_empty_block(
             item_block:typing.Union[typing.Dict, typing.List]):
@@ -98,45 +100,53 @@ def get_dict_data_parsed_ll(
                 m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
                 m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
 
-        list_tokens_first = list_def \
+        list_tokens_first = list_definition \
             [0] \
             [KEY_LIST_TOKENS]
 
-        _, \
-        text_type_input, \
-        text_name_function = list_tokens_first \
-            [:3]
+        def get_dict_definition_function():
 
-        list_dicts_operations, \
-        _, \
-        list_lists_inner_definitions = m_common_functions.get_tuple_partitions_list(
-                list_items=list_def \
-                    [1:],
-                function_separate=is_empty_block)
+            _, \
+            text_type_input, \
+            text_name_function = list_tokens_first \
+                [:3]
 
-        list_dicts_parsed_arguments = list(
-                map(
-                    get_dict_argument,
-                    list_tokens_first \
-                        [3:]))
+            list_dicts_operations, \
+            _, \
+            list_lists_inner_definitions = m_common_functions.get_tuple_partitions_list(
+                    list_items=list_definition \
+                        [1:],
+                    function_separate=is_empty_block)
 
-        list_dicts_parsed_operations = list(
-                map(
-                    get_dict_parsed_operation,
-                    list_dicts_operations))
+            list_dicts_parsed_arguments = list(
+                    map(
+                        get_dict_argument,
+                        list_tokens_first \
+                            [3:]))
 
-        list_dicts_parsed_inner_definitions = list(
-                map(
-                    get_dict_parsed_definition,
-                    list_lists_inner_definitions \
-                        [::2]))
+            list_dicts_parsed_operations = list(
+                    map(
+                        get_dict_parsed_operation,
+                        list_dicts_operations))
+
+            list_dicts_parsed_inner_definitions = list(
+                    map(
+                        get_dict_parsed_definition,
+                        list_lists_inner_definitions \
+                            [::2]))
+
+            return {
+                m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_DEFINITION_FUNCTION,
+                m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
+                m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
+                m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_parsed_arguments,
+                m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_parsed_operations,
+                m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_DEFINITIONS: list_dicts_parsed_inner_definitions}
 
         return {
-            m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
-            m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
-            m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_parsed_arguments,
-            m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_parsed_operations,
-            m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_DEFINITIONS: list_dicts_parsed_inner_definitions}
+            KEYWORD_DEFINITION_FUNCTION: get_dict_definition_function} \
+            [list_tokens_first[0]] \
+            ()
 
     return get_dict_parsed_definition(list_file[4])
 

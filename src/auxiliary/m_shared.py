@@ -6,6 +6,8 @@ KEY_CATEGORY_LITERAL = "literal"
 KEY_CATEGORY_FUNCTION = "function"
 KEY_CATEGORY_MEMORY_READ = "memory_read"
 KEY_CATEGORY_MEMORY_WRITE = "memory_write"
+KEY_CATEGORY_DEFINITION_CLASS = "definition_class"
+KEY_CATEGORY_DEFINITION_FUNCTION = "definition_function"
 
 
 class Object_variable:

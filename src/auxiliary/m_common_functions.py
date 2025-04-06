@@ -167,6 +167,7 @@ def get_item_tokens(
             index_line = pair_line \
                 [0]
 
+            # TODO refactor: create constants
             return {
                 "type": "terminal",
                 "index_line": index_line,
