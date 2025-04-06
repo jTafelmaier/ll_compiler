@@ -184,6 +184,46 @@ def get_item_tokens(
                         .split("\n"))))
 
 
+# TODO test further
+def get_list_lists_tokens_grouped(
+    list_texts_tokens:typing.List[str]):
+
+    int_level_grouping = 0
+
+    list_tokens_current = []
+
+    for text_token in list_texts_tokens:
+
+        bool_append_token = True
+
+        if text_token == "[":
+            if int_level_grouping == 0:
+                bool_append_token = False
+
+            int_level_grouping = int_level_grouping + 1
+
+        elif text_token == "]":
+            int_level_grouping = int_level_grouping - 1
+
+            if int_level_grouping == 0:
+                bool_append_token = False
+
+            if int_level_grouping < 0:
+                raise Exception("Too many closing brackets.")
+
+        if bool_append_token:
+            list_tokens_current \
+                .append(text_token)
+
+        if int_level_grouping == 0:
+            yield list_tokens_current
+
+            list_tokens_current = []
+
+    if int_level_grouping > 0:
+        raise Exception("Unclosed brackets: " + str(int_level_grouping))
+
+
 def get_tuple_partitions_list(
     list_items:typing.List,
     function_separate:typing.Callable[[typing.Any], bool]):
