@@ -15,7 +15,8 @@ START TEXT Main
     | Join -- " "
     | Addright -- ": Hello World!"
     | Logwithquotes -- "Stage 2:"
-    | Seq -- [If -- Isalphabetic [Addleft -- "ALPHA: \""] [Addleft -- "NONALPHA: \""]] [Addright -- "\""]
+    | If -- Isalphabetic [Addleft -- "ALPHA: \""] [Addleft -- "NONALPHA: \""]
+    | Addright -- "\""
     | Log
 
     START TEXT Logwithquotes -- TEXT:prefix
