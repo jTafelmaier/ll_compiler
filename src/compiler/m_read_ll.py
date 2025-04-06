@@ -31,19 +31,49 @@ def get_dict_data_parsed_ll(
                     == 0
 
         def get_dict_parsed_expression(
-            text_expression:str):
+            list_tokens:typing.List[str]):
 
-            if text_expression[0].isupper():
-                return get_dict_parsed_function([text_expression])
+            text_token_first = list_tokens \
+                [0]
 
-            if text_expression[0].islower():
+            if text_token_first[0].isupper():
+                return get_dict_parsed_function(list_tokens)
+
+            if text_token_first[0].islower():
                 return {
                     m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_READ,
-                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_expression}
+                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_token_first}
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_LITERAL,
-                m_shared.Literal.KEY_TEXT_VALUE: text_expression}
+                m_shared.Literal.KEY_TEXT_VALUE: text_token_first}
+
+        # TODO test further
+        def get_list_lists_tokens_grouped(
+            list_tokens:typing.List[str]):
+
+            int_level_grouping = 0
+
+            list_tokens_current = []
+
+            for text_token in list_tokens:
+                if text_token == "[":
+                    int_level_grouping = int_level_grouping + 1
+                elif text_token == "]":
+                    int_level_grouping = int_level_grouping - 1
+                    if int_level_grouping < 0:
+                        raise Exception("Too many closing brackets.")
+                else:
+                    list_tokens_current \
+                        .append(text_token)
+
+                if int_level_grouping == 0:
+                    yield list_tokens_current
+
+                    list_tokens_current = []
+
+            if int_level_grouping > 0:
+                raise Exception("Unclosed brackets: " + str(int_level_grouping))
 
         def get_dict_parsed_function(
             list_tokens:typing.List[str]):
@@ -54,7 +84,7 @@ def get_dict_data_parsed_ll(
             list_dicts_arguments = list(
                     map(
                         get_dict_parsed_expression,
-                        list_tokens[2:]))
+                        get_list_lists_tokens_grouped(list_tokens[2:])))
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_FUNCTION,

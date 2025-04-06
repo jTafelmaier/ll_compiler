@@ -100,14 +100,17 @@ def get_item_tokens(
 
             list_characters_current = []
 
-            # TODO test further
             for character in text_line:
 
                 bool_token_terminated_here = False
+                bool_yield_character_separately = False
 
                 if not bool_in_string:
                     if character == "#":
                         return
+                    if character in {"[", "]"}:
+                        bool_token_terminated_here = True
+                        bool_yield_character_separately = True
                     if character == " ":
                         if character_last == " ":
                             raise Exception(
@@ -125,13 +128,17 @@ def get_item_tokens(
                             .append(character)
 
                 if bool_token_terminated_here:
-                    yield "" \
-                        .join(list_characters_current)
+                    if len(list_characters_current) > 0:
+                        yield "" \
+                            .join(list_characters_current)
 
                     list_characters_current = []
                 else:
                     list_characters_current \
                         .append(character)
+
+                if bool_yield_character_separately:
+                    yield character
 
                 character_last = character
 
