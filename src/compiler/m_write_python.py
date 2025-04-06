@@ -87,7 +87,7 @@ def get_text_python_definition(
     def get_text_operations():
 
         list_dicts_operations = dict_definition \
-            [m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS]
+            [m_shared.Definition_function.KEY_ARRAY_DICTS_OPERATIONS]
 
         text_python_current_expression = TEXT_INPUT
 
@@ -123,33 +123,63 @@ def get_text_python_definition(
             + "return " \
             + text_python_current_expression
 
+    def get_list_text_variable_definitions_parsed(
+        list_dicts_arguments:typing.List[typing.Dict]):
+
+        def get_text_variable_definitions(
+            dict_argument:typing.Dict):
+
+            # TODO extend
+            text_type = {
+                "TEXT": "str",
+                "INTEGER": "int"} \
+                [dict_argument[m_shared.Argument.KEY_TEXT_TYPE]]
+
+            return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                + dict_argument \
+                    [m_shared.Argument.KEY_TEXT_NAME] \
+                + ":" \
+                + text_type
+
+        return list(
+                map(
+                    get_text_variable_definitions,
+                    list_dicts_arguments))
+
+    def get_text_python_definition_class():
+
+        text_name_class = dict_definition \
+            [m_shared.Definition_class.KEY_TEXT_NAME_CLASS]
+
+        text_members = "\n" \
+            .join(
+                get_list_text_variable_definitions_parsed(
+                    dict_definition \
+                        [m_shared.Definition_class.KEY_ARRAY_DICTS_MEMBERS]))
+
+        return "class " \
+            + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+            + text_name_class \
+            + ":\n" \
+            + m_common_functions.get_text_indented_one_level(text_members)
+
     def get_text_python_definition_function():
 
-        def get_text_arguments():
-
-            def get_text_argument(
-                dict_argument:typing.Dict):
-
-                return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                    + dict_argument \
-                        [m_shared.Function_definition.Argument.KEY_TEXT_NAME]
-
-            return ",\n" \
-                .join(
-                    [TEXT_INPUT] \
-                        + list(
-                            map(
-                                get_text_argument,
-                                dict_definition \
-                                    [m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS])))
-
         text_name_function = dict_definition \
-            [m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION]
+            [m_shared.Definition_function.KEY_TEXT_NAME_FUNCTION]
 
         # text_type_input = dict_def \
-        #     [m_shared.Function_definition.KEY_TEXT_TYPE_INPUT]
+        #     [m_shared.Definition_function.KEY_TEXT_TYPE_INPUT]
 
-        text_body = get_text_arguments() \
+        text_arguments = ",\n" \
+            .join(
+                [TEXT_INPUT] \
+                    + 
+                    get_list_text_variable_definitions_parsed(
+                        dict_definition \
+                            [m_shared.Definition_function.KEY_ARRAY_DICTS_ARGUMENTS]))
+
+        text_body = text_arguments \
             + "):\n\n" \
             + "\n\n" \
                 .join(
@@ -157,7 +187,7 @@ def get_text_python_definition(
                         map(
                             get_text_python_definition,
                             dict_definition \
-                                [m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_DEFINITIONS])) \
+                                [m_shared.Definition_function.KEY_ARRAY_DICTS_INNER_DEFINITIONS])) \
                     + [get_text_operations()])
 
         return "def " \
@@ -167,6 +197,7 @@ def get_text_python_definition(
             + m_common_functions.get_text_indented_one_level(text_body)
 
     return {
+        m_shared.KEY_CATEGORY_DEFINITION_CLASS: get_text_python_definition_class,
         m_shared.KEY_CATEGORY_DEFINITION_FUNCTION: get_text_python_definition_function} \
         [dict_definition[m_shared.Object_variable.KEY_TEXT_CATEGORY]] \
         ()

@@ -12,6 +12,7 @@ def get_dict_data_parsed_ll(
     list_file:typing.List):
 
     KEYWORD_DEFINITION_FUNCTION = "START"
+    KEYWORD_DEFINITION_CLASS = "CLASS"
     KEYWORD_FUNCTION_CALL = "|"
     KEYWORD_MEMORY_WRITE = "+"
     KEYWORD_SEPARATOR_TYPE = ":"
@@ -97,12 +98,36 @@ def get_dict_data_parsed_ll(
                 .partition(KEYWORD_SEPARATOR_TYPE)
 
             return {
-                m_shared.Function_definition.Argument.KEY_TEXT_NAME: text_name_argument,
-                m_shared.Function_definition.Argument.KEY_TEXT_TYPE: text_type_argument}
+                m_shared.Argument.KEY_TEXT_NAME: text_name_argument,
+                m_shared.Argument.KEY_TEXT_TYPE: text_type_argument}
 
         list_tokens_first = list_definition \
             [0] \
             [KEY_LIST_TOKENS]
+
+        def get_dict_definition_class():
+
+            def get_dict_parsed_member(
+                dict_member:typing.Dict):
+
+                return get_dict_argument(
+                    dict_member \
+                        [KEY_LIST_TOKENS] \
+                        [1])
+
+            text_name_class = list_tokens_first \
+                [1]
+
+            list_dicts_parsed_members = list(
+                    map(
+                        get_dict_parsed_member,
+                        list_definition \
+                            [1:]))
+
+            return {
+                m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_DEFINITION_CLASS,
+                m_shared.Definition_class.KEY_TEXT_NAME_CLASS: text_name_class,
+                m_shared.Definition_class.KEY_ARRAY_DICTS_MEMBERS: list_dicts_parsed_members}
 
         def get_dict_definition_function():
 
@@ -137,13 +162,14 @@ def get_dict_data_parsed_ll(
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_DEFINITION_FUNCTION,
-                m_shared.Function_definition.KEY_TEXT_NAME_FUNCTION: text_name_function,
-                m_shared.Function_definition.KEY_TEXT_TYPE_INPUT: text_type_input,
-                m_shared.Function_definition.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_parsed_arguments,
-                m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_parsed_operations,
-                m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_DEFINITIONS: list_dicts_parsed_inner_definitions}
+                m_shared.Definition_function.KEY_TEXT_NAME_FUNCTION: text_name_function,
+                m_shared.Definition_function.KEY_TEXT_TYPE_INPUT: text_type_input,
+                m_shared.Definition_function.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_parsed_arguments,
+                m_shared.Definition_function.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_parsed_operations,
+                m_shared.Definition_function.KEY_ARRAY_DICTS_INNER_DEFINITIONS: list_dicts_parsed_inner_definitions}
 
         return {
+            KEYWORD_DEFINITION_CLASS: get_dict_definition_class,
             KEYWORD_DEFINITION_FUNCTION: get_dict_definition_function} \
             [list_tokens_first[0]] \
             ()

@@ -25,3 +25,7 @@ START TEXT Main
         | Log
         | To input
 
+    CLASS STATISTICS
+        L TEXT:text
+        L INTEGER:frequency
+

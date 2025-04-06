@@ -15,18 +15,25 @@ class Object_variable:
     KEY_TEXT_CATEGORY = "category"
 
 
-class Function_definition:
+class Argument:
+
+    KEY_TEXT_NAME = "name_argument"
+    KEY_TEXT_TYPE = "type"
+
+
+class Definition_class:
+
+    KEY_TEXT_NAME_CLASS = "name_class"
+    KEY_ARRAY_DICTS_MEMBERS = "members"
+
+
+class Definition_function:
 
     KEY_TEXT_NAME_FUNCTION = "name_function"
     KEY_TEXT_TYPE_INPUT = "type_input"
     KEY_ARRAY_DICTS_ARGUMENTS = "arguments"
     KEY_ARRAY_DICTS_OPERATIONS = "operations"
     KEY_ARRAY_DICTS_INNER_DEFINITIONS = "inner_definitions"
-
-    class Argument:
-
-        KEY_TEXT_NAME = "name_argument"
-        KEY_TEXT_TYPE = "type"
 
 
 class Function_reference:
