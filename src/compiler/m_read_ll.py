@@ -57,13 +57,25 @@ def get_dict_data_parsed_ll(
             list_tokens_current = []
 
             for text_token in list_tokens:
+
+                bool_append_token = True
+
                 if text_token == "[":
+                    if int_level_grouping == 0:
+                        bool_append_token = False
+
                     int_level_grouping = int_level_grouping + 1
+
                 elif text_token == "]":
                     int_level_grouping = int_level_grouping - 1
+
+                    if int_level_grouping == 0:
+                        bool_append_token = False
+
                     if int_level_grouping < 0:
                         raise Exception("Too many closing brackets.")
-                else:
+
+                if bool_append_token:
                     list_tokens_current \
                         .append(text_token)
 

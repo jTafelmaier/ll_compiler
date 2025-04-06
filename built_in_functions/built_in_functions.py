@@ -18,6 +18,15 @@ def nonpython_To(
     return item_other
 
 
+def nonpython_Seq(
+    item_input:typing.Any,
+    function_1:typing.Callable[[typing.Any], typing.Any],
+    function_2:typing.Callable[[typing.Any], typing.Any]):
+
+    return function_2(
+        function_1(item_input))
+
+
 def nonpython_If(
     item_input:typing.Any,
     function_condition:typing.Callable[[typing.Any], bool],
