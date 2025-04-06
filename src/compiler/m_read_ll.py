@@ -16,7 +16,7 @@ def get_dict_data_parsed_ll(
     KEYWORD_SEPARATOR_TYPE = ":"
     KEY_LIST_TOKENS = "list_tokens"
 
-    def get_dict_parsed_function_definition(
+    def get_dict_parsed_definition(
         list_def:typing.List):
 
         def is_empty_block(
@@ -127,7 +127,7 @@ def get_dict_data_parsed_ll(
 
         list_dicts_parsed_inner_definitions = list(
                 map(
-                    get_dict_parsed_function_definition,
+                    get_dict_parsed_definition,
                     list_lists_inner_definitions \
                         [::2]))
 
@@ -138,5 +138,5 @@ def get_dict_data_parsed_ll(
             m_shared.Function_definition.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_parsed_operations,
             m_shared.Function_definition.KEY_ARRAY_DICTS_INNER_DEFINITIONS: list_dicts_parsed_inner_definitions}
 
-    return get_dict_parsed_function_definition(list_file[4])
+    return get_dict_parsed_definition(list_file[4])
 
