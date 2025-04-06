@@ -49,6 +49,7 @@ def get_dict_data_parsed_ll(
                 m_shared.Literal.KEY_TEXT_VALUE: text_token_first}
 
         # TODO test further
+        # TODO move
         def get_list_lists_tokens_grouped(
             list_tokens:typing.List[str]):
 
@@ -96,7 +97,7 @@ def get_dict_data_parsed_ll(
             list_dicts_arguments = list(
                     map(
                         get_dict_parsed_expression,
-                        get_list_lists_tokens_grouped(list_tokens[2:])))
+                        get_list_lists_tokens_grouped(list_tokens[1:])))
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_FUNCTION,
@@ -157,7 +158,7 @@ def get_dict_data_parsed_ll(
                 map(
                     get_dict_argument,
                     list_tokens_first \
-                        [4:]))
+                        [3:]))
 
         list_dicts_parsed_operations = list(
                 map(
