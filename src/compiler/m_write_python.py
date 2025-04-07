@@ -164,7 +164,7 @@ def get_text_python_definition(
                     + dict_definition \
                         [m_shared.Definition_class.KEY_ARRAY_DICTS_MEMBERS]))
 
-        return "class " \
+        return "@dataclasses.dataclass()\nclass " \
             + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
             + text_name_class \
             + ":\n" \
@@ -214,7 +214,7 @@ def get_text_python_main(
 
     text_python = get_text_python_definition(dict_definition)
 
-    return "\n\nfrom built_in_functions.built_in_functions import *\n\n\n\n\n" \
+    return "\n\n\n\nimport dataclasses\n\nfrom built_in_functions.built_in_functions import *\n\n\n\n\n" \
         + text_python \
         + "\n\n"
 

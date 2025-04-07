@@ -16,6 +16,7 @@ START TEXT Main
     | Addright ": Hello World!"
     | Logwithquotes "Stage 2:"
     | If Isalphabetic [Addleft "ALPHA: "] [Addleft "NONALPHA: "]
+    | PERSON "example@email.com" 20
     | Log
 
     START TEXT Logwithquotes TEXT:prefix
