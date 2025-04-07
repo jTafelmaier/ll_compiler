@@ -24,6 +24,7 @@ class Argument:
 class Definition_class:
 
     KEY_TEXT_NAME_CLASS = "name_class"
+    KEY_TEXT_TYPE_CLASS = "type_class"
     KEY_ARRAY_DICTS_MEMBERS = "members"
 
 

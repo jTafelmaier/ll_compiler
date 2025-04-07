@@ -115,8 +115,10 @@ def get_dict_data_parsed_ll(
                         [KEY_LIST_TOKENS] \
                         [1])
 
+            _, \
+            text_type_class, \
             text_name_class = list_tokens_first \
-                [1]
+                [:3]
 
             list_dicts_parsed_members = list(
                     map(
@@ -127,6 +129,7 @@ def get_dict_data_parsed_ll(
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_DEFINITION_CLASS,
                 m_shared.Definition_class.KEY_TEXT_NAME_CLASS: text_name_class,
+                m_shared.Definition_class.KEY_TEXT_TYPE_CLASS: text_type_class,
                 m_shared.Definition_class.KEY_ARRAY_DICTS_MEMBERS: list_dicts_parsed_members}
 
         def get_dict_definition_function():

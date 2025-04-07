@@ -151,10 +151,17 @@ def get_text_python_definition(
         text_name_class = dict_definition \
             [m_shared.Definition_class.KEY_TEXT_NAME_CLASS]
 
+        text_type_class = dict_definition \
+            [m_shared.Definition_class.KEY_TEXT_TYPE_CLASS]
+
         text_members = "\n" \
             .join(
                 get_list_text_variable_definitions_parsed(
-                    dict_definition \
+                    [
+                        {
+                            m_shared.Argument.KEY_TEXT_TYPE: text_type_class,
+                            m_shared.Argument.KEY_TEXT_NAME: "main"}] \
+                    + dict_definition \
                         [m_shared.Definition_class.KEY_ARRAY_DICTS_MEMBERS]))
 
         return "class " \

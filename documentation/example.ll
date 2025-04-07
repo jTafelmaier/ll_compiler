@@ -25,7 +25,7 @@ START TEXT Main
         | Log
         | To input
 
-    CLASS STATISTICS
-        L TEXT:text
-        L INTEGER:frequency
+    CLASS TEXT PERSON
+        L TEXT:email
+        L INTEGER:age
 
