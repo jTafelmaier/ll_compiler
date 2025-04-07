@@ -26,6 +26,13 @@ def get_text_python_definition(
         text_name_function = dict_function \
             [m_shared.Function_reference.KEY_NAME_FUNCTION]
 
+        if text_name_function.islower():
+            return "(" \
+                + text_input \
+                + ")." \
+                + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                + text_name_function
+
         list_dicts_arguments = dict_function \
             [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
 

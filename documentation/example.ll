@@ -17,6 +17,7 @@ START TEXT Main
     | Logwithquotes "Stage 2:"
     | If Isalphabetic [Addleft "ALPHA: "] [Addleft "NONALPHA: "]
     | PERSON "example@email.com" 20
+    | age
     | Log
 
     START TEXT Logwithquotes TEXT:prefix
