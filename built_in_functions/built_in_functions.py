@@ -84,6 +84,17 @@ def nonpython_Addright(
         + text_to_append
 
 
+def nonpython_Replacesubtext(
+    text_input:str,
+    text_old:str,
+    text_new:str):
+
+    return text_input \
+        .replace(
+            text_old,
+            text_new)
+
+
 def nonpython_Reversed(
     text_input:str):
 

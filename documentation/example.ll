@@ -5,7 +5,7 @@
 START TEXT Main
     | To "Adam Cain, Eve Abel, Delta 02"
     | Split ", "
-    | Filter [Seq [Seq [Split " "] [Join ""]] Isalphabetic]
+    | Filter [Seq [Replacesubtext " " ""] Isalphabetic]
     | Map [PERSON Unchanged Getemail [To 20]]
     + $listData
     | Map email
