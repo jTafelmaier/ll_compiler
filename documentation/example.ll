@@ -19,13 +19,13 @@ START TEXT Main
     | Addleft "Names: "
     | Log
 
-    START PERSON Emailcorrected
-        | email
-        | Map [If [Equalsint " "] [To "_"] Unchanged]
-        | Join ""
-
     CLASS PERSON
         L TEXT:name
         L TEXT:email
         L INTEGER:age
+
+    START PERSON Emailcorrected
+        | email
+        | Map [If [Equalsint " "] [To "_"] Unchanged]
+        | Join ""
 
