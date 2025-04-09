@@ -8,9 +8,8 @@ Implement, in order:
 - type inference for expressions using built in functions
 - type inference for user-defined functions
 - type inference for expressions using user-defined functions
-- map and retainIf should return iterators (lazy execution)
+- lazy execution
 - floats, lists, tuples, sets etc.
-- data classes
 - enums (for struct attribute access, important feature!)
 - some way to specify that multiple arguments must have the same type
 - VScode: implement language server for ll
