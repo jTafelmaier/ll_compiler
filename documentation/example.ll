@@ -16,7 +16,7 @@ START TEXT Main
     | Addright ": Hello World!"
     | Logwithquotes "Stage 2:"
     | If Isalphabetic [Addleft "ALPHA: "] [Addleft "NONALPHA: "]
-    | PERSON "example@email.com" 20
+    | PERSON Unchanged [Addright "@protonmail.com"] [To 20]
     | age
     | Log
 
@@ -27,7 +27,8 @@ START TEXT Main
         | Log
         | To input
 
-    CLASS TEXT PERSON
+    CLASS PERSON
+        L TEXT:name
         L TEXT:email
         L INTEGER:age
 

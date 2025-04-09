@@ -62,8 +62,16 @@ def get_dict_data_parsed_ll(
                         get_dict_parsed_expression,
                         m_common_functions.get_list_lists_tokens_grouped(list_tokens[1:])))
 
+            # TODO refactor: perhaps move this distinction?
+            if text_name.isupper():
+                text_category = m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR
+            elif text_name.islower():
+                text_category = m_shared.KEY_CATEGORY_CLASS_ACCESS
+            else:
+                text_category = m_shared.KEY_CATEGORY_FUNCTION
+
             return {
-                m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_FUNCTION,
+                m_shared.Object_variable.KEY_TEXT_CATEGORY: text_category,
                 m_shared.Function_reference.KEY_NAME_FUNCTION: text_name,
                 m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS: list_dicts_arguments}
 
@@ -115,10 +123,8 @@ def get_dict_data_parsed_ll(
                         [KEY_LIST_TOKENS] \
                         [1])
 
-            _, \
-            text_type_class, \
             text_name_class = list_tokens_first \
-                [:3]
+                [1]
 
             list_dicts_parsed_members = list(
                     map(
@@ -129,7 +135,6 @@ def get_dict_data_parsed_ll(
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_DEFINITION_CLASS,
                 m_shared.Definition_class.KEY_TEXT_NAME_CLASS: text_name_class,
-                m_shared.Definition_class.KEY_TEXT_TYPE_CLASS: text_type_class,
                 m_shared.Definition_class.KEY_ARRAY_DICTS_MEMBERS: list_dicts_parsed_members}
 
         def get_dict_definition_function():
@@ -166,7 +171,6 @@ def get_dict_data_parsed_ll(
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_DEFINITION_FUNCTION,
                 m_shared.Definition_function.KEY_TEXT_NAME_FUNCTION: text_name_function,
-                m_shared.Definition_function.KEY_TEXT_TYPE_INPUT: text_type_input,
                 m_shared.Definition_function.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_parsed_arguments,
                 m_shared.Definition_function.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_parsed_operations,
                 m_shared.Definition_function.KEY_ARRAY_DICTS_INNER_DEFINITIONS: list_dicts_parsed_inner_definitions}

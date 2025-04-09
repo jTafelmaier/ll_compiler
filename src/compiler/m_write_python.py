@@ -19,6 +19,19 @@ TEXT_VAR_LAMBDA = "var_lambda"
 def get_text_python_definition(
     dict_definition:typing.Dict):
 
+    def get_text_class_access(
+        text_input:str,
+        dict_class_access:typing.Dict):
+
+        return "(" \
+            + text_input \
+            + ")\n" \
+            + m_common_functions.get_text_indented_one_level(
+                "." \
+                    + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                    + dict_class_access \
+                        [m_shared.Function_reference.KEY_NAME_FUNCTION])
+
     def get_text_function_call(
         text_input:str,
         dict_function:typing.Dict):
@@ -26,28 +39,29 @@ def get_text_python_definition(
         text_name_function = dict_function \
             [m_shared.Function_reference.KEY_NAME_FUNCTION]
 
-        if text_name_function.islower():
-            return "(" \
-                + text_input \
-                + ")." \
-                + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                + text_name_function
-
         list_dicts_arguments = dict_function \
             [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
-        text_arguments_python = ",\n" \
-            .join([
+        if text_input is not None:
+            iterable_texts_arguments = [
                     text_input] \
                 + list(
                     map(
                         get_text_expression,
-                        list_dicts_arguments)))
+                        list_dicts_arguments))
+        else:
+           iterable_texts_arguments = map(
+                lambda dict_argument: get_text_function_call(
+                    text_input="intermediate",
+                    dict_function=dict_argument),
+                list_dicts_arguments)
 
         return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
             + text_name_function \
             + "(\n" \
-            + m_common_functions.get_text_indented_one_level(text_arguments_python) \
+            + m_common_functions.get_text_indented_one_level(
+                ",\n" \
+                    .join(iterable_texts_arguments)) \
             + ")"
 
     def get_text_expression(
@@ -111,20 +125,35 @@ def get_text_python_definition(
                         text_input=text_python_current_expression,
                         dict_function=dict_operation)
 
-            if text_category == m_shared.KEY_CATEGORY_MEMORY_WRITE:
+            if text_category == m_shared.KEY_CATEGORY_CLASS_ACCESS:
+                text_python_current_expression = get_text_class_access(
+                        text_input=text_python_current_expression,
+                        dict_class_access=dict_operation)
 
-                text_key_memory = dict_operation \
-                    [m_shared.Memory_write.KEY_TEXT_KEY_MEMORY]
+            if text_category == m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR:
 
                 text_python_finished_expressions = text_python_finished_expressions \
-                    + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                    + "intermediate = " \
+                    + text_python_current_expression \
+                    + "\n\n"
+
+                text_python_current_expression = get_text_function_call(
+                        text_input=None,
+                        dict_function=dict_operation)
+
+            if text_category == m_shared.KEY_CATEGORY_MEMORY_WRITE:
+
+                text_key_memory = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                    + dict_operation \
+                        [m_shared.Memory_write.KEY_TEXT_KEY_MEMORY]
+
+                text_python_finished_expressions = text_python_finished_expressions \
                     + text_key_memory \
                     + " = " \
                     + text_python_current_expression \
                     + "\n\n"
 
-                text_python_current_expression = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                    + text_key_memory
+                text_python_current_expression = text_key_memory
 
         return text_python_finished_expressions \
             + "return " \
@@ -136,11 +165,28 @@ def get_text_python_definition(
         def get_text_variable_definitions(
             dict_argument:typing.Dict):
 
-            # TODO extend
-            text_type = {
-                "TEXT": "str",
-                "INTEGER": "int"} \
-                [dict_argument[m_shared.Argument.KEY_TEXT_TYPE]]
+            def get_text_python_type(
+                text_type:str):
+
+                # TODO extend
+                dict_equivalences = {
+                    "FUNCTION[": "typing.Callable[[",
+                    ",": "], ",
+                    "TEXT": "str",
+                    "INTEGER": "int"}
+
+                # TODO refactor
+                for text_ll_type, text_python_type in dict_equivalences.items():
+                    text_type = text_type \
+                        .replace(
+                            text_ll_type,
+                            text_python_type)
+
+                return text_type
+
+            text_type = get_text_python_type( \
+                dict_argument[
+                    m_shared.Argument.KEY_TEXT_TYPE])
 
             return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
                 + dict_argument \
@@ -158,17 +204,10 @@ def get_text_python_definition(
         text_name_class = dict_definition \
             [m_shared.Definition_class.KEY_TEXT_NAME_CLASS]
 
-        text_type_class = dict_definition \
-            [m_shared.Definition_class.KEY_TEXT_TYPE_CLASS]
-
         text_members = "\n" \
             .join(
                 get_list_text_variable_definitions_parsed(
-                    [
-                        {
-                            m_shared.Argument.KEY_TEXT_TYPE: text_type_class,
-                            m_shared.Argument.KEY_TEXT_NAME: "main"}] \
-                    + dict_definition \
+                    dict_definition \
                         [m_shared.Definition_class.KEY_ARRAY_DICTS_MEMBERS]))
 
         return "@dataclasses.dataclass()\nclass " \
@@ -182,18 +221,13 @@ def get_text_python_definition(
         text_name_function = dict_definition \
             [m_shared.Definition_function.KEY_TEXT_NAME_FUNCTION]
 
-        # text_type_input = dict_def \
-        #     [m_shared.Definition_function.KEY_TEXT_TYPE_INPUT]
-
-        text_arguments = ",\n" \
+        text_body = ",\n" \
             .join(
                 [TEXT_INPUT] \
                     + 
                     get_list_text_variable_definitions_parsed(
                         dict_definition \
-                            [m_shared.Definition_function.KEY_ARRAY_DICTS_ARGUMENTS]))
-
-        text_body = text_arguments \
+                            [m_shared.Definition_function.KEY_ARRAY_DICTS_ARGUMENTS])) \
             + "):\n\n" \
             + "\n\n" \
                 .join(
@@ -221,6 +255,7 @@ def get_text_python_main(
 
     text_python = get_text_python_definition(dict_definition)
 
+    # TODO create template file
     return "\n\n\n\nimport dataclasses\n\nfrom built_in_functions.built_in_functions import *\n\n\n\n\n" \
         + text_python \
         + "\n\n"
