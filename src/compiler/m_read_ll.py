@@ -1,5 +1,7 @@
 
 
+
+
 import typing
 
 from src.auxiliary import m_common_functions
@@ -39,13 +41,13 @@ def get_dict_data_parsed_ll(
             text_token_first = list_tokens \
                 [0]
 
-            if text_token_first[0].isupper():
-                return get_dict_parsed_function(list_tokens)
-
-            if text_token_first[0].islower():
+            if text_token_first[0] == "$":
                 return {
                     m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_READ,
-                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_token_first}
+                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_token_first[1:]}
+
+            if text_token_first[0].isalpha():
+                return get_dict_parsed_function(list_tokens)
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_LITERAL,
@@ -62,7 +64,6 @@ def get_dict_data_parsed_ll(
                         get_dict_parsed_expression,
                         m_common_functions.get_list_lists_tokens_grouped(list_tokens[1:])))
 
-            # TODO refactor: perhaps move this distinction?
             if text_name.isupper():
                 text_category = m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR
             elif text_name.islower():
@@ -79,7 +80,8 @@ def get_dict_data_parsed_ll(
             list_tokens:typing.List[str]):
 
             text_key_memory = list_tokens \
-                [0]
+                [0] \
+                [1:]
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_WRITE,

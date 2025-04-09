@@ -1,5 +1,7 @@
 
 
+
+
 import typing
 
 from src.auxiliary import m_common_functions
@@ -19,22 +21,12 @@ TEXT_VAR_LAMBDA = "var_lambda"
 def get_text_python_definition(
     dict_definition:typing.Dict):
 
-    def get_text_class_access(
-        text_input:str,
-        dict_class_access:typing.Dict):
-
-        return "(" \
-            + text_input \
-            + ")\n" \
-            + m_common_functions.get_text_indented_one_level(
-                "." \
-                    + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                    + dict_class_access \
-                        [m_shared.Function_reference.KEY_NAME_FUNCTION])
-
     def get_text_function_call(
         text_input:str,
         dict_function:typing.Dict):
+
+        text_category = dict_function \
+            [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
         text_name_function = dict_function \
             [m_shared.Function_reference.KEY_NAME_FUNCTION]
@@ -42,26 +34,47 @@ def get_text_python_definition(
         list_dicts_arguments = dict_function \
             [m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]
 
-        if text_input is not None:
-            iterable_texts_arguments = [
+        if text_category == m_shared.KEY_CATEGORY_CLASS_ACCESS:
+            return "(" \
+                + text_input \
+                + ")\n" \
+                + m_common_functions.get_text_indented_one_level(
+                    "." \
+                        + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                        + text_name_function)
+
+        if text_category == m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR:
+            return "(lambda var_constructor: " \
+                + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
+                + text_name_function \
+                + "(\n" \
+                + m_common_functions.get_text_indented_one_level(
+                    ",\n" \
+                        .join(
+                            map(
+                                lambda dict_argument: get_text_function_call(
+                                    text_input="var_constructor",
+                                    dict_function=dict_argument),
+                                list_dicts_arguments)) \
+                    + "))\n" \
+                    + m_common_functions.get_text_indented_one_level(
+                        "(" \
+                            + text_input \
+                            + ")"))
+
+        text_arguments = ",\n" \
+            .join(
+                [
                     text_input] \
                 + list(
                     map(
                         get_text_expression,
-                        list_dicts_arguments))
-        else:
-           iterable_texts_arguments = map(
-                lambda dict_argument: get_text_function_call(
-                    text_input="intermediate",
-                    dict_function=dict_argument),
-                list_dicts_arguments)
+                        list_dicts_arguments)))
 
         return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
             + text_name_function \
             + "(\n" \
-            + m_common_functions.get_text_indented_one_level(
-                ",\n" \
-                    .join(iterable_texts_arguments)) \
+            + m_common_functions.get_text_indented_one_level(text_arguments) \
             + ")"
 
     def get_text_expression(
@@ -83,11 +96,6 @@ def get_text_python_definition(
         def get_text_function(
             dict_function:typing.Dict):
 
-            if len(dict_function[m_shared.Function_reference.KEY_ARRAY_OBJECTS_ARGUMENTS]) == 0:
-                return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                    + dict_function \
-                        [m_shared.Function_reference.KEY_NAME_FUNCTION]
-
             return "lambda " \
                 + TEXT_VAR_LAMBDA \
                 + ": " \
@@ -98,10 +106,13 @@ def get_text_python_definition(
         text_category = dict_expression \
             [m_shared.Object_variable.KEY_TEXT_CATEGORY]
 
+        # TODO perhaps refactor
         return {
             m_shared.KEY_CATEGORY_LITERAL: get_text_literal,
             m_shared.KEY_CATEGORY_MEMORY_READ: get_text_memory_read,
-            m_shared.KEY_CATEGORY_FUNCTION: get_text_function} \
+            m_shared.KEY_CATEGORY_FUNCTION: get_text_function,
+            m_shared.KEY_CATEGORY_CLASS_ACCESS: get_text_function,
+            m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR: get_text_function} \
             [text_category] \
             (dict_expression)
 
@@ -117,31 +128,7 @@ def get_text_python_definition(
         # TODO refactor
         for dict_operation in list_dicts_operations:
 
-            text_category = dict_operation \
-                [m_shared.Object_variable.KEY_TEXT_CATEGORY]
-
-            if text_category == m_shared.KEY_CATEGORY_FUNCTION:
-                text_python_current_expression = get_text_function_call(
-                        text_input=text_python_current_expression,
-                        dict_function=dict_operation)
-
-            if text_category == m_shared.KEY_CATEGORY_CLASS_ACCESS:
-                text_python_current_expression = get_text_class_access(
-                        text_input=text_python_current_expression,
-                        dict_class_access=dict_operation)
-
-            if text_category == m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR:
-
-                text_python_finished_expressions = text_python_finished_expressions \
-                    + "intermediate = " \
-                    + text_python_current_expression \
-                    + "\n\n"
-
-                text_python_current_expression = get_text_function_call(
-                        text_input=None,
-                        dict_function=dict_operation)
-
-            if text_category == m_shared.KEY_CATEGORY_MEMORY_WRITE:
+            if dict_operation[m_shared.Object_variable.KEY_TEXT_CATEGORY] == m_shared.KEY_CATEGORY_MEMORY_WRITE:
 
                 text_key_memory = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
                     + dict_operation \
@@ -154,6 +141,11 @@ def get_text_python_definition(
                     + "\n\n"
 
                 text_python_current_expression = text_key_memory
+
+            else:
+                text_python_current_expression = get_text_function_call(
+                        text_input=text_python_current_expression,
+                        dict_function=dict_operation)
 
         return text_python_finished_expressions \
             + "return " \

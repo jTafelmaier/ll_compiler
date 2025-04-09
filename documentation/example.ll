@@ -3,29 +3,26 @@
 
 
 START TEXT Main
-    | To "Hello"
-    + hello
-    | To "World"
-    + world
-    | To input # TODO improve this example
-    | Logwithquotes "Stage 1:"
-    | Split " "
-    | Filter Isalphabetic
-    | Map Titlecase
-    | Join " "
-    | Addright ": Hello World!"
-    | Logwithquotes "Stage 2:"
-    | If Isalphabetic [Addleft "ALPHA: "] [Addleft "NONALPHA: "]
-    | PERSON Unchanged [Addright "@protonmail.com"] [To 20]
-    | age
+    | To "Adam Cain, Eve Abel, Delta 02"
+    | Split ", "
+    | Filter [Seq [Seq [Split " "] [Join ""]] Isalphabetic]
+    | Map [PERSON Unchanged [Addright "@protonmail.com"] [To 20]]
+    + $listData
+    | Log
+    | Map Emailcorrected
+    | Join ", "
+    | Addleft "Emails: "
+    | Log
+    | To $listData
+    | Map name
+    | Join ", "
+    | Addleft "Names: "
     | Log
 
-    START TEXT Logwithquotes TEXT:prefix
-        | Addright "\""
-        | Addleft "\""
-        | Addleft prefix
-        | Log
-        | To input
+    START PERSON Emailcorrected
+        | email
+        | Map [If [Equalsint " "] [To "_"] Unchanged]
+        | Join ""
 
     CLASS PERSON
         L TEXT:name
