@@ -8,15 +8,14 @@ START TEXT Main
     | Filter [Seq [Seq [Split " "] [Join ""]] Isalphabetic]
     | Map [PERSON Unchanged [Addright "@protonmail.com"] [To 20]]
     + $listData
-    | Log
     | Map Emailcorrected
-    | Join ", "
-    | Addleft "Emails: "
+    | Join "\n  "
+    | Addleft "\nEmails:\n  "
     | Log
     | To $listData
     | Map name
-    | Join ", "
-    | Addleft "Names: "
+    | Join "\n  "
+    | Addleft "\nNames:\n  "
     | Log
 
     CLASS PERSON
