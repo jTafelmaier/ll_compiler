@@ -6,9 +6,9 @@ START TEXT Main
     | To "Adam Cain, Eve Abel, Delta 02"
     | Split ", "
     | Filter [Seq [Seq [Split " "] [Join ""]] Isalphabetic]
-    | Map [PERSON Unchanged [Addright "@protonmail.com"] [To 20]]
+    | Map [PERSON Unchanged AsEmail [To 20]]
     + $listData
-    | Map Emailcorrected
+    | Map email
     | Join "\n  "
     | Addleft "\nEmails:\n  "
     | Log
@@ -23,8 +23,8 @@ START TEXT Main
         L TEXT:email
         L INTEGER:age
 
-    START PERSON Emailcorrected
-        | email
+    START TEXT AsEmail
         | Map [If [Equalsint " "] [To "_"] Unchanged]
         | Join ""
+        | Addright "@protonmail.com"
 
