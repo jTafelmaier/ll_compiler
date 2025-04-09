@@ -15,7 +15,7 @@ TEXT_PREFIX_TO_AVOID_NAME_CLASHES = "nonpython_"
 TEXT_INPUT = TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
     + "input"
 
-TEXT_VAR_LAMBDA = "var_lambda"
+TEXT_VAR_LAMBDA = "x"
 
 
 def get_text_python_definition(
