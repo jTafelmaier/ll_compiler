@@ -7,7 +7,7 @@ START TEXT Main
     | Split ", "
     | Filter [Seq [Replacesubtext " " ""] Isalphabetic]
     | Map [PERSON Unchanged Getemail [To 20]]
-    + $listData
+    + :listData
     | Logdata email "Emails"
     | Logdata name "Names"
 
@@ -21,12 +21,12 @@ START TEXT Main
         | Join ""
         | Addright "@protonmail.com"
 
-    START [LIST PERSON] Logdata [[FUNCTION PERSON TEXT] $getattribute] [TEXT $title]
-        | Map $getattribute
+    START [LIST PERSON] Logdata [[FUNCTION PERSON TEXT] :getattribute] [TEXT :title]
+        | Map :getattribute
         | Join "\n  "
         | Addleft ":\n  "
-        | Addleft $title
+        | Addleft :title
         | Addleft "\n"
         | Log
-        | To $input
+        | To :input
 

@@ -43,7 +43,7 @@ def get_dict_data_parsed_ll(
             else:
                 text_token_first = token
 
-            if text_token_first[0] == "$":
+            if text_token_first[0] == ":":
                 return {
                     m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_READ,
                     m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_token_first[1:]}
