@@ -17,7 +17,6 @@ def get_dict_data_parsed_ll(
     KEYWORD_DEFINITION_CLASS = "CLASS"
     KEYWORD_FUNCTION_CALL = "|"
     KEYWORD_MEMORY_WRITE = "+"
-    KEYWORD_SEPARATOR_TYPE = ":"
 
     KEY_LIST_TOKENS = "list_tokens"
 
@@ -36,10 +35,13 @@ def get_dict_data_parsed_ll(
                     == 0
 
         def get_dict_parsed_expression(
-            list_tokens:typing.List[str]):
+            token:typing.Union[str, typing.List]):
 
-            text_token_first = list_tokens \
-                [0]
+            if isinstance(token, list):
+                text_token_first = token \
+                    [0]
+            else:
+                text_token_first = token
 
             if text_token_first[0] == "$":
                 return {
@@ -47,14 +49,19 @@ def get_dict_data_parsed_ll(
                     m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_token_first[1:]}
 
             if text_token_first[0].isalpha():
-                return get_dict_parsed_function(list_tokens)
+                return get_dict_parsed_function(token)
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_LITERAL,
                 m_shared.Literal.KEY_TEXT_VALUE: text_token_first}
 
         def get_dict_parsed_function(
-            list_tokens:typing.List[str]):
+            token:typing.Union[str, typing.List]):
+
+            if isinstance(token, list):
+                list_tokens = token
+            else:
+                list_tokens = [token]
 
             text_name = list_tokens \
                 [0]
@@ -62,7 +69,7 @@ def get_dict_data_parsed_ll(
             list_dicts_arguments = list(
                     map(
                         get_dict_parsed_expression,
-                        m_common_functions.get_list_lists_tokens_grouped(list_tokens[1:])))
+                        list_tokens[1:]))
 
             if text_name.isupper():
                 text_category = m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR
@@ -87,6 +94,16 @@ def get_dict_data_parsed_ll(
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_WRITE,
                 m_shared.Memory_write.KEY_TEXT_KEY_MEMORY: text_key_memory}
 
+        def get_list_tokens_parsed_argument(
+            list_tokens:typing.List):
+
+            # TODO test
+            list_tokens[-1] = list_tokens \
+                [-1] \
+                [1:]
+
+            return list_tokens
+
         def get_dict_parsed_operation(
             dict_operation:typing.Dict):
 
@@ -99,52 +116,37 @@ def get_dict_data_parsed_ll(
                 [list_tokens[0]] \
                 (list_tokens[1:])
 
-        def get_dict_argument(
-            text_argument:str):
-
-            text_type_argument, \
-            _, \
-            text_name_argument = text_argument \
-                .partition(KEYWORD_SEPARATOR_TYPE)
-
-            return {
-                m_shared.Argument.KEY_TEXT_NAME: text_name_argument,
-                m_shared.Argument.KEY_TEXT_TYPE: text_type_argument}
-
         list_tokens_first = list_definition \
             [0] \
             [KEY_LIST_TOKENS]
 
         def get_dict_definition_class():
 
-            def get_dict_parsed_member(
+            def get_list_tokens_member(
                 dict_member:typing.Dict):
 
-                return get_dict_argument(
-                    dict_member \
-                        [KEY_LIST_TOKENS] \
-                        [1])
+                return dict_member \
+                    [KEY_LIST_TOKENS] \
+                    [1:]
 
             text_name_class = list_tokens_first \
                 [1]
 
-            list_dicts_parsed_members = list(
+            list_lists_tokens_members = list(
                     map(
-                        get_dict_parsed_member,
+                        get_list_tokens_member,
                         list_definition \
                             [1:]))
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_DEFINITION_CLASS,
                 m_shared.Definition_class.KEY_TEXT_NAME_CLASS: text_name_class,
-                m_shared.Definition_class.KEY_ARRAY_DICTS_MEMBERS: list_dicts_parsed_members}
+                m_shared.Definition_class.KEY_ARRAY_ARRAYS_TOKENS_MEMBERS: list_lists_tokens_members}
 
         def get_dict_definition_function():
 
-            _, \
-            text_type_input, \
             text_name_function = list_tokens_first \
-                [:3]
+                [2]
 
             list_dicts_operations, \
             _, \
@@ -153,9 +155,10 @@ def get_dict_data_parsed_ll(
                         [1:],
                     function_separate=is_empty_block)
 
-            list_dicts_parsed_arguments = list(
+            # TODO test
+            list_lists_tokens_arguments = list(
                     map(
-                        get_dict_argument,
+                        get_list_tokens_parsed_argument,
                         list_tokens_first \
                             [3:]))
 
@@ -173,7 +176,7 @@ def get_dict_data_parsed_ll(
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_DEFINITION_FUNCTION,
                 m_shared.Definition_function.KEY_TEXT_NAME_FUNCTION: text_name_function,
-                m_shared.Definition_function.KEY_ARRAY_DICTS_ARGUMENTS: list_dicts_parsed_arguments,
+                m_shared.Definition_function.KEY_ARRAY_ARRAYS_TOKENS_ARGUMENTS: list_lists_tokens_arguments,
                 m_shared.Definition_function.KEY_ARRAY_DICTS_OPERATIONS: list_dicts_parsed_operations,
                 m_shared.Definition_function.KEY_ARRAY_DICTS_INNER_DEFINITIONS: list_dicts_parsed_inner_definitions}
 

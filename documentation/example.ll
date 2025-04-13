@@ -8,23 +8,25 @@ START TEXT Main
     | Filter [Seq [Replacesubtext " " ""] Isalphabetic]
     | Map [PERSON Unchanged Getemail [To 20]]
     + $listData
-    | Map email
-    | Join "\n  "
-    | Addleft "\nEmails:\n  "
-    | Log
-    | To $listData
-    | Map name
-    | Join "\n  "
-    | Addleft "\nNames:\n  "
-    | Log
+    | Logdata email "Emails"
+    | Logdata name "Names"
 
     CLASS PERSON
-        L TEXT:name
-        L TEXT:email
-        L INTEGER:age
+        L TEXT name
+        L TEXT email
+        L INTEGER age
 
     START TEXT Getemail
         | Map [If [Equalsint " "] [To "_"] Unchanged]
         | Join ""
         | Addright "@protonmail.com"
+
+    START [LIST PERSON] Logdata [[FUNCTION PERSON TEXT] $getattribute] [TEXT $title]
+        | Map $getattribute
+        | Join "\n  "
+        | Addleft ":\n  "
+        | Addleft $title
+        | Addleft "\n"
+        | Log
+        | To $input
 

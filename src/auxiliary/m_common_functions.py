@@ -92,7 +92,10 @@ def get_item_tokens(
         index_line, \
         text_line = pair_line
 
-        def get_iterator_tokens():
+        def get_iterator_tokens(
+            text:str):
+
+            int_level_grouping = 0
 
             bool_in_string = False
 
@@ -100,45 +103,71 @@ def get_item_tokens(
 
             list_characters_current = []
 
-            for character in text_line:
+            # TODO refactor
+            for character in text:
 
-                bool_token_terminated_here = False
-                bool_yield_character_separately = False
+                bool_whitespace_token = False
+
+                bool_termination_token = False
+
+                bool_bracket_start = False
+
+                bool_bracket_end = False
 
                 if not bool_in_string:
                     if character == "#":
-                        return
-                    if character in {"[", "]"}:
-                        bool_token_terminated_here = True
-                        bool_yield_character_separately = True
-                    if character == " ":
+                        # TODO test
+                        break
+                    elif character == "[":
+                        if int_level_grouping == 0:
+                            bool_bracket_start = True
+
+                        int_level_grouping = int_level_grouping + 1
+                    elif character == "]":
+                        if int_level_grouping == 0:
+                            raise Exception("Too many closing brackets")
+                        if int_level_grouping == 1:
+                            bool_bracket_end = True
+
+                        int_level_grouping = int_level_grouping - 1
+                    elif character == " ":
                         if character_last == " ":
                             raise Exception(
                                     "Line " \
                                         + str(index_line) \
                                         + ": Two consecutive whitespaces are not allowed.")
-                        bool_token_terminated_here = True
+                        bool_whitespace_token = True
 
                 if character == "\"" and character_last != "\\":
                     bool_in_string = not bool_in_string
                     if not bool_in_string:
-                        bool_token_terminated_here = True
+                        bool_termination_token = True
 
+                if bool_bracket_end:
+                    yield list(get_iterator_tokens(
+                            "" \
+                                .join(list_characters_current)))
+
+                    list_characters_current = []
+
+                elif bool_bracket_start or (int_level_grouping == 0 and (bool_termination_token or bool_whitespace_token)):
+
+                    # TODO refactor
+                    if bool_termination_token:
                         list_characters_current \
                             .append(character)
 
-                if bool_token_terminated_here:
-                    if len(list_characters_current) > 0:
-                        yield "" \
-                            .join(list_characters_current)
+                    text_current = "" \
+                        .join(list_characters_current)
 
                     list_characters_current = []
+
+                    if text_current != "":
+                        yield text_current
+
                 else:
                     list_characters_current \
                         .append(character)
-
-                if bool_yield_character_separately:
-                    yield character
 
                 character_last = character
 
@@ -152,7 +181,10 @@ def get_item_tokens(
                 yield "" \
                     .join(list_characters_current)
 
-        return list(get_iterator_tokens())
+            if int_level_grouping > 0:
+                raise Exception("Unclosed brackets.")
+
+        return list(get_iterator_tokens(text_line))
 
     def get_list_or_dict_tokens_section(
         list_pairs_lines:typing.List[typing.Tuple[int, str]]):
@@ -183,46 +215,6 @@ def get_item_tokens(
                 enumerate(
                     text \
                         .split("\n"))))
-
-
-# TODO test further
-def get_list_lists_tokens_grouped(
-    list_texts_tokens:typing.List[str]):
-
-    int_level_grouping = 0
-
-    list_tokens_current = []
-
-    for text_token in list_texts_tokens:
-
-        bool_append_token = True
-
-        if text_token == "[":
-            if int_level_grouping == 0:
-                bool_append_token = False
-
-            int_level_grouping = int_level_grouping + 1
-
-        elif text_token == "]":
-            int_level_grouping = int_level_grouping - 1
-
-            if int_level_grouping == 0:
-                bool_append_token = False
-
-            if int_level_grouping < 0:
-                raise Exception("Too many closing brackets.")
-
-        if bool_append_token:
-            list_tokens_current \
-                .append(text_token)
-
-        if int_level_grouping == 0:
-            yield list_tokens_current
-
-            list_tokens_current = []
-
-    if int_level_grouping > 0:
-        raise Exception("Unclosed brackets: " + str(int_level_grouping))
 
 
 def get_tuple_partitions_list(

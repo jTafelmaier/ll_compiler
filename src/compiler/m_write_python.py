@@ -152,44 +152,20 @@ def get_text_python_definition(
             + text_python_current_expression
 
     def get_list_text_variable_definitions_parsed(
-        list_dicts_arguments:typing.List[typing.Dict]):
+        list_lists_tokens_arguments:typing.List[typing.List]):
 
         def get_text_variable_definitions(
-            dict_argument:typing.Dict):
-
-            def get_text_python_type(
-                text_type:str):
-
-                # TODO extend
-                dict_equivalences = {
-                    "FUNCTION[": "typing.Callable[[",
-                    ",": "], ",
-                    "TEXT": "str",
-                    "INTEGER": "int"}
-
-                # TODO refactor
-                for text_ll_type, text_python_type in dict_equivalences.items():
-                    text_type = text_type \
-                        .replace(
-                            text_ll_type,
-                            text_python_type)
-
-                return text_type
-
-            text_type = get_text_python_type( \
-                dict_argument[
-                    m_shared.Argument.KEY_TEXT_TYPE])
+            list_tokens:typing.List):
 
             return TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
-                + dict_argument \
-                    [m_shared.Argument.KEY_TEXT_NAME] \
-                + ":" \
-                + text_type
+                + list_tokens \
+                    [-1] \
+                + ":object"
 
         return list(
                 map(
                     get_text_variable_definitions,
-                    list_dicts_arguments))
+                    list_lists_tokens_arguments))
 
     def get_text_python_definition_class():
 
@@ -200,7 +176,7 @@ def get_text_python_definition(
             .join(
                 get_list_text_variable_definitions_parsed(
                     dict_definition \
-                        [m_shared.Definition_class.KEY_ARRAY_DICTS_MEMBERS]))
+                        [m_shared.Definition_class.KEY_ARRAY_ARRAYS_TOKENS_MEMBERS]))
 
         return "@dataclasses.dataclass()\nclass " \
             + TEXT_PREFIX_TO_AVOID_NAME_CLASHES \
@@ -219,7 +195,7 @@ def get_text_python_definition(
                     + 
                     get_list_text_variable_definitions_parsed(
                         dict_definition \
-                            [m_shared.Definition_function.KEY_ARRAY_DICTS_ARGUMENTS])) \
+                            [m_shared.Definition_function.KEY_ARRAY_ARRAYS_TOKENS_ARGUMENTS])) \
             + "):\n\n" \
             + "\n\n" \
                 .join(
