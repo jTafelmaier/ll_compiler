@@ -95,9 +95,12 @@ def get_dict_data_parsed_ll(
                 m_shared.Memory_write.KEY_TEXT_KEY_MEMORY: text_key_memory}
 
         def get_list_tokens_parsed_argument(
-            list_tokens:typing.List):
+            dict_tokens:typing.Dict):
 
-            # TODO test
+            list_tokens = dict_tokens \
+                [KEY_LIST_TOKENS] \
+                [1:]
+
             list_tokens[-1] = list_tokens \
                 [-1] \
                 [1:]
@@ -148,24 +151,43 @@ def get_dict_data_parsed_ll(
             text_name_function = list_tokens_first \
                 [2]
 
-            list_dicts_operations, \
+            list_dicts_beginning, \
             _, \
             list_lists_inner_definitions = m_common_functions.get_tuple_partitions_list(
                     list_items=list_definition \
                         [1:],
                     function_separate=is_empty_block)
 
-            # TODO test
+            def get_tuple_lists_tokens():
+
+                list_dicts_tokens_signature = []
+                list_dicts_tokens_body = []
+
+                # TODO refactor
+                for dict_token in list_dicts_beginning:
+                    if dict_token[KEY_LIST_TOKENS][0] == "-":
+                        list_dicts_tokens_signature \
+                            .append(dict_token)
+                    else:
+                        list_dicts_tokens_body \
+                            .append(dict_token)
+
+                return (
+                    list_dicts_tokens_signature,
+                    list_dicts_tokens_body)
+
+            list_dicts_tokens_arguments, \
+            list_dicts_tokens_operations = get_tuple_lists_tokens()
+
             list_lists_tokens_arguments = list(
                     map(
                         get_list_tokens_parsed_argument,
-                        list_tokens_first \
-                            [3:]))
+                        list_dicts_tokens_arguments))
 
             list_dicts_parsed_operations = list(
                     map(
                         get_dict_parsed_operation,
-                        list_dicts_operations))
+                        list_dicts_tokens_operations))
 
             list_dicts_parsed_inner_definitions = list(
                     map(

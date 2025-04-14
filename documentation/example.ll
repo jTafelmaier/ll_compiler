@@ -21,7 +21,9 @@ START TEXT Main
         | Join ""
         | Addright "@protonmail.com"
 
-    START [LIST PERSON] Logdata [[FUNCTION PERSON TEXT] :getattribute] [TEXT :title]
+    START [LIST PERSON] Logdata
+        - [FUNCTION PERSON TEXT] :getattribute
+        - TEXT :title
         | Map :getattribute
         | Join "\n  "
         | Addleft ":\n  "
