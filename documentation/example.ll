@@ -8,8 +8,8 @@ START TEXT Main
     | Filter [Seq [Replacesubtext " " ""] Isalphabetic]
     | Map [PERSON Unchanged Getemail [To 20]]
     + listdata
-    | Logdata .email "Emails"
-    | Logdata .name "Names"
+    | Logdataofperson .email "Emails"
+    | Logdataofperson .name "Names"
 
     CLASS PERSON
         - TEXT name
@@ -21,7 +21,7 @@ START TEXT Main
         | Join ""
         | Addright "@protonmail.com"
 
-    START [LIST PERSON] Logdata
+    START [LIST PERSON] Logdataofperson
         - [FUNCTION PERSON TEXT] getattribute
         - TEXT title
         | Map getattribute
