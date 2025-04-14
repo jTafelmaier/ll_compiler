@@ -95,17 +95,8 @@ def get_dict_data_parsed_ll(
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_WRITE,
                 m_shared.Memory_write.KEY_TEXT_KEY_MEMORY: text_key_memory}
 
-        def get_list_tokens_parsed_argument(
-            dict_tokens:typing.Dict):
-
-            return dict_tokens \
-                [KEY_LIST_TOKENS]
-
         def get_dict_parsed_operation(
-            dict_operation:typing.Dict):
-
-            list_tokens = dict_operation \
-                [KEY_LIST_TOKENS]
+            list_tokens:typing.List):
 
             return {
                 KEYWORD_FUNCTION_CALL: get_dict_parsed_function,
@@ -152,36 +143,21 @@ def get_dict_data_parsed_ll(
                         [1:],
                     function_separate=is_empty_block)
 
-            def get_tuple_lists_tokens():
+            list_lists_tokens_arguments = []
+            list_lists_tokens_operations = []
 
-                list_dicts_tokens_signature = []
-                list_dicts_tokens_body = []
+            # TODO refactor
+            for dict_token in list_dicts_beginning:
+                list_tokens = dict_token \
+                    [KEY_LIST_TOKENS]
 
-                # TODO refactor
-                for dict_token in list_dicts_beginning:
-                    if dict_token[KEY_LIST_TOKENS][0] == "-":
-                        list_dicts_tokens_signature \
-                            .append(dict_token)
-                    else:
-                        list_dicts_tokens_body \
-                            .append(dict_token)
-
-                return (
-                    list_dicts_tokens_signature,
-                    list_dicts_tokens_body)
-
-            list_dicts_tokens_arguments, \
-            list_dicts_tokens_operations = get_tuple_lists_tokens()
-
-            list_lists_tokens_arguments = list(
-                    map(
-                        get_list_tokens_parsed_argument,
-                        list_dicts_tokens_arguments))
+                (list_lists_tokens_arguments if list_tokens[0] == "-" else list_lists_tokens_operations) \
+                    .append(list_tokens)
 
             list_dicts_parsed_operations = list(
                     map(
                         get_dict_parsed_operation,
-                        list_dicts_tokens_operations))
+                        list_lists_tokens_operations))
 
             list_dicts_parsed_inner_definitions = list(
                     map(
