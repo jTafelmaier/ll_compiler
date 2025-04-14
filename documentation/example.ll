@@ -7,9 +7,9 @@ START TEXT Main
     | Split ", "
     | Filter [Seq [Replacesubtext " " ""] Isalphabetic]
     | Map [PERSON Unchanged Getemail [To 20]]
-    + :listData
-    | Logdata email "Emails"
-    | Logdata name "Names"
+    + listData
+    | Logdata .email "Emails"
+    | Logdata .name "Names"
 
     CLASS PERSON
         - TEXT name
@@ -22,13 +22,13 @@ START TEXT Main
         | Addright "@protonmail.com"
 
     START [LIST PERSON] Logdata
-        - [FUNCTION PERSON TEXT] :getattribute
-        - TEXT :title
-        | Map :getattribute
+        - [FUNCTION PERSON TEXT] getattribute
+        - TEXT title
+        | Map getattribute
         | Join "\n  "
         | Addleft ":\n  "
-        | Addleft :title
+        | Addleft title
         | Addleft "\n"
         | Log
-        | To :input
+        | To input
 

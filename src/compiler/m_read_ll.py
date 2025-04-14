@@ -43,12 +43,13 @@ def get_dict_data_parsed_ll(
             else:
                 text_token_first = token
 
-            if text_token_first[0] == ":":
+            if text_token_first[0].islower():
                 return {
                     m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_READ,
-                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_token_first[1:]}
+                    m_shared.Memory_read.KEY_TEXT_KEY_MEMORY: text_token_first}
 
-            if text_token_first[0].isalpha():
+            # TODO refactor
+            if text_token_first[0].isupper() or text_token_first.startswith("."):
                 return get_dict_parsed_function(token)
 
             return {
@@ -73,8 +74,9 @@ def get_dict_data_parsed_ll(
 
             if text_name.isupper():
                 text_category = m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR
-            elif text_name.islower():
+            elif text_name.startswith("."):
                 text_category = m_shared.KEY_CATEGORY_CLASS_ACCESS
+                text_name = text_name[1:]
             else:
                 text_category = m_shared.KEY_CATEGORY_FUNCTION
 
@@ -87,8 +89,7 @@ def get_dict_data_parsed_ll(
             list_tokens:typing.List[str]):
 
             text_key_memory = list_tokens \
-                [0] \
-                [1:]
+                [0]
 
             return {
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_WRITE,
@@ -97,15 +98,8 @@ def get_dict_data_parsed_ll(
         def get_list_tokens_parsed_argument(
             dict_tokens:typing.Dict):
 
-            list_tokens = dict_tokens \
-                [KEY_LIST_TOKENS] \
-                [1:]
-
-            list_tokens[-1] = list_tokens \
-                [-1] \
-                [1:]
-
-            return list_tokens
+            return dict_tokens \
+                [KEY_LIST_TOKENS]
 
         def get_dict_parsed_operation(
             dict_operation:typing.Dict):
