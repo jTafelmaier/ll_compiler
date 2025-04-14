@@ -17,7 +17,7 @@ START TEXT Main
         - INTEGER age
 
     START TEXT Getemail
-        | Map [If [Equalsint " "] [To "_"] Unchanged]
+        | Replacesubtext " " "_"
         | Join ""
         | Addright "@protonmail.com"
 
