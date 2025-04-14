@@ -95,15 +95,6 @@ def get_dict_data_parsed_ll(
                 m_shared.Object_variable.KEY_TEXT_CATEGORY: m_shared.KEY_CATEGORY_MEMORY_WRITE,
                 m_shared.Memory_write.KEY_TEXT_KEY_MEMORY: text_key_memory}
 
-        def get_dict_parsed_operation(
-            list_tokens:typing.List):
-
-            return {
-                KEYWORD_FUNCTION_CALL: get_dict_parsed_function,
-                KEYWORD_MEMORY_WRITE: get_dict_parsed_memory_write} \
-                [list_tokens[0]] \
-                (list_tokens[1:])
-
         list_tokens_first = list_definition \
             [0] \
             [KEY_LIST_TOKENS]
@@ -132,6 +123,15 @@ def get_dict_data_parsed_ll(
                 m_shared.Definition_class.KEY_ARRAY_ARRAYS_TOKENS_MEMBERS: list_lists_tokens_members}
 
         def get_dict_definition_function():
+
+            def get_dict_parsed_operation(
+                list_tokens:typing.List):
+
+                return {
+                    KEYWORD_FUNCTION_CALL: get_dict_parsed_function,
+                    KEYWORD_MEMORY_WRITE: get_dict_parsed_memory_write} \
+                    [list_tokens[0]] \
+                    (list_tokens[1:])
 
             text_name_function = list_tokens_first \
                 [2]
