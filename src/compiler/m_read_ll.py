@@ -76,7 +76,8 @@ def get_dict_data_parsed_ll(
                 text_category = m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR
             elif text_name.startswith("."):
                 text_category = m_shared.KEY_CATEGORY_CLASS_ACCESS
-                text_name = text_name[1:]
+                text_name = text_name \
+                    [1:]
             else:
                 text_category = m_shared.KEY_CATEGORY_FUNCTION
 
