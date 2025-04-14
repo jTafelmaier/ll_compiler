@@ -7,7 +7,7 @@ START TEXT Main
     | Split ", "
     | Filter [Seq [Replacesubtext " " ""] Isalphabetic]
     | Map [PERSON Unchanged Getemail [To 20]]
-    + listData
+    + listdata
     | Logdata .email "Emails"
     | Logdata .name "Names"
 
