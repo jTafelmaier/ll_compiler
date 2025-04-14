@@ -12,9 +12,9 @@ START TEXT Main
     | Logdata name "Names"
 
     CLASS PERSON
-        L TEXT name
-        L TEXT email
-        L INTEGER age
+        - TEXT name
+        - TEXT email
+        - INTEGER age
 
     START TEXT Getemail
         | Map [If [Equalsint " "] [To "_"] Unchanged]
