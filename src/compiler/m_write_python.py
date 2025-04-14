@@ -191,7 +191,7 @@ def get_text_python_definition(
 
         text_body = ",\n" \
             .join(
-                [TEXT_INPUT] \
+                [TEXT_INPUT + ":object"] \
                     + 
                     get_list_text_variable_definitions_parsed(
                         dict_definition \
