@@ -3,22 +3,22 @@
 
 
 Implement, in order:
+- importing other files
 - built in ll file?
 - type inference for literals
 - type inference for expressions using built in functions
 - type inference for user-defined functions
 - type inference for expressions using user-defined functions
+- some way to specify that multiple arguments must have the same type
 - lazy execution
 - floats, lists, tuples, sets etc.
-- enums (for struct attribute access, important feature!)
-- some way to specify that multiple arguments must have the same type
 - VScode: implement language server for ll
-- VScode: show argument names when multiple arguments passed
-- function groups / namespaces
-- module imports
+- VScode: perhaps show argument names when multiple arguments passed
+- perhaps: enums (for class attribute access?)
+- perhaps: namespaces (maybe modules suffice)
+- perhaps: prohibit clashing variable names
+- perhaps: utilities for function signatures
 - pure - modifying function differentiation
-- perhaps prohibit clashing variable names
-- automatic class constructors and utilities for function signatures
 - (automatic parallelization)
 
 
