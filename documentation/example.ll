@@ -18,7 +18,6 @@ START TEXT Main
 
     START TEXT Getemail
         | Replacesubtext " " "_"
-        | Join ""
         | Addright "@protonmail.com"
 
     START [LIST PERSON] Logdataofperson

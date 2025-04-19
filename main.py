@@ -7,6 +7,8 @@ from src.compiler import compiler_ll_to_python
 
 def main():
 
+    # TODO repeat for all source files in any subdirectories
+
     with open("documentation/example.ll", "r", encoding="utf-8") as file_ll:
         text_ll = file_ll \
             .read()
