@@ -182,6 +182,14 @@ def nonpython_Length(
     return len(list_input)
 
 
+def nonpython_Atindex(
+    list_input:typing.List,
+    index:int):
+
+    return list_input \
+        [index]
+
+
 def nonpython_Equalsint(
     int_input:int,
     int_arg:int):
