@@ -6,8 +6,9 @@ START TEXT Main
     | To "Adam Cain, Eve Abel, Delta 02"
     | Split ", "
     | Filter Unite[Replace[" " ""] Isalphabetic]
-    | Map PERSON[Unchanged Getemail To[20]]
+    | Map PERSON[Unchanged Getemail Getage]
     + listdata
+    | Log
     | Filter Unite[.name Equals["Adam Cain"]]
     | Logattribute .email "Emails"
     | To listdata
@@ -21,6 +22,10 @@ START TEXT Main
     START TEXT Getemail
         | Replace " " "_"
         | Addright "@protonmail.com"
+
+    START TEXT Getage
+        | Length
+        | Plus 10
 
     START LIST[PERSON] Logattribute
         - FUNCTION[PERSON TEXT] Function1
