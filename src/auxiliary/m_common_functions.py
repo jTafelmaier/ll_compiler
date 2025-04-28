@@ -143,14 +143,18 @@ def get_item_tokens(
                     if not bool_in_string:
                         bool_termination_token = True
 
-                if bool_bracket_end:
+                if bool_bracket_start:
+                    list_characters_current \
+                        .append(" ")
+
+                elif bool_bracket_end:
                     yield list(get_iterator_tokens(
                             "" \
                                 .join(list_characters_current)))
 
                     list_characters_current = []
 
-                elif bool_bracket_start or (int_level_grouping == 0 and (bool_termination_token or bool_whitespace_token)):
+                elif int_level_grouping == 0 and (bool_termination_token or bool_whitespace_token):
 
                     # TODO refactor
                     if bool_termination_token:
