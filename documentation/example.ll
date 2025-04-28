@@ -8,7 +8,9 @@ START TEXT Main
     | Filter [Seq [Replace " " ""] Isalphabetic]
     | Map [PERSON Unchanged Getemail [To 20]]
     + listdata
+    | Filter [Seq .name [Equalsint "Adam Cain"]]
     | Logdataofperson .email "Emails"
+    | To listdata
     | Logdataofperson .name "Names"
 
     CLASS PERSON
