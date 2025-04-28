@@ -6,7 +6,7 @@ START TEXT Main
     | To "Adam Cain, Eve Abel, Delta 02"
     | Split ", "
     | Filter Unite[Replace[" " ""] Isalphabetic]
-    | Map [PERSON Unchanged Getemail To[20]]
+    | Map PERSON[Unchanged Getemail To[20]]
     + listdata
     | Filter Unite[.name Equalsint["Adam Cain"]]
     | Logdataofperson .email "Emails"
