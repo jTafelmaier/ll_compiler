@@ -5,10 +5,10 @@
 START TEXT Main
     | To "Adam Cain, Eve Abel, Delta 02"
     | Split ", "
-    | Filter [Seq [Replace " " ""] Isalphabetic]
+    | Filter [Unite [Replace " " ""] Isalphabetic]
     | Map [PERSON Unchanged Getemail [To 20]]
     + listdata
-    | Filter [Seq .name [Equalsint "Adam Cain"]]
+    | Filter [Unite .name [Equalsint "Adam Cain"]]
     | Logdataofperson .email "Emails"
     | To listdata
     | Logdataofperson .name "Names"

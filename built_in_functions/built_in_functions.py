@@ -18,7 +18,7 @@ def nonpython_To(
     return item_other
 
 
-def nonpython_Seq(
+def nonpython_Unite(
     item_input:typing.Any,
     function_1:typing.Callable[[typing.Any], typing.Any],
     function_2:typing.Callable[[typing.Any], typing.Any]):
