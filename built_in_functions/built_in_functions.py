@@ -190,7 +190,7 @@ def nonpython_Atindex(
         [index]
 
 
-def nonpython_Equalsint(
+def nonpython_Equals(
     int_input:int,
     int_arg:int):
 

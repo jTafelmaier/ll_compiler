@@ -8,7 +8,7 @@ START TEXT Main
     | Filter Unite[Replace[" " ""] Isalphabetic]
     | Map PERSON[Unchanged Getemail To[20]]
     + listdata
-    | Filter Unite[.name Equalsint["Adam Cain"]]
+    | Filter Unite[.name Equals["Adam Cain"]]
     | Logattribute .email "Emails"
     | To listdata
     | Logattribute .name "Names"
