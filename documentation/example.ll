@@ -9,9 +9,9 @@ START TEXT Main
     | Map PERSON[Unchanged Getemail To[20]]
     + listdata
     | Filter Unite[.name Equalsint["Adam Cain"]]
-    | Logdataofperson .email "Emails"
+    | Logattribute .email "Emails"
     | To listdata
-    | Logdataofperson .name "Names"
+    | Logattribute .name "Names"
 
     CLASS PERSON
         - TEXT name
@@ -22,7 +22,7 @@ START TEXT Main
         | Replace " " "_"
         | Addright "@protonmail.com"
 
-    START LIST[PERSON] Logdataofperson
+    START LIST[PERSON] Logattribute
         - FUNCTION[PERSON TEXT] Function1
         - TEXT title
         | Map Function1
