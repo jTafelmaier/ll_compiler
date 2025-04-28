@@ -21,9 +21,9 @@ START TEXT Main
         | Addright "@protonmail.com"
 
     START [LIST PERSON] Logdataofperson
-        - [FUNCTION PERSON TEXT] getattribute
+        - [FUNCTION PERSON TEXT] Function1
         - TEXT title
-        | Map getattribute
+        | Map Function1
         | Join "\n  "
         | Addleft ":\n  "
         | Addleft title
