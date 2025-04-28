@@ -6,7 +6,7 @@ START TEXT Main
     | To "Adam Cain, Eve Abel, Delta 02"
     | Split ", "
     | Filter Unite[Replace[" " ""] Isalphabetic]
-    | Map PERSON[Unchanged Getemail Getage]
+    | Map PERSON[Unchanged Estimateemail Estimateage]
     + listdata
     | Log
     | Filter Unite[.name Equals["Adam Cain"]]
@@ -19,11 +19,11 @@ START TEXT Main
         - TEXT email
         - INTEGER age
 
-    START TEXT Getemail
+    START TEXT Estimateemail
         | Replace " " "_"
         | Addright "@protonmail.com"
 
-    START TEXT Getage
+    START TEXT Estimateage
         | Length
         | Plus 10
 
