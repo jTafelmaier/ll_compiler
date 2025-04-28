@@ -84,7 +84,7 @@ def nonpython_Addright(
         + text_to_append
 
 
-def nonpython_Replacesubtext(
+def nonpython_Replace(
     text_input:str,
     text_old:str,
     text_new:str):
