@@ -12,5 +12,5 @@ if __name__ == "__main__":
 
         return float(sum(list_ints)) / len(list_ints)
 
-    print(get_average([len(text) for text in "Test, Hello, World".split(", ")]))
+    print(get_average([len(text) for text in "Test, Hello, World".split(", ") if text.isalpha()]))
 

@@ -3,8 +3,9 @@
 
 
 START TEXT Main
-    | To "Test, Hello, World"
+    | To "Test, Hello, World, 00"
     | Split ", "
+    | Filter Isalphabetic
     | Map Length
     | Getaverage
     | Log
