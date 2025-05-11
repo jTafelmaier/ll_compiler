@@ -61,6 +61,14 @@ def nonpython_Minus(
         - int_arg
 
 
+def nonpython_Dividefloat(
+    int_input:int,
+    int_arg:int):
+
+    return float(int_input) \
+        / int_arg
+
+
 def nonpython_Isalphabetic(
     text_input:str):
 
@@ -174,6 +182,12 @@ def nonpython_Join(
 
     return text_join \
         .join(list_texts_input)
+
+
+def nonpython_Sum(
+    list_integers_input:typing.List[int]):
+
+    return sum(list_integers_input)
 
 
 def nonpython_Length(

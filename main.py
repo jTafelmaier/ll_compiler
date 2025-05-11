@@ -9,17 +9,17 @@ def main():
 
     # TODO repeat for all source files in any subdirectories
 
-    with open("documentation/example.ll", "r", encoding="utf-8") as file_ll:
+    with open("documentation/example_simple.ll", "r", encoding="utf-8") as file_ll:
         text_ll = file_ll \
             .read()
 
     text_python_main = compiler_ll_to_python.get_text_python(text_ll)
 
-    with open("documentation/example.py", "w", encoding="utf-8") as file_python:
+    with open("documentation/example_simple.py", "w", encoding="utf-8") as file_python:
         file_python \
             .write(text_python_main)
 
-    import documentation.example as example
+    import documentation.example_simple as example
 
     example.nonpython_Main("example input")
 
