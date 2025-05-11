@@ -5,14 +5,14 @@
 START TEXT Main
     | To "Test, Hello, World"
     | Split ", "
-    | Getaveragelength
+    | Map Length
+    | Getaverage
     | Log
 
-    START LIST[TEXT] Getaveragelength
+    START LIST[INTEGER] Getaverage
         | Length
         + countItems
         | To input
-        | Map Length
         | Sum
         | Dividefloat countItems
 
