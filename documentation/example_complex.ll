@@ -2,7 +2,7 @@
 
 
 
-START TEXT Main
+FUNCTION TEXT Main
     | To "Adam Cain, Eve Abel, Delta 02"
     | Split ", "
     | Filter Unite[Replace[" " ""] Isalphabetic]
@@ -19,15 +19,15 @@ START TEXT Main
         - TEXT email
         - INTEGER age
 
-    START TEXT Estimateemail
+    FUNCTION TEXT Estimateemail
         | Replace " " "_"
         | Addright "@protonmail.com"
 
-    START TEXT Estimateage
+    FUNCTION TEXT Estimateage
         | Length
         | Plus 10
 
-    START LIST[PERSON] Logattribute
+    FUNCTION LIST[PERSON] Logattribute
         - FUNCTION[PERSON TEXT] Function1
         - TEXT title
         | Map Function1
