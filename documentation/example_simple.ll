@@ -2,7 +2,7 @@
 
 
 
-FUNCTION TEXT Main
+THREAD TEXT Main
     | To "Test, Hello, World, 00"
     | Split ", "
     | Filter Isalphabetic
@@ -10,7 +10,7 @@ FUNCTION TEXT Main
     | Getaverage
     | Log
 
-    FUNCTION LIST[INTEGER] Getaverage
+    THREAD LIST[INTEGER] Getaverage
         | Length
         + countItems
         | To input

@@ -13,7 +13,7 @@ from src.auxiliary import m_shared
 def get_dict_data_parsed_ll(
     list_file:typing.List):
 
-    KEYWORD_DEFINITION_FUNCTION = "FUNCTION"
+    KEYWORD_DEFINITION_FUNCTION = "THREAD"
     KEYWORD_DEFINITION_CLASS = "CLASS"
     KEYWORD_FUNCTION_CALL = "|"
     KEYWORD_MEMORY_WRITE = "+"
