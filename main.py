@@ -19,7 +19,7 @@ def main():
         file_python \
             .write(text_python_main)
 
-    import documentation.example_simple as example
+    import documentation.example as example
 
     example.nonpython_Main("example input")
 
