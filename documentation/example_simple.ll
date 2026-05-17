@@ -2,7 +2,7 @@
 
 
 
-THREAD TEXT Main
+THREAD ANY Main
     | To "Test, Hello, World, 00"
     | Split ", "
     | Filter Isalphabetic
