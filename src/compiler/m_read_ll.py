@@ -74,6 +74,7 @@ def get_dict_data_parsed_ll(
 
             if text_name.isupper():
                 text_category = m_shared.KEY_CATEGORY_CLASS_CONSTRUCTOR
+            # TODO change to usual syntax
             elif text_name.startswith("."):
                 text_category = m_shared.KEY_CATEGORY_CLASS_ACCESS
                 text_name = text_name \
