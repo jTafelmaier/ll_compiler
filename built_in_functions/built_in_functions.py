@@ -147,13 +147,13 @@ def nonpython_Log(
     return text_input
 
 
-def nonpython_Logother(
-    text_input:str,
-    text_other:str):
+def nonpython_LogAs(
+    item_input:typing.Any,
+    function:typing.Callable[[typing.Any], str]):
 
-    print(text_other)
+    print(function(item_input))
 
-    return text_input
+    return item_input
 
 
 def nonpython_Map(
